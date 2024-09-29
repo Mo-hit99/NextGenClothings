@@ -10,7 +10,7 @@ function App() {
   return (
     <div className='App'>
       <RefreshHandler setIsAuthenticated={setIsAuthenticated}/>
-      <NavLinks admin={'Admin'} logo={"e-commerce"} home={"Home"} products={'Products'} signIn={'SignIn'} Addcart={<i className="fa-solid fa-cart-shopping"></i>} />
+      <NavLinks admin={'Admin'} logo={"Next Gen"} home={"Home"} products={'Products'} signIn={'SignIn'} Addcart={<i className="fa-solid fa-cart-shopping"></i>} />
       <Outlet/>
       <Footer/>
     </div>
