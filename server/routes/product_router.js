@@ -6,7 +6,7 @@ import multer from "multer"
 
 const Id=crypto.randomUUID();
 
-const storage = multer.memoryStorage({
+const storage = multer.diskStorage({
     destination: './public'
     ,
     filename: function (req, file, cb) {
