@@ -179,7 +179,7 @@ export const userForgotPassword = async (req, res) => {
       subject: "Reset your Password",
       text: `Reset Your Password
              Click on the following link to reset your password:
-             ${process.env.CLIENT_HTTP_LINK+token},
+             ${process.env.CLIENT_HTTP_LINK + '/reset-password/' + token},
              The link will expire in 10 minutes.</p>
              If you didn't request a password reset, please ignore this email.`
   };
