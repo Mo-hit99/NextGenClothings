@@ -17,11 +17,11 @@ export default function SignIn() {
 
   async function submitForm(e) {
     e.preventDefault();
-    const response = axios.post(`${import.meta.env.VITE_SERVER_LINK}/login`, {
-      email,
-      password,
-    });
     try {
+      const response = axios.post(`${import.meta.env.VITE_SERVER_LINK}/login`, {
+        email,
+        password,
+      });
       const token = (await response).data.token;
       setOpenModel(true);
       setEmail("");
