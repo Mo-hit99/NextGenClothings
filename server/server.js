@@ -19,7 +19,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/productData',express.static("public"));
 app.listen(port,()=>{
-  console.log(process.env.HTTP_LINK + port);
+  console.log(port);
   db_connection()
 })
 app.use(Product_router)
