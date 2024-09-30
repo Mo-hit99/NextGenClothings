@@ -24,7 +24,7 @@ export default function Addcart() {
       <>
       <div key={element.product._id} className="shopping-item">
         <div className="image-container-shopping">
-          <img className="shopping-cart-image" src={`http://localhost:3000/productData/${element.product.filename}`} alt={element.product.title} />
+          <img className="shopping-cart-image" src={`${element.product.filename}`} alt={element.product.title} />
         </div>
         <div className="shopping-cart-description">
           <h1 className="shopping-cart-heading">{element.product.brand}</h1>
