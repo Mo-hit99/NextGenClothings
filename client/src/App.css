@@ -989,7 +989,7 @@ textarea::-webkit-scrollbar {
 /* sign in */
 .form_container {
   width: fit-content;
-  height: 600px;
+  height: 650px;
   display: flex;
   margin: 5rem auto;
   flex-direction: column;
