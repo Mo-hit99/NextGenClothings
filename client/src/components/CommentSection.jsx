@@ -27,6 +27,7 @@ export default function CommentSection({ id }) {
       if (response) {
         setComment("");
         setRating("");
+        setError('')
         getCommentSection();
       }
     } catch (error) {
@@ -76,8 +77,8 @@ export default function CommentSection({ id }) {
         { upDatedComment }
       );
       if (response.status === 200) {
+        setError('')
         getCommentSection();
-        console.log("comment Updated");
       }
     } catch (error) {
       setEditError(error.response.data.message);
