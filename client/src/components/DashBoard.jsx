@@ -106,7 +106,7 @@ return (
       productData && productData?.map((item)=> (
       <div key={item._id} className="admin-product-card">
     <div className="admin-product-card-image">
-      <img className="admin-product-image" src={`${import.meta.env.VITE_SERVER_LINK}/productData/${item?.filename[0]}`} alt={item.category} />
+      <img className="admin-product-image" src={`${item?.filename[0]}`} alt={item.category} />
     </div>
     <div className="admin-product-brand"> {item.brand} </div>
     <div className="admin-product-title"> {item.title} </div>

@@ -35,7 +35,7 @@ export default function Addproduct() {
             "Content-Type": "multipart/form-data"
           },
         })
-         if(response){
+         if(response.status === 200){
           setBrand('')
           setCategory('')
           setCount('')
@@ -47,7 +47,7 @@ export default function Addproduct() {
            alert('Product created Successfully')
          }
        } catch (error) {
-         alert('invalid Data or must fill fields')
+        alert('Failed to create product: ' + error.response?.data.queryData || error.message);
         console.log(error)
        }
      }

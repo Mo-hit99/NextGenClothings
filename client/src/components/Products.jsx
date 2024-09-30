@@ -87,7 +87,7 @@ export default function Products() {
                   key={product._id}
                   state={product}
                   links={`/ProductDetails/${product._id}`}
-                  image={`${import.meta.env.VITE_SERVER_LINK}/productData/${product.filename[0]}`}
+                  image={`${product.filename[0]}`}
                   brand={product.brand}
                   description={product.title}
                   formattedPrice={"₹ " + product.price}

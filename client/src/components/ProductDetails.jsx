@@ -17,7 +17,7 @@ export default function ProductDetails() {
           <div className="img-details">
             <img
               className="product-img" 
-              src={`${import.meta.env.VITE_SERVER_LINK}/productData/${selectedImage}`}
+              src={`${selectedImage}`}
               alt={MoreDate.title}
             />
             <div className="images-container">
@@ -25,7 +25,7 @@ export default function ProductDetails() {
                 <img 
                   key={index}
                   className="dynamic-images-func"  
-                  src={`${import.meta.env.VITE_SERVER_LINK}/productData/${image}`} 
+                  src={`${image}`} 
                   alt={MoreDate.title} 
                   onClick={() => handleImageClick(image)}
                   />

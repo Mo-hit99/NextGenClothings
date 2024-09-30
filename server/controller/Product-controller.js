@@ -85,8 +85,8 @@ export const createProductData = async (req, res) => {
   try {
     const { brand, title, price, description, category, rate, count } =
       req.body;
-      const fileDataArray = req.files.map(file => file.filename);
-     if(!fileDataArray){
+      const fileDataArray = req.files.map(file => file.path);
+     if(!fileDataArray || !brand || !title || !price || !description || !category || !rate || !count){
       console.log('no file there!!!')
      }
     const productImg = new ProductSchema({
@@ -117,7 +117,7 @@ export const UpdateProductData = async (req, res) => {
     const { id } = req.params;
     const { brand, title, price, description, category, rate, count } =
       req.body;
-      const fileDataArray = req.files.map(file => file.filename);
+      const fileDataArray = req.files.map(file => file.path);
     const updateProduct = await ProductSchema.findOneAndUpdate(
       { _id: id },
       {

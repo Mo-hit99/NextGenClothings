@@ -11,16 +11,24 @@ dotenv.config();
 
 const port= process.env.PORT || 8080;
 const app = express();
+
+// const corsOptions = {
+//   origin: 'http://localhost:5173', // Allow this origin
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true, // If you need to include credentials (cookies, authorization headers)
+// };
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
 
-
-
-app.use(express.json())
-app.use('/productData',express.static("public"));
-app.listen(port,()=>{
-  console.log(port);
-  db_connection()
-})
 app.use(Product_router)
 app.use(User_route)
+
+
+// app.use('/productData',express.static("public"));
+// app.use('/productData',express.static("public"));
+app.listen(port,()=>{
+  console.log('http://localhost:'+port);
+  db_connection()
+})
