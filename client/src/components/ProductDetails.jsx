@@ -9,9 +9,10 @@ export default function ProductDetails() {
   const location = useLocation();
   const data = location.state;
   const MoreDate = data.state;
-  const [selectedColor, setSelectedColor] = useState("");
-  const [amount,setAmount]=useState()
-  const [selectedSize, setSelectedSize] = useState("");
+  console.log(MoreDate)
+  const [selectedColor, setSelectedColor] = useState([]);
+  const [amount,setAmount]=useState('')
+  const [selectedSize, setSelectedSize] = useState([]);
   const [selectedImage, setSelectedImage] = useState(
     MoreDate.filename[0]
   );
