@@ -5,7 +5,7 @@ import img2 from '../assets/jason-leung-DmD8HVOjy4c-unsplash.jpg'
 import img3 from '../assets/tuananh-blue-_sNZ8XOm52w-unsplash.jpg'
 import { NavLink} from 'react-router-dom';
 import { useState } from 'react';
-import { trendingData } from '../data/trendingProductData';
+import { trendingData } from '../data/trendingProductData.js';
 import FeatureCard from './FeatureCard';
 
 
