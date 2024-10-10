@@ -9,7 +9,6 @@ export default function ProductDetails() {
   const location = useLocation();
   const data = location.state;
   const MoreDate = data.state;
-  console.log(MoreDate)
   const [selectedColor, setSelectedColor] = useState('');
   const [amount,setAmount]=useState('')
   const [selectedSize, setSelectedSize] = useState('');
