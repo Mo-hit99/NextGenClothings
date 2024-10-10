@@ -3,13 +3,16 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import img from '../assets/henry-co-cp-VMJ-mdKs-unsplash.jpg'
 import img2 from '../assets/jason-leung-DmD8HVOjy4c-unsplash.jpg'
 import img3 from '../assets/tuananh-blue-_sNZ8XOm52w-unsplash.jpg'
-import { NavLink } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { useState } from 'react';
 import { trendingData } from '../data/trendingProductData';
 import FeatureCard from './FeatureCard';
 
 
+
 export default function Home() {
+
+
   const [trendingProducts,setTrendingProducts]=useState(trendingData)
   return (
     <>
@@ -36,14 +39,19 @@ export default function Home() {
         </div>
       </Carousel>
   <h1 className='title-arrivals'>NEW ARRIVALS</h1>
-  <section className='Trending'>
+  <section className='Trending-container'>
+    <div className="Trending">
+
     {trendingProducts?.map((trending)=>(
+      <>
       <FeatureCard key={trending.id} links={'/products'} image={trending.image}
       brand={trending.brand}
       description={trending.description}
       >
     </FeatureCard>
+  </>
 ))}
+</div>
   </section>
 
   <div className="payday-sale">

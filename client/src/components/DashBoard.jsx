@@ -11,6 +11,8 @@ export default function DashBoard() {
   const [category,setCategory]=useState('')
   const [rate,setRate]=useState('')
   const [count,setCount]=useState('') 
+  const [colors ,setColors] = useState([])
+  const [sizes ,setSizes] = useState([])
   const [productData,setProductData]= useState('');
   const [model ,setModal]= useState(false)
   
@@ -21,6 +23,18 @@ export default function DashBoard() {
   formData.append('description',description)
   formData.append('category',category)
   formData.append('rate',rate)
+  if(colors){
+    for (let i = 0; i < colors.length; i++) {
+      formData.append('colors',colors[i])
+      
+    }
+  }
+  if(sizes){
+    for (let i = 0; i < colors.length; i++) {
+      formData.append('colors',sizes[i])
+      
+    }
+  }
   formData.append('count',count)
   if (image) {
     for (let i = 0; i < image.length; i++) {
@@ -72,6 +86,8 @@ async function getByIdData(id){
     setPrice(productDataById.price)
     setCount(productDataById.count)
     setRate(productDataById.rate)
+    setColors(productDataById.colors.map(colors=> colors))
+    setSizes(productDataById.sizes.map(sizes => sizes))
     setDescription(productDataById.description)
   } catch (error) {
     console.log(error)
@@ -136,6 +152,25 @@ return (
       <input className='create-data' type="text" value={rate || ''} name='rate' id='rate' onChange={(e)=> setRate(e.target.value)}/>
       <label htmlFor="count">Count</label>
       <input  className='create-data'type="text" name='count' value={count || ''} id='count' onChange={(e)=> setCount(e.target.value)} />
+      <label htmlFor="colors">colors</label>
+
+<input
+  className="create-data"
+  type="text"
+  name="colors"
+  placeholder="Enter colors (comma separated)"
+  value={colors || ''}
+  onChange={(e) => setColors(e.target.value.split(","))}
+/>
+<label htmlFor="sizes">Sizes</label>
+<input
+  className="create-data"
+  type="text"
+  name="sizes"
+  placeholder="Enter sizes (comma separated)"
+  value={sizes || ''}
+  onChange={(e) => setSizes(e.target.value.split(","))}
+/>
       <label htmlFor="description">Description</label>
       <textarea className='product-textarea' type="textarea" value={description || ''} name='description'id='description' onChange={(e)=> setDescription(e.target.value)}/>
       <label className='image-uploader' htmlFor="image-uploader"><i className="fa-solid fa-camera"></i>Upload Image</label>

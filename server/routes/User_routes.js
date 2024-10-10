@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import {
   get_allData,
+  getById_data,
   googleLogin,
   UserCreateData,
   UserDeleteDate,
@@ -10,23 +11,23 @@ import {
   userRestPassword,
   UserUpdateData,
   verificationOtp,
-} from "../controller/controller.js";
+} from "../controller/User_controller.js";
 
 dotenv.config();
 
 export const User_route = express.Router();
 
 // get all user data
-User_route.get("/", get_allData);
+User_route.get("/api/user", get_allData);
 
 // get user data by Id
-// User_route.get("/:id", getById_data);
+User_route.get("/api/user/:id", getById_data);
 
 // update user data
-User_route.patch("/:id", UserUpdateData);
+User_route.put("/api/user/:id", UserUpdateData);
 
 // delete user data
-User_route.delete("/:id", UserDeleteDate);
+User_route.delete("/api/user/:id", UserDeleteDate);
 
 // create user data register
 User_route.post("/signup", UserCreateData);

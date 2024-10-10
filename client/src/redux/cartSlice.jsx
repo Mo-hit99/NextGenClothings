@@ -26,14 +26,16 @@ export const cartSlice = createSlice({
       state.items = nextcartItems;
     },
     addToCard(state, action) {
-      const { productId, quantity, product } = action.payload;
+      const { productId, quantity, product , selectedColor,
+        selectedSize } = action.payload;
       const indexProductId = state.items.findIndex(
         (item) => item.productId === productId
       );
       if (indexProductId >= 0) {
         state.items[indexProductId].quantity += quantity;
       } else {
-        state.items.push({ productId, quantity, product });
+        state.items.push({ productId, quantity, product,selectedColor,
+          selectedSize });
       }
       state.cartTotalQuantity = state.items.reduce(
         (prev, curr) => prev + curr.quantity,
@@ -100,6 +102,11 @@ export const cartSlice = createSlice({
         0
       );
     },
+    clearCart: (state) => {
+      state.items = [];
+      state.cartTotalQuantity = 0;
+      state.cartTotalAmount = 0;
+    },
   },
 });
 export const {
@@ -109,5 +116,6 @@ export const {
   removeToCart,
   updateQuantityItems,
   subtractQuantityItems,
+  clearCart
 } = cartSlice.actions;
 export default cartSlice.reducer;

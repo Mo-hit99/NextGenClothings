@@ -83,12 +83,12 @@ export const getProductDataById = async (req, res) => {
 // };
 export const createProductData = async (req, res) => {
   try {
-    const { brand, title, price, description, category, rate, count } =
+    const { brand, title, price, description, category, rate, count,colors,sizes } =
       req.body;
-      const fileDataArray = req.files.map(file => file.path);
-     if(!fileDataArray || !brand || !title || !price || !description || !category || !rate || !count){
+    const fileDataArray = req.files.map(file => file.filename);
+    if(!fileDataArray || !brand || !title || !price || !description || !category || !rate || !count || !colors || !sizes){
       console.log('no file there!!!')
-     }
+    }
     const productImg = new ProductSchema({
       brand,
       title,
@@ -97,9 +97,10 @@ export const createProductData = async (req, res) => {
       category,
       rate,
       count,
+      colors,
+      sizes,
       filename:fileDataArray,
     });
-    
     await productImg.save();
     res.send("file stored in data");
     console.log("file has been stored in database");
@@ -115,20 +116,25 @@ export const createProductData = async (req, res) => {
 export const UpdateProductData = async (req, res) => {
   try {
     const { id } = req.params;
-    const { brand, title, price, description, category, rate, count } =
+    const { brand, title, price, description, category, rate, count,colors,sizes} =
       req.body;
-      const fileDataArray = req.files.map(file => file.path);
+      const fileDataArray = req.files.map(file => file.filename);
+      if(!fileDataArray || !brand || !title || !price || !description || !category || !rate || !count || !colors || !sizes){
+        console.log('no file there!!!')
+       }
     const updateProduct = await ProductSchema.findOneAndUpdate(
       { _id: id },
       {
         brand,
         title,
         price,
+        colors,
+        sizes,
         description,
         category,
         rate,
         count,
-        filenames:fileDataArray,
+        filename:fileDataArray,
       },
       { new: true }
     );
@@ -205,11 +211,11 @@ export const DeleteProductData = async (req, res) => {
 
 export const productReview = async (req, res) => {
   try {
-    const { comment, rating } = req.body;
+    const {name, comment, rating } = req.body;
     const productId = req.params.id;
 
     //Validate input
-    if (!comment || !rating) {
+    if ( !name || !comment || !rating) {
       return res.status(400).send({
         success: false,
         message: "Comment and rating are required",
@@ -237,6 +243,7 @@ export const productReview = async (req, res) => {
     // }
 
     const review = {
+      name,
       rating: Number(rating),
       comment,
     };

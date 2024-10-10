@@ -9,17 +9,65 @@ export default function CommentSection({ id }) {
   const [editError, setEditError] = useState("");
   const [upDatedComment, setUpDatedComment] = useState("");
   const [model, setModel] = useState(null);
+  const [userId,setUserId]=useState('')
+  const [name,setName]=useState('')
   const [commentOptionModel, SetCommentOptionModel] = useState(null);
+
+
+  const UserEmail = localStorage.getItem("email");
+  const user_info = localStorage.getItem("user-info");
+  const userData = JSON.parse(user_info);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          import.meta.env.VITE_SERVER_LINK + `/api/user`
+        );
+        if (response.data) {
+          const currentUser = response.data.find(
+            (user) => user.email === UserEmail || user.email === userData.email
+          ); // Find user by email
+          if (currentUser) {
+            setUserId(currentUser._id); // Set user ID
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, [UserEmail, userData]);
+
+  useEffect(() => {
+    const getUserById = async () => {
+      if (!userId) return; // Ensure userId is not null
+
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER_LINK}/api/user/${userId}`
+        );
+        if (response) {
+          setName(response.data.name);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUserById();
+  }, [userId]);
 
   useEffect(() => {
     getCommentSection();
   }, []);
+
   async function commenthandler(e) {
     e.preventDefault();
     try {
       const response = await axios.post(
         import.meta.env.VITE_SERVER_LINK + `/productData/${id}/review`,
         {
+          name,
           comment,
           rating,
         }
@@ -170,7 +218,7 @@ export default function CommentSection({ id }) {
                         </svg>
                       </div>
                       <div className="user-info">
-                        <span>Anonymous</span>
+                        <span>{dataComment.name}</span>
                         <p>{dataComment.createdAt}</p>
                       </div>
                     </div>

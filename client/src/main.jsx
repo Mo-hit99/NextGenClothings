@@ -13,11 +13,14 @@ import { store } from "./redux/store.jsx";
 import Admin from "./components/Admin.jsx";
 import DashBoard from "./components/DashBoard.jsx";
 import Addproduct from "./components/Addproduct.jsx";
-import ViewProduct from "./components/ViewProduct.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
 import RestPassword from "./components/RestPassword.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import VerificationOtp from "./components/VerificationOtp.jsx";
+import UserDashBoard from "./components/UserDashBoard.jsx";
+import { CategoryProvider } from "../context/context.jsx";
+import UserInvoice from "./components/UserInvoice.jsx";
+import ViewOrder from "./components/ViewOrder.jsx";
 
 const GoogleAuthWrapper = () => {
   return (
@@ -34,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/userDashboard/:id",
+        element: <UserDashBoard />,
+      },
+      {
+        path: "/UserInvoice/:id",
+        element: <UserInvoice />,
       },
       {
         path: "/products",
@@ -57,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/verification-Otp",
-        element:<VerificationOtp/>
+        element: <VerificationOtp />,
       },
       {
         path: "/Addcart",
@@ -88,8 +99,8 @@ const router = createBrowserRouter([
             element: <Addproduct />,
           },
           {
-            path: "/Admin/viewproduct",
-            element: <ViewProduct />,
+            path: "/Admin/view/order",
+            element: <ViewOrder />,
           },
         ],
       },
@@ -98,6 +109,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <CategoryProvider>
+      <RouterProvider router={router} />
+    </CategoryProvider>
   </Provider>
 );

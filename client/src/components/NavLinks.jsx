@@ -1,10 +1,45 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useCategory } from "../../context/context";
+import { clearCart } from "../redux/cartSlice";
+
+const button = [
+  {
+    id: 1,
+    category: "shoes",
+  },
+  {
+    id: 2,
+    category: "shoes2",
+  },
+  {
+    id: 3,
+    category: "shoes3",
+  },
+  {
+    id: 4,
+    category: "shoes4",
+  },
+  {
+    id: 5,
+    category: "shoes5",
+  },
+  {
+    id: 6,
+    category: "shoes6",
+  },
+ 
+];
+
 export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
+  const [userId, setUserId] = useState(null);
   const carts = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
   const isUserSignedIn = !!localStorage.getItem("token");
   const isUserGoogleSignedIn = !!localStorage.getItem("user-info");
-
+  const { setCategoryItem } = useCategory();
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
   const userData = JSON.parse(user_info);
@@ -13,7 +48,34 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("user-info");
+    dispatch(clearCart());
     navigate("/signIn");
+  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          import.meta.env.VITE_SERVER_LINK + `/api/user`
+        );
+        if (response) {
+          const currentUser = response.data.find(
+            user => user.email === UserEmail || user.email === userData.email 
+          ); // Find user by email
+          if (currentUser) {
+            setUserId(currentUser._id); // Set user ID
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserData();
+  }, [UserEmail, userData]);
+
+  const handleCategory = (category) => {
+    setCategoryItem(category);
+    navigate("/products");
   };
 
   return (
@@ -24,7 +86,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
         </NavLink>
         <div className="nav-link01">
           <ul>
-            {isUserSignedIn && UserEmail === "u9120307@gmail.com" ? (
+            {isUserSignedIn || isUserGoogleSignedIn && UserEmail === "u9120307@gmail.com" ? (
               <>
                 <li>
                   <NavLink className="nav-link-text" to="/Admin">
@@ -32,17 +94,55 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="nav-link-text" to="/products">
-                    {products}
-                  </NavLink>
+                  <div className="paste-button">
+                    <button className="btn-dropdown">
+                      <NavLink className="nav-link-text" to="/products">
+                        {products}
+                      </NavLink>
+                    </button>
+                    <div className="dropdown-content">
+                      <div className="dropdown-wrapper-for-category">
+                      {button &&
+                        button?.map((ele) => (
+                          <div className="btn-category-wrapper" key={ele.id}>
+                          <button
+                            className="nav-link-category"
+                            onClick={() => handleCategory(ele.category)}
+                            >
+                            {ele.category}
+                          </button>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                  </div>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <NavLink className="nav-link-text" to="/products">
-                    {products}
-                  </NavLink>
+                <div className="paste-button">
+                    <button className="btn-dropdown">
+                      <NavLink className="nav-link-text" to="/products">
+                        {products}
+                      </NavLink>
+                    </button>
+                    <div className="dropdown-content">
+                      <div className="dropdown-wrapper-for-category">
+                      {button &&
+                        button?.map((ele) => (
+                          <div className="btn-category-wrapper" key={ele.id}>
+                          <button
+                            className="nav-link-category"
+                            onClick={() => handleCategory(ele.category)}
+                            >
+                            {ele.category}
+                          </button>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                  </div>
                 </li>
               </>
             )}
@@ -56,14 +156,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                   <div className="menu">
                     <div className="item">
                       <span className="link">
-                        {isUserGoogleSignedIn  ? (
+                        {isUserGoogleSignedIn ? (
                           <img
                             className="profile-image"
                             src={userData.image}
                             alt={userData.name}
                           />
                         ) : (
-                          <p>{UserEmail.split('').splice(0,8).join('')}</p>
+                          <p>{UserEmail.split("").splice(0, 8).join("")}</p>
                         )}
                         <svg viewBox="0 0 360 360" xmlSpace="preserve">
                           <g id="SVGRepo_iconCarrier">
@@ -77,29 +177,53 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                       <div className="submenu">
                         {isUserGoogleSignedIn ? (
                           <>
-                            <div className="submenu-item">
+                            {/* <div className="submenu-item">
                               <a href="#" className="submenu-link">
                                 <span className="dropdown-name">Name:</span>
                                 {userData?.name}
                               </a>
-                            </div>
+                            </div>``
                             <div className="submenu-item">
                               <a href="#" className="submenu-link">
                                 <span className="dropdown-email">Email:</span>
                                 {userData?.email}
                               </a>
+                            </div> */}
+                            <div>
+                              <NavLink
+                                className="nav-link-text"
+                                to={`/userDashboard/${userId}`}
+                                >
+                                Profile
+                              </NavLink>
+                            </div>
+                            <div>
+                              <NavLink
+                                className="nav-link-text"
+                                to={`/UserInvoice/${userId}`}
+                              >
+                                Invoice
+                              </NavLink>
                             </div>
                             <div className="submenu-item">
                               <button
                                 className="signOut"
                                 onClick={handleSignOut}
-                              >
+                                >
                                 Sign Out
                               </button>
                             </div>
                           </>
                         ) : (
                           <div className="submenu-item">
+                            <div>
+                              <NavLink
+                                className="nav-link-text"
+                                to={`/userDashboard/${userId}`}
+                              >
+                                Profile
+                              </NavLink>
+                            </div>
                             <button className="signOut" onClick={handleSignOut}>
                               Sign Out
                             </button>
