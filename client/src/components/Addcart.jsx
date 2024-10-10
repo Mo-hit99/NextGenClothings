@@ -197,7 +197,7 @@ export default function Addcart() {
               <td>
                 <img
                   className="shopping-cart-image"
-                  src={`${import.meta.env.VITE_SERVER_LINK}/productData/${element.product.filename[0]}`}
+                  src={`${element.product.filename[0]}`}
                   alt={element.product.title}
                 />
               </td>
