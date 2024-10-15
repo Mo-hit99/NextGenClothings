@@ -19,7 +19,7 @@ export default function ViewOrder() {
     }
   }
   return (
-    <section>
+    <section className="section-invoice-container">
       <table className="invoice-table">
         <thead>
           <tr>
@@ -36,7 +36,7 @@ export default function ViewOrder() {
             <th>Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="table-invoice-body">
           {userInvoice && userInvoice.map(getInvoice => (
             <tr key={getInvoice._id}>
               <td>{getInvoice.paymentId}</td>

@@ -393,7 +393,29 @@ h1 {
   text-align: center; /* Center-align heading */
   margin-bottom: 20px; /* Add margin below heading */
 }
-
+.section-invoice-container{
+width: 100%;
+}
+.table-invoice-body{
+  width: 100%;
+}
+@media  screen and (max-width: 768px) {
+  .dashboard-home{
+    max-width: calc(100% - 10rem);
+  }
+  .invoice-table {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  .section-invoice-container{
+    width: 50%;
+  }
+  .table-invoice-body{
+    width: 100%;
+  }
+}
 /* profile-image */
 .profile-image {
   height: 30px;
@@ -1463,9 +1485,8 @@ textarea::-webkit-scrollbar {
     position: absolute;
     top:45px; /* Adjust as per header height */
     left:0;
-    z-index:3;
+    z-index:16;
     width: 100%;
-    border: 1px solid black;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   .nav-container.open {
@@ -1562,6 +1583,7 @@ textarea::-webkit-scrollbar {
   width: fit-content;
   height: 650px;
   display: flex;
+  z-index: 0;
   margin: 5rem auto;
   flex-direction: column;
   align-items: center;
@@ -1781,6 +1803,42 @@ textarea::-webkit-scrollbar {
   font-size: 0.75rem;
   color: #8b8e98;
   text-decoration: underline;
+}
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+  .form_container {
+    padding: 15px;
+    max-width: calc(90% - 5rem)
+  }
+
+  .sign-in_btn {
+    font-size: 16px;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-menu a {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
 }
 
 /* Home */
