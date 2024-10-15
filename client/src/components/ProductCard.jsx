@@ -1,12 +1,7 @@
-import { useState } from 'react';
 import { NavLink} from 'react-router-dom';
 
 
-export default function ProductCard({image,brand,description,formattedPrice,state,links,rate,count,children}) {
-  const [like,setLinke]= useState(false);
-  function likehandler(){
-  setLinke(!like);
-  } 
+export default function ProductCard({image,brand,description,formattedPrice,state,links,rate,count,children,likehandler,like}) {
   return (
     <section className='product-card'>
      <NavLink state={{state}} className="product-card-img" to={links}>

@@ -30,11 +30,11 @@ const button = [
     id: 6,
     category: "shoes6",
   },
- 
 ];
 
 export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
   const [userId, setUserId] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const carts = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const isUserSignedIn = !!localStorage.getItem("token");
@@ -59,7 +59,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
         );
         if (response) {
           const currentUser = response.data.find(
-            user => user.email === UserEmail || user.email === userData.email 
+            (user) => user.email === UserEmail || user.email === userData.email
           ); // Find user by email
           if (currentUser) {
             setUserId(currentUser._id); // Set user ID
@@ -80,13 +80,22 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
 
   return (
     <header className="container">
-      <nav className="nav-container">
-        <NavLink className="nav-link-text-logo" to="/">
-          {logo}
-        </NavLink>
+      <div className="new-nav-wrapper">
+      {/* Hamburger Icon */}
+      <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <span className="line"></span>
+        <span className="line"></span>
+        <span className="line"></span>
+      </div>
+      </div>
+      <NavLink className="nav-link-text-logo" to="/">
+        {logo}
+      </NavLink>
+      <nav className={`nav-container ${isMenuOpen ? "open" : ""}`}>
         <div className="nav-link01">
           <ul>
-            {isUserSignedIn || isUserGoogleSignedIn && UserEmail === "u9120307@gmail.com" ? (
+            {isUserSignedIn ||
+            (isUserGoogleSignedIn && UserEmail === "u9120307@gmail.com") ? (
               <>
                 <li>
                   <NavLink className="nav-link-text" to="/Admin">
@@ -102,18 +111,18 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                     </button>
                     <div className="dropdown-content">
                       <div className="dropdown-wrapper-for-category">
-                      {button &&
-                        button?.map((ele) => (
-                          <div className="btn-category-wrapper" key={ele.id}>
-                          <button
-                            className="nav-link-category"
-                            onClick={() => handleCategory(ele.category)}
-                            >
-                            {ele.category}
-                          </button>
+                        {button &&
+                          button?.map((ele) => (
+                            <div className="btn-category-wrapper" key={ele.id}>
+                              <button
+                                className="nav-link-category"
+                                onClick={() => handleCategory(ele.category)}
+                              >
+                                {ele.category}
+                              </button>
                             </div>
-                        ))}
-                        </div>
+                          ))}
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -121,7 +130,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
             ) : (
               <>
                 <li>
-                <div className="paste-button">
+                  <div className="paste-button">
                     <button className="btn-dropdown">
                       <NavLink className="nav-link-text" to="/products">
                         {products}
@@ -129,18 +138,18 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                     </button>
                     <div className="dropdown-content">
                       <div className="dropdown-wrapper-for-category">
-                      {button &&
-                        button?.map((ele) => (
-                          <div className="btn-category-wrapper" key={ele.id}>
-                          <button
-                            className="nav-link-category"
-                            onClick={() => handleCategory(ele.category)}
-                            >
-                            {ele.category}
-                          </button>
+                        {button &&
+                          button?.map((ele) => (
+                            <div className="btn-category-wrapper" key={ele.id}>
+                              <button
+                                className="nav-link-category"
+                                onClick={() => handleCategory(ele.category)}
+                              >
+                                {ele.category}
+                              </button>
                             </div>
-                        ))}
-                        </div>
+                          ))}
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -193,7 +202,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                               <NavLink
                                 className="nav-link-text"
                                 to={`/userDashboard/${userId}`}
-                                >
+                              >
                                 Profile
                               </NavLink>
                             </div>
@@ -209,7 +218,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                               <button
                                 className="signOut"
                                 onClick={handleSignOut}
-                                >
+                              >
                                 Sign Out
                               </button>
                             </div>
@@ -233,14 +242,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                     </div>
                   </div>
                   <li>
-                    <NavLink className="nav-link-text" to="/Addcart">
+                    {/* <NavLink className="nav-link-text" to="/Addcart">
                       {Addcart}
                       <small className="nav-add-cart-items">
                         {carts.cartTotalQuantity === 0
                           ? false
                           : carts.cartTotalQuantity}
                       </small>
-                    </NavLink>
+                    </NavLink> */}
                   </li>
                 </ul>
               </>
@@ -253,20 +262,30 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                 </li>
 
                 <li>
-                  <NavLink className="nav-link-text" to="/Addcart">
+                  {/* <NavLink className="nav-link-text" to="/Addcart">
                     {Addcart}
                     <small className="nav-add-cart-items">
                       {carts.cartTotalQuantity === 0
                         ? false
                         : carts.cartTotalQuantity}
                     </small>
-                  </NavLink>
+                  </NavLink> */}
                 </li>
               </>
             )}
           </ul>
         </div>
       </nav>
+      <ul className="nav-link-cart-wrapper">
+      <li className="nav-link-text-cart">
+        <NavLink className="nav-link-text" to="/Addcart">
+          {Addcart}
+          <small className="nav-add-cart-items">
+            {carts.cartTotalQuantity === 0 ? false : carts.cartTotalQuantity}
+          </small>
+        </NavLink>
+      </li>
+      </ul>
     </header>
   );
 }

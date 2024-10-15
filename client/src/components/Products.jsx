@@ -20,12 +20,16 @@ export default function Products() {
   const [loadingOff,setLoadingOff]=useState(true)
   const [activePage, setActivePage] = useState(1);
   const [totalProductData, setTotalProductData] = useState(0);
+  const [like,setLinke]= useState(false);
   const dispatch = useDispatch();
   
   useEffect(() => {
     fetchProductData();
   }, []);
-  
+
+  const likehandler = (product) => {
+    setLinke(like === product._id ? null : product._id); // Toggle like state
+  };
   const filteredData = categoryItem 
   ? data.filter(ele => ele.category === categoryItem) 
   : data.filter(product => (category.length === 0) || category.includes(product.category) && (brand.length === 0 || brand.includes(product.brand)));
@@ -120,6 +124,8 @@ export default function Products() {
                   formattedPrice={"₹ " + product.price}
                   rate={product.rate}
                   count={product.count}
+                  likehandler={() => likehandler(product)} // Pass product object to handler
+                  like={(like === product._id)} // Check if in wishlist
                 >
                   <button
                     onClick={() =>

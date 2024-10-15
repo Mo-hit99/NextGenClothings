@@ -12,8 +12,6 @@ export default function CommentSection({ id }) {
   const [userId,setUserId]=useState('')
   const [name,setName]=useState('')
   const [commentOptionModel, SetCommentOptionModel] = useState(null);
-
-
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
   const userData = JSON.parse(user_info);
@@ -29,6 +27,7 @@ export default function CommentSection({ id }) {
           ); // Find user by email
           if (currentUser) {
             setUserId(currentUser._id); // Set user ID
+            console.log(currentUser._id)
           }
         }
       } catch (error) {
