@@ -1546,9 +1546,6 @@ textarea::-webkit-scrollbar {
     align-items: center;
     padding: 1rem;
   }
-  .submenu-item{
-    margin: 0 auto;
-  }
   .signOut {
     text-decoration: none;
     background-color: #115dfc;
