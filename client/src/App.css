@@ -164,12 +164,13 @@
 .product-detail-title2 {
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin: 0;
   color: #2a2a2a;
+  text-align: start;
 }
 
 .product-details-description2 {
-  margin: 20px 0;
+  margin: 0;
 }
 
 .product-description2 {
@@ -181,13 +182,13 @@
 /* Color and Size Wrapper */
 .color-wrapper2, .size-wrapper2 {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  width: 100%;  
+  margin-bottom: 10px;
 }
 
 .colors-btn2, .sizes-btn2 {
   padding: 10px 15px;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
 }
 
@@ -284,8 +285,15 @@
 
   .buynow-in_btn2, .addcart-in_btn2 {
     width: 100%;
-    margin: 5px 0;
   }
+
+  .colors-btn2, .sizes-btn2 {
+    width: 100%;  
+    border-radius: 30px;
+    font-size:13px;
+    cursor: pointer;
+  }
+  
 }
 
 
