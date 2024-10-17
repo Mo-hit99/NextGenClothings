@@ -21,6 +21,7 @@ import UserDashBoard from "./components/UserDashBoard.jsx";
 import { CategoryProvider } from "../context/context.jsx";
 import UserInvoice from "./components/UserInvoice.jsx";
 import ViewOrder from "./components/ViewOrder.jsx";
+import WishList from "./components/WishList.jsx";
 
 
 const GoogleAuthWrapper = () => {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/reset-password/:token",
         element: <RestPassword />,
+      },
+      {
+        path: '/wishlist',
+        element:<WishList/>
       },
       {
         path: "/verification-Otp",

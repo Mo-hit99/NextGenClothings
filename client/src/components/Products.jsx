@@ -7,6 +7,7 @@ import axios from "axios";
 import ProductLoading from "./ProductLoading";
 import Search from "./Search";
 import { useCategory } from "../../context/context";
+import { addToWishList } from "../redux/wishlistslice";
 
 
 const LIMIT = 5;
@@ -29,6 +30,7 @@ export default function Products() {
 
   const likehandler = (product) => {
     setLinke(like === product._id ? null : product._id); // Toggle like state
+    dispatch(addToWishList({wishlistId:product._id, wishlistItem:product}))
   };
   const filteredData = categoryItem 
   ? data.filter(ele => ele.category === categoryItem) 

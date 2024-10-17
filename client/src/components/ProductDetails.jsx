@@ -7,19 +7,19 @@ import axios from "axios";
 export default function ProductDetails() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const data = location.state;
+  const data = location.state // Fallback to an empty object if state is not present
   const MoreDate = data.state;
   const [selectedColor, setSelectedColor] = useState('');
   const [amount,setAmount]=useState('')
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedImage, setSelectedImage] = useState(
-    MoreDate.filename[0]
+    MoreDate.filename?.[0] || ''
   );
-
+  
   const handleImageClick = (filename) => {
     setSelectedImage(filename);
   };
-
+  
   async function handlePayment(payment) {
     try {
       setAmount(payment);
@@ -65,6 +65,9 @@ export default function ProductDetails() {
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
+  // if (!data._id) {
+  //   return <div>Product not found or no details available.</div>;
+  // }
   return (
     <section>
       {MoreDate && (
@@ -74,7 +77,7 @@ export default function ProductDetails() {
               className="product-img2"
               src={`${selectedImage}`}
               alt={MoreDate.title}
-            />
+              />
             <div className="images-container2">
               {MoreDate.filename.map((image, index) => (
                 <img

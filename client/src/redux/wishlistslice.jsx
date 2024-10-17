@@ -8,20 +8,18 @@ const wishlistSlice = createSlice({
   },
   reducers: {
     addToWishList(state,action){
-        const { productId, quantity, product } = action.payload;
+        const { wishlistId,wishlistItem } = action.payload;
         const indexProductId = state.wishListItems.findIndex(
-          (item) => item.productId === productId
+          (item) => item.productId === wishlistId
         );
-        if (indexProductId >= 0) {
-          state.wishListItems[indexProductId].quantity += quantity;
-        } else {
-          state.wishListItems.push({ productId, quantity, product });
+        if (indexProductId <=0) {
+          state.wishListItems.push({ wishlistId,wishlistItem });
         }   
       },
       removeToWishList(state,action){
-        const  productId  = action.payload;
+        const  wishlistId  = action.payload;
         const nextcartItems = state.wishListItems.filter(
-          (item) => item.productId !== productId
+          (item) => item.productId !== wishlistId
         );
         state.wishListItems = nextcartItems;
       },

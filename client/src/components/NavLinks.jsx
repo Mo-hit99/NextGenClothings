@@ -8,27 +8,19 @@ import { clearCart } from "../redux/cartSlice";
 const button = [
   {
     id: 1,
-    category: "shoes",
+    category: " Women shoes",
   },
   {
     id: 2,
-    category: "shoes2",
+    category: " Women T-Shirts",
   },
   {
     id: 3,
-    category: "shoes3",
+    category: "Man shoes",
   },
   {
     id: 4,
-    category: "shoes4",
-  },
-  {
-    id: 5,
-    category: "shoes5",
-  },
-  {
-    id: 6,
-    category: "shoes6",
+    category: "Man T-Shirts",
   },
 ];
 
@@ -81,12 +73,12 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
   return (
     <header className="container">
       <div className="new-nav-wrapper">
-      {/* Hamburger Icon */}
-      <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <span className="line"></span>
-        <span className="line"></span>
-        <span className="line"></span>
-      </div>
+        {/* Hamburger Icon */}
+        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <span className="line"></span>
+          <span className="line"></span>
+          <span className="line"></span>
+        </div>
       </div>
       <NavLink className="nav-link-text-logo" to="/">
         {logo}
@@ -209,6 +201,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                             <div>
                               <NavLink
                                 className="nav-link-text"
+                                to={`/wishlist`}
+                              >
+                                WhistList
+                              </NavLink>
+                            </div>
+                            <div>
+                              <NavLink
+                                className="nav-link-text"
                                 to={`/UserInvoice/${userId}`}
                               >
                                 Invoice
@@ -231,6 +231,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                                 to={`/userDashboard/${userId}`}
                               >
                                 Profile
+                              </NavLink>
+                            </div>
+                            <div>
+                              <NavLink
+                                className="nav-link-text"
+                                to={`/wishlist`}
+                              >
+                                WhistList
                               </NavLink>
                             </div>
                             <button className="signOut" onClick={handleSignOut}>
@@ -277,14 +285,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
         </div>
       </nav>
       <ul className="nav-link-cart-wrapper">
-      <li className="nav-link-text-cart">
-        <NavLink className="nav-link-text" to="/Addcart">
-          {Addcart}
-          <small className="nav-add-cart-items">
-            {carts.cartTotalQuantity === 0 ? false : carts.cartTotalQuantity}
-          </small>
-        </NavLink>
-      </li>
+        <li className="nav-link-text-cart">
+          <NavLink className="nav-link-text" to="/Addcart">
+            {Addcart}
+            <small className="nav-add-cart-items">
+              {carts.cartTotalQuantity === 0 ? false : carts.cartTotalQuantity}
+            </small>
+          </NavLink>
+        </li>
       </ul>
     </header>
   );
