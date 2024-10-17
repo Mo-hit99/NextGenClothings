@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 
 export default function WishList() {
   const wishlistItems = useSelector((state) => state.wishlist.wishListItems);
@@ -37,7 +36,7 @@ export default function WishList() {
           );
         })
       ) : (
-        <p>Your wishlist is empty.</p>
+        <p className="cart-empty">Your wishlist is empty.</p>
       )}
     </section>
   );

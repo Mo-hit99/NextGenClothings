@@ -8,12 +8,13 @@ import ProductLoading from "./ProductLoading";
 import Search from "./Search";
 import { useCategory } from "../../context/context";
 import { addToWishList } from "../redux/wishlistslice";
+import Message from "./Message";
 
 
 const LIMIT = 5;
 
 export default function Products() {
-  
+  const [wishlistModel,setWishlistModel] = useState(false)
   const { categoryItem } = useCategory();
   const [data, setData] = useState([]);
   const [category, setCategory] = useState([]);
@@ -31,6 +32,10 @@ export default function Products() {
   const likehandler = (product) => {
     setLinke(like === product._id ? null : product._id); // Toggle like state
     dispatch(addToWishList({wishlistId:product._id, wishlistItem:product}))
+    setWishlistModel(!wishlistModel);
+    setTimeout(()=>{
+      setWishlistModel(wishlistModel)
+    },1000)
   };
   const filteredData = categoryItem 
   ? data.filter(ele => ele.category === categoryItem) 
@@ -101,6 +106,7 @@ export default function Products() {
 
   return (
     <section className="product-section-container2">
+      {wishlistModel && <Message subtitle={'WhishList'} title={'Add to'} /> }
       <Search setData={setData}/>
         {/* <div className="category-selection">
           <button onClick={() => handleCategory("shoes")}>Shoes</button>

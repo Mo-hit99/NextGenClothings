@@ -93,10 +93,10 @@
     color: #fff;
     padding: 10px 15px;
     border: none;
-    border-radius: 30px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
-    width: 100px;
+    width: 100%;
     transition: box-shadow 0.3s ease-in-out;
   }
 }
@@ -223,13 +223,12 @@
   border: none;
   color: #fff;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .buynow-in_btn2 {
@@ -449,16 +448,19 @@ width: 100%;
   font-size: 13px;
   top: 25px;
   left: -300%;
-  z-index: 1;
+  z-index: 16;
   width: 100vh;
   height: 60vh;
   margin: auto;
-  background-color: white;
+  background-color:#F5F5F5;
+  box-shadow: 0px 0px 27px -3px rgba(0,0,0,0.1);
+  border-radius: 1rem;
 }
 .dropdown-wrapper-for-category{
   display: grid;
   width: 700px;
   margin: auto;
+
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
 }
 .paste-button:hover .dropdown-content {
@@ -468,6 +470,7 @@ width: 100%;
   padding: .2rem;
   display: block;
   border: none;
+  font-size: 15px;
   width: inherit;
   background-color: transparent;
   cursor: pointer;
@@ -537,9 +540,10 @@ width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #99f969;
+  background: #90EE90;
   border-radius: 8px;
   box-shadow: 0px 0px 5px -3px #111;
+  z-index: 99;
 }
 
 .success__icon {
@@ -1286,6 +1290,25 @@ textarea::-webkit-scrollbar {
   position: relative;
   color: #25262a;
 }
+.nav-link-text2{
+  display:block;
+  width: 120px;
+  font-size: 50px;
+  margin-top: 14px;
+  margin-left: 4.8rem;
+  overflow: hidden;
+}
+.nav-link-text2 .all-products{
+  font-size: 15px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+.nav-link-text svg{
+  margin-bottom: -5px;
+  margin-right:5px;
+  color: #000;
+}
 .nav-add-cart-items {
   content: "";
   position: absolute;
@@ -1472,7 +1495,9 @@ textarea::-webkit-scrollbar {
   width: 100%;
   border-radius: 10px;
 }
-
+.nav-link-product{
+  font-size: 18px;
+}
 .nav-link-cart-wrapper .nav-link-text-cart{
   list-style: none;
 }
@@ -1529,11 +1554,11 @@ textarea::-webkit-scrollbar {
     background-color: #115dfc;
     border: none;
     color: white;
-    padding:.2rem 0;
+    padding:.5rem 0;
     font-size: 10px;
     border-radius: 10px;
     width: 100%;
-    margin:auto;
+    margin:.5rem auto;
     cursor: pointer;
   }
   .nav-link-text{
@@ -1570,12 +1595,15 @@ textarea::-webkit-scrollbar {
     display: none;
     position: absolute;
     font-size: 13px;
-    top: 25px;
-    left: 0;
-    width: 100%;
-    z-index: 16;
+    top: 26px;
+    right: -220px;
+    width:100%;
+    min-width: 330px;
+    height:100%;
+    min-height: 265px;
+    overflow: hidden;
+    z-index:16;
     margin: auto;
-    background-color: #fff;
   }
   .dropdown-wrapper-for-category{
     display: grid;
@@ -1583,6 +1611,15 @@ textarea::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
+  }
+  .nav-link-text2{
+    margin: 0 auto;
+    margin-top: .5rem;
+  }
+  .nav-link-text2 .all-products{
+    font-size: 15px;
+    text-align: center;
+    color: #000;
   }
 }
 
