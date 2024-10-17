@@ -102,7 +102,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                     <div className="dropdown-content">
                       <div className="dropdown-wrapper-for-category">
                         <NavLink className="nav-link-text2" to="/products">
-                          <p className="all-products">All Products</p>
+                          <p className="all-products">all Products</p>
                         </NavLink>
                         {button &&
                           button?.map((ele) => (
