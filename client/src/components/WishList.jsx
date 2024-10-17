@@ -30,7 +30,7 @@ export default function WishList() {
               </p>
               <p className="product-card__brand">{wishlistItem.brand}</p>
               <p className="product-card__description">
-                {wishlistItem.description}
+                {wishlistItem.title}
               </p>
               <p className="product-card__price">{wishlistItem.price}</p>
             </div>
