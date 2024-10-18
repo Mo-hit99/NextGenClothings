@@ -103,9 +103,9 @@ export default function ProductDetails() {
                         backgroundColor: color,
                         border:
                           selectedColor === color
-                            ? "2px solid #393a37"
-                            : "1px solid gray",
-                        margin: "5px",
+                            ? "1px solid #000"
+                            : "1px solid #cccccc",
+                        margin: "4px",
                       }}
                       onClick={() => setSelectedColor(color)}
                     ></button>
@@ -119,9 +119,9 @@ export default function ProductDetails() {
                       style={{
                         border:
                           selectedSize === size
-                            ? "2px solid #026eda"
-                            : "1px solid gray",
-                        margin: "5px",
+                            ? "1px solid #026eda"
+                            : "1px solid #cccccc",
+                        margin: "4px",
                       }}
                       onClick={() => setSelectedSize(size)}
                     >
