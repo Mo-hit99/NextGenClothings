@@ -2849,6 +2849,16 @@ h1 {
     top: 0;
     right: 0 ;
   }
+  .form-edit{
+    position: absolute;
+    top: 0;
+    left: 70px;
+    width: 80%;
+    z-index: 4;
+    padding: 1rem 1rem;
+    background-color: #e6e3e3;
+    border-radius: 1rem;
+  }
 }
 
 /* Smaller Mobile Screens */
@@ -2878,6 +2888,16 @@ h1 {
     position: absolute;
     top: 0;
     right: 0 ;
+  }
+  .form-edit{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    z-index: 4;
+    padding: 1rem 1rem;
+    background-color: #e6e3e3;
+    border-radius: 1rem;
   }
 }
 
