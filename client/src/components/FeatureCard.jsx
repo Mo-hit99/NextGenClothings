@@ -9,7 +9,7 @@ import { useCategory } from "../../context/context";
 
   const handleCategory = (category) => {
     setCategoryItem(category);
-    navigate('/products');
+    navigate('/products/q');
   };
   return (
     <section className='product-card2'>

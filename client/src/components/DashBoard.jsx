@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
+import { timeAgo } from "../assets/Timeago";
+
 
 export default function DashBoard() {
   
@@ -129,7 +131,7 @@ return (
     <div className="admin-product-rate">⭐{item.rate} <span className="admin-product-count"></span>({item.count})</div>
     <div className="admin-product-price"> ₹{item.price} </div>
     <div className="admin-product-category"> {item.category}
-        <div className="admin-product-author">{item.createdAt}</div>
+        <div className="admin-product-author">{timeAgo(item.createdAt)}</div>
         <div className="delete-update-btn-container">
           <button title="Edit" className="admin-update-btn" onClick={()=> updateProduct(item._id)} ><i className="fa-solid fa-pencil"></i></button>
           <button title="Delete" className="admin-delete-btn" onClick={()=>deleteProduct(item._id)}><i className="fa-regular fa-trash-can"></i></button>

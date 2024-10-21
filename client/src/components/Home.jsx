@@ -44,7 +44,7 @@ export default function Home() {
 
     {trendingProducts?.map((trending)=>(
       <>
-      <FeatureCard key={trending.id} links={'/products'} image={trending.image}
+      <FeatureCard key={trending.id} links={'/products/q'} image={trending.image}
       brand={trending.brand}
       description={trending.description}
       >
@@ -68,7 +68,7 @@ export default function Home() {
       <h1 className='date-offer'>1 June - 10 June 2024</h1>
       <p className='term-offer'>*Terms & Condition apply</p>
       <div className="showNow-btn">
-        <NavLink className='offer-btn' to={'/products'}>SHOP NOW</NavLink>
+        <NavLink className='offer-btn' to={'/products/q'}>SHOP NOW</NavLink>
       </div>
     </div>
     </div>

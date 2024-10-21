@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { timeAgo } from "../assets/Timeago";
 
 export default function UserInvoice() {
     const { id } = useParams();
@@ -26,7 +27,6 @@ export default function UserInvoice() {
         const response = await axios.get(import.meta.env.VITE_SERVER_LINK +'/payment/invoice')
         if(response){
             setUserInvoice(response.data);
-            console.log(response.data)
         }
     } catch (error) {
         console.log(error)
@@ -64,7 +64,7 @@ export default function UserInvoice() {
               <td>{getInvoice.ProductSize}</td>
               <td>{getInvoice.ProductPrice}</td>
               <td>{getInvoice.CustomerAddress}</td>
-              <td>{getInvoice.date}</td>
+              <td>{timeAgo(getInvoice.date)}</td>
             </tr>
           ))}
         </tbody>

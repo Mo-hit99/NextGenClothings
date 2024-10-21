@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <UserInvoice />,
       },
       {
-        path: "/products",
+        path: "/products/q",
         element: <Products />,
       },
       {

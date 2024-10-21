@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { timeAgo } from "../assets/Timeago";
 
 export default function CommentSection({ id }) {
   const [comment, setComment] = useState("");
@@ -27,7 +28,7 @@ export default function CommentSection({ id }) {
           ); // Find user by email
           if (currentUser) {
             setUserId(currentUser._id); // Set user ID
-            console.log(currentUser._id)
+        
           }
         }
       } catch (error) {
@@ -218,7 +219,7 @@ export default function CommentSection({ id }) {
                       </div>
                       <div className="user-info">
                         <span>{dataComment.name}</span>
-                        <p>{dataComment.createdAt}</p>
+                        <p>{timeAgo(dataComment.createdAt)}</p>
                       </div>
                     </div>
                     <p className="comment-content">{dataComment.comment}</p>

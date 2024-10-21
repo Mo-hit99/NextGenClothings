@@ -5,10 +5,10 @@ import { addToCard } from "../redux/cartSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import ProductLoading from "./ProductLoading";
-import Search from "./Search";
 import { useCategory } from "../../context/context";
 import { addToWishList } from "../redux/wishlistslice";
 import Message from "./Message";
+import { useLocation } from "react-router-dom";
 
 
 const LIMIT = 5;
@@ -16,6 +16,7 @@ const LIMIT = 5;
 export default function Products() {
   const [wishlistModel,setWishlistModel] = useState(false)
   const { categoryItem } = useCategory();
+  const location = useLocation();
   const [data, setData] = useState([]);
   const [category, setCategory] = useState([]);
   const [brand, setBrand] = useState([]);
@@ -24,7 +25,6 @@ export default function Products() {
   const [totalProductData, setTotalProductData] = useState(0);
   const [like,setLinke]= useState(false);
   const dispatch = useDispatch();
-  
   useEffect(() => {
     fetchProductData();
   }, []);
@@ -61,7 +61,31 @@ export default function Products() {
       console.log({ error: error.message });
     }
   }
-  
+// extract the search query from the url
+const query = new URLSearchParams(location.search).get('search');
+useEffect(()=>{
+  // Search products based on query
+  async function searchProducts(query) {
+    try{
+    let response = await axios.get(
+             `${import.meta.env.VITE_SERVER_LINK}/productData/?search=${encodeURIComponent(query)}`
+           );
+           let result = await response.data;
+           if (result) {
+             setData(result.queryData);
+           }
+      setTotalProductData(result.pagination.totalCount);
+    } catch (error) {
+      console.log("Error during search:", error.message);
+    }
+  }
+  if(query){
+    searchProducts(query);
+  }else{
+    searchProducts('')
+  }
+},[query,location.search]);
+
   async function filterSubmit(e) {
     e.preventDefault();
     try {
@@ -107,7 +131,6 @@ export default function Products() {
   return (
     <section className="product-section-container2">
       {wishlistModel && <Message subtitle={'WhishList'} title={'Add to'} /> }
-      <Search setData={setData}/>
         {/* <div className="category-selection">
           <button onClick={() => handleCategory("shoes")}>Shoes</button>
         </div> */}

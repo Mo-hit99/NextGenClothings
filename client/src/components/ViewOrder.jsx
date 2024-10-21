@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { timeAgo } from "../assets/Timeago";
 
 export default function ViewOrder() {
 
@@ -49,7 +50,7 @@ export default function ViewOrder() {
               <td>{getInvoice.ProductSize}</td>
               <td>{getInvoice.ProductPrice}</td>
               <td>{getInvoice.CustomerAddress}</td>
-              <td>{getInvoice.date}</td>
+              <td>{timeAgo(getInvoice.date)}</td>
             </tr>
           ))}
         </tbody>
