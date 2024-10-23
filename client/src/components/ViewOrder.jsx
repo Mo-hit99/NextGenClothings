@@ -19,6 +19,19 @@ export default function ViewOrder() {
         console.log(error)
     }
   }
+
+  async function deleteProduct(id){
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_SERVER_LINK}/payment/invoice/${id}`)
+  
+      if(response){
+        getUserInvoice()
+      }
+      
+  } catch (error) {
+    console.log({error : error.message})
+  }
+  }
   return (
     <section className="section-invoice-container">
       <table className="invoice-table">
@@ -51,8 +64,10 @@ export default function ViewOrder() {
               <td>{getInvoice.ProductPrice}</td>
               <td>{getInvoice.CustomerAddress}</td>
               <td>{timeAgo(getInvoice.date)}</td>
+              <button title="Delete" className="admin-delete-btn" onClick={()=>deleteProduct(getInvoice._id)}><i className="fa-regular fa-trash-can"></i></button>
             </tr>
           ))}
+          
         </tbody>
       </table>
       {userInvoice.length === 0 && (

@@ -17,7 +17,10 @@ export default function Addcart() {
   const [ProductBrand, setProductBrand] = useState('');
   const [ProductColor, setProductColor] = useState('');
   const [ProductSize, setProductSize] = useState('');
+  const [subQuantity,setSubQuantity] = useState('');
+  const [subProductPrice,SetSubProductPrice]=useState('');
   const [selectedAddress, setSelectedAddress] = useState('');
+  const [invoiceUserEmail,setInvoiceUserEmail]=useState("");
   const [ProductPrice, setProductPrice] = useState(cart.cartTotalAmount);
   const [totalQuantity, setTotalQuantity] = useState(cart.cartTotalQuantity);
   const [paymentId,setPaymentId]=useState('')
@@ -38,6 +41,7 @@ export default function Addcart() {
           ); // Find user by email
           if (currentUser) {
             setUserId(currentUser._id); // Set user ID
+            setInvoiceUserEmail(currentUser.email)
           }
         }
       } catch (error) {
@@ -78,7 +82,7 @@ export default function Addcart() {
 
     getUserById();
   }, [userId]);
-  console.log(paymentId)
+
   useEffect(()=>{
     setProductName(cart.items.map((ele) => ele.product.title).join(", "));
     setProductBrand(cart.items.map((ele) => ele.product.brand).join(", "));
@@ -86,6 +90,8 @@ export default function Addcart() {
     setProductSize(cart.items.map((ele) => ele.selectedSize).join(", "));
     setProductPrice(cart.cartTotalAmount);
     setTotalQuantity(cart.cartTotalQuantity);
+    setSubQuantity(cart.items.map((ele) => ele.quantity).join(", "));
+    SetSubProductPrice(cart.items.map((ele)=> ele.product.price).join(", "));
   },[cart])
   // invoice rest api
   async function handlePayment() {
@@ -156,6 +162,9 @@ export default function Addcart() {
           CustomerAddress:selectedAddress,
           paymentId,
           totalQuantity,
+          subQuantity,
+          subProductPrice,
+          email:invoiceUserEmail
         }
       );
     } catch (error) {
