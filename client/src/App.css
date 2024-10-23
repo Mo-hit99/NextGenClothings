@@ -3144,4 +3144,8 @@ background-color: #14151484;
     width: 100%;
     margin: 0 auto;
   }
+  .submission-btn{
+    width: 80%;
+    margin: auto;
+  }
 }
