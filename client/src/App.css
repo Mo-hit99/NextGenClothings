@@ -2492,9 +2492,9 @@ textarea::-webkit-scrollbar {
     padding: 0.4rem 0.8rem;
   }
   .product-card2 {
-    margin: 0 auto;
-    width: 90%;
-    height: 100%;
+    margin: 0 20rem;
+    /* width: 90%; */
+    /* height: 100%; */
   }
 }
 
@@ -2517,8 +2517,8 @@ textarea::-webkit-scrollbar {
     padding: 0.3rem 0.6rem;
   }
   .product-card2 {
-    width: 86%;
-    height: 100%;
+    /* width: 86%; */
+    /* height: 100%; */
   }
 }
 
