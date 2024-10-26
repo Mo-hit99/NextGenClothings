@@ -5,12 +5,13 @@ import NavLinks from './components/NavLinks'
 import Footer from './components/Footer'
 import RefreshHandler from './components/RefreshHandler'
 import { useState } from 'react'
+import logo from './assets/svg/logo'
 function App() {
  const [isAuthenticated,setIsAuthenticated] = useState(false);
   return (
     <div className='App'>
       <RefreshHandler setIsAuthenticated={setIsAuthenticated}/>
-      <NavLinks admin={'Admin'} logo={"Next Gen"} home={"Home"} products={'Products'} signIn={'SignIn'} Addcart={<i className="fa-solid fa-cart-shopping"></i>} />
+      <NavLinks admin={'Admin'} logo={logo} home={"Home"} products={'Products'} signIn={'SignIn'} Addcart={<i className="fa-solid fa-cart-shopping"></i>} />
       <Outlet/>
       <Footer/>
     </div>

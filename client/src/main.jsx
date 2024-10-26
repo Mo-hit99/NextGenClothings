@@ -22,7 +22,7 @@ import { CategoryProvider } from "../context/context.jsx";
 import UserInvoice from "./components/UserInvoice.jsx";
 import ViewOrder from "./components/ViewOrder.jsx";
 import WishList from "./components/WishList.jsx";
-
+import CustomerCare from "./components/CustomerCare.jsx";
 
 const GoogleAuthWrapper = () => {
   return (
@@ -69,8 +69,12 @@ const router = createBrowserRouter([
         element: <RestPassword />,
       },
       {
-        path: '/wishlist',
-        element:<WishList/>
+        path: "/customerCare",
+        element: <CustomerCare />,
+      },
+      {
+        path: "/wishlist",
+        element: <WishList />,
       },
       {
         path: "/verification-Otp",

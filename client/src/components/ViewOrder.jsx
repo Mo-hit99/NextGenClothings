@@ -71,7 +71,7 @@ export default function ViewOrder() {
         </tbody>
       </table>
       {userInvoice.length === 0 && (
-        <p>No invoices found for this user.</p>
+        <p className="user-invoice-text">No invoices found for this user.</p>
       )}
     </section>
   );

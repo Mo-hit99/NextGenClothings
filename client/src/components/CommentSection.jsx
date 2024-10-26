@@ -10,8 +10,8 @@ export default function CommentSection({ id }) {
   const [editError, setEditError] = useState("");
   const [upDatedComment, setUpDatedComment] = useState("");
   const [model, setModel] = useState(null);
-  const [userId,setUserId]=useState('')
-  const [name,setName]=useState('')
+  const [userId, setUserId] = useState("");
+  const [name, setName] = useState("");
   const [commentOptionModel, SetCommentOptionModel] = useState(null);
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
@@ -19,23 +19,33 @@ export default function CommentSection({ id }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        // Check if email is available
+        const email = UserEmail || (userData && userData.email);
+        if (!email) {
+          console.log("No email found to search for user.");
+          return; // Exit if email is not available
+        }
         const response = await axios.get(
           import.meta.env.VITE_SERVER_LINK + `/api/user`
         );
         if (response.data) {
+          // const currentUser = response.data.find(
+          //   (user) => user.email === UserEmail || user.email === userData.email
+          // ); // Find user by email
           const currentUser = response.data.find(
-            (user) => user.email === UserEmail || user.email === userData.email
-          ); // Find user by email
+            (user) => user.email === email
+          );
           if (currentUser) {
             setUserId(currentUser._id); // Set user ID
-        
           }
         }
       } catch (error) {
         console.error(error);
       }
     };
-    fetchUserData();
+    if (UserEmail || (userData && userData.email)) {
+      fetchUserData();
+    }
   }, [UserEmail, userData]);
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export default function CommentSection({ id }) {
       if (response) {
         setComment("");
         setRating("");
-        setError('')
+        setError("");
         getCommentSection();
       }
     } catch (error) {
@@ -125,7 +135,7 @@ export default function CommentSection({ id }) {
         { upDatedComment }
       );
       if (response.status === 200) {
-        setError('')
+        setError("");
         getCommentSection();
       }
     } catch (error) {
@@ -133,7 +143,7 @@ export default function CommentSection({ id }) {
     }
   }
   function commentOptionToggle(commentId) {
-   SetCommentOptionModel(commentOptionModel === commentId ? null : commentId);
+    SetCommentOptionModel(commentOptionModel === commentId ? null : commentId);
   }
   return (
     <div className="comment-card">
@@ -255,13 +265,13 @@ export default function CommentSection({ id }) {
                             placeholder="Edit"
                             value={upDatedComment || dataComment.comment || ""}
                             onChange={(e) => setUpDatedComment(e.target.value)}
-                            />
+                          />
                           <div className="edit-btn-wrapper">
                             <button
                               className="edit-comment-btn"
                               title="edit"
                               onClick={() => UpdateComment(dataComment._id)}
-                              >
+                            >
                               <i className="fa-solid fa-pencil"></i>
                             </button>
                           </div>

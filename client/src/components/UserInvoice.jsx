@@ -70,7 +70,7 @@ export default function UserInvoice() {
         </tbody>
       </table>
       {userInvoice.filter(invoiceUser => invoiceUser.CustomerName === user).length === 0 && (
-        <p>No invoices found for this user.</p>
+        <p className="user-invoice-text">No invoices found for this user.</p>
       )}
     </section>
   )
