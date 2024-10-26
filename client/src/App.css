@@ -2516,8 +2516,11 @@ textarea::-webkit-scrollbar {
   .offer-btn {
     padding: 0.3rem 0.6rem;
   }
+  .Trending{
+    margin: 0 auto;
+  }
   .product-card2 {
-    width: 87%;
+    width: 89%;
     height: 100%;
     }
     .feature-category-btn{
