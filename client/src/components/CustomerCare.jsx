@@ -113,7 +113,7 @@ function msgOpner(){
   const formData = new FormData();
   if (sender) formData.append("sender", sender); // Adjust to include user info
   if (content) formData.append("content", content); // Append only if content exists
-  if (image) formData.append("image", image); // Append only if image exists
+  if (image) formData.append("product-img", image); // Append only if image exists
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if the sender and content fields are properly set
