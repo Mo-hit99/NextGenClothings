@@ -2517,9 +2517,8 @@ textarea::-webkit-scrollbar {
     padding: 0.3rem 0.6rem;
   }
   .product-card2 {
-    width: 85%;
+    width: 70%;
     height: 100%;
-    margin: 0 auto;
   }
 }
 
