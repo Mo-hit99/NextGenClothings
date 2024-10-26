@@ -1584,7 +1584,6 @@ textarea::-webkit-scrollbar {
   text-decoration: none;
   width: calc(100% - 25rem);
   color: #25262a;
-  border: 1px solid black;
 }
 .nav-link-text-logo svg{
   margin-top: 1rem;
@@ -2518,7 +2517,7 @@ textarea::-webkit-scrollbar {
     padding: 0.3rem 0.6rem;
   }
   .product-card2 {
-    width: 100%;
+    width: 80%;
     height: 100%;
   }
 }
