@@ -2517,10 +2517,11 @@ textarea::-webkit-scrollbar {
     padding: 0.3rem 0.6rem;
   }
   .Trending{
+    width: 100%;
     margin: 0 auto;
   }
   .product-card2 {
-    width: 89%;
+    width: 86.6%;
     height: 100%;
     }
     .feature-category-btn{
