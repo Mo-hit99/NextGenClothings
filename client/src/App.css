@@ -4055,6 +4055,10 @@ h1.customer-care-title {
   h1.customer-care-title {
     font-size: 28px; /* Adjust font size for smaller screens */
   }
+  .chat-container{
+    max-width: 450px;
+  }
+
 }
 .new-message {
   -webkit-animation: pulse 1s infinite;
@@ -4073,8 +4077,9 @@ h1.customer-care-title {
   100% { -webkit-transform: scale(1); transform: scale(1); }
 }
 
-/* wishlist card */
 
+
+/* wishlist card */
 /* Section styles */
 .wishlistCard-container {
   padding: 20px;
