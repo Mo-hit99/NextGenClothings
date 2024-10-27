@@ -4055,12 +4055,8 @@ h1.customer-care-title {
   h1.customer-care-title {
     font-size: 28px; /* Adjust font size for smaller screens */
   }
-  .chat-container{
-    width: 69%;
-    /* min-width: 300px; */
-  }
   .chat-input{
-    width: 100%;
+    width: 50%;
   }
 }
 .new-message {
