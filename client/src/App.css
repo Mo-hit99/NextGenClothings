@@ -4055,9 +4055,6 @@ h1.customer-care-title {
   h1.customer-care-title {
     font-size: 28px; /* Adjust font size for smaller screens */
   }
-  .chat-input{
-    width: 30%;
-  }
 }
 .new-message {
   -webkit-animation: pulse 1s infinite;
