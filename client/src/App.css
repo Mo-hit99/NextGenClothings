@@ -4058,7 +4058,9 @@ h1.customer-care-title {
   .chat-container{
     max-width: 300px;
   }
-
+  .chat-input{
+    width: 100%;
+  }
 }
 .new-message {
   -webkit-animation: pulse 1s infinite;
