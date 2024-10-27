@@ -1545,13 +1545,16 @@ textarea::-webkit-scrollbar {
 
 /* navigation link */
 .container {
-  padding: 0.5rem;
+  padding: 0 .5rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.searchBar-container .nav-search-bar{
+padding: .3rem;
 }
 .new-nav-wrapper {
   display: -webkit-box;
@@ -2770,9 +2773,9 @@ textarea::-webkit-scrollbar {
 .addcart-in_btn span {
   padding: 0 0.8rem 0 0;
 }
-.product-search-form {
+/* .product-search-form {
   width: 100%;
-}
+} */
 .main-container-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2855,7 +2858,7 @@ textarea::-webkit-scrollbar {
   width: 100%;
   text-align: center;
   max-width: 900px;
-  margin: 1rem auto;
+  margin: 0 auto;
   padding: 0 1rem;
   border-radius: 30px;
 }

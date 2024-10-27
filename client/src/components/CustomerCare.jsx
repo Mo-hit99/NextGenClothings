@@ -31,7 +31,7 @@ function msgOpner(){
     if (Notification.permission === "granted" && document.hidden) {
       const notification = new Notification("New Message", {
         body: `${message.sender}: ${message.content}`,
-        icon: "/path/to/notification-icon.png", // Replace with your icon path
+        icon: './src/assets/svg/openart-image_CZzVmoz-_1729959679734_raw.jpg', // Replace with your icon path
       });
 
       // Optional: Add a click event for the notification

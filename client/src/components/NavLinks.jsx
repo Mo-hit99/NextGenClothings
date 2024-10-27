@@ -490,8 +490,8 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
           </li>
         </ul>
       </header>
-      <section>
-        <nav>
+      <section className="searchBar-container">
+        <nav className="nav-search-bar">
           <Search />
         </nav>
       </section>
