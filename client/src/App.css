@@ -4167,3 +4167,189 @@ h1.customer-care-title {
   color: #555; /* Grey color for the empty state message */
   font-size: 1.2em; /* Larger font for visibility */
 }
+
+
+/* OrderTracker */
+/* Container for all cards */
+.order-tracker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Individual order card */
+.order-card {
+  display: flex;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 800px; /* Maximum width for large screens */
+  width: 100%; /* Full width on smaller screens */
+  margin: 1rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* .order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+} */
+
+/* Card image */
+.order-card img {
+  width: 150px; /* Fixed width for the image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 12px 0 0 12px; /* Rounded corners on the left */
+}
+
+/* Card content area */
+.order-card-content {
+  padding: 1rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space evenly */
+  flex-grow: 1; /* Allow content to grow */
+}
+
+/* Card header */
+.order-card h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+/* Product details */
+.order-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Status updates */
+.status-updates {
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #eee;
+  margin-top: 1rem;
+}
+
+.status-updates li {
+  list-style: none;
+  margin: 0.3rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .order-card {
+    flex-direction: column; /* Stack elements on small screens */
+  }
+
+  .order-card img {
+    width: 100%; /* Full width on small screens */
+    border-radius: 12px 12px 0 0; /* Rounded corners on the top */
+  }
+}
+
+
+/* admin handle user order by status */
+/* Container for the manage orders section */
+.manage-orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual order card */
+.order-card {
+  display: flex;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 800px; /* Maximum width for large screens */
+  width: 100%; /* Full width on smaller screens */
+  margin: 1rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Card image */
+.order-card img {
+  width: 150px; /* Fixed width for the image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 12px 0 0 12px; /* Rounded corners on the left */
+}
+
+/* Card content area */
+.order-card-content {
+  padding: 1rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space evenly */
+  flex-grow: 1; /* Allow content to grow */
+}
+
+/* Card header */
+.order-card h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+/* Current Status and select box */
+.order-card p {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+/* Dropdown and button styles */
+.order-card select {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.update-order-btn{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  background-color: #141514;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
+  transition: -webkit-box-shadow 0.3s ease-in-out;
+  -o-transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
+  margin-top: .5rem;
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .order-card {
+    flex-direction: column; /* Stack elements on small screens */
+  }
+
+  .order-card img {
+    width: 100%; /* Full width on small screens */
+    border-radius: 12px 12px 0 0; /* Rounded corners on the top */
+  }
+}

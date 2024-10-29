@@ -72,7 +72,7 @@ export function invoiceTemplate(customerName,customerAddress,PaymentId,ProductNa
         <div class="invoice-container">
           <!-- Header -->
           <div class="header">
-            <h1>Next Gen Clothings</h1>
+            <h1>Next Gen Clothes</h1>
             <p>Your Invoice</p>
           </div>
 
@@ -102,7 +102,7 @@ export function invoiceTemplate(customerName,customerAddress,PaymentId,ProductNa
                 <td>${subQuantity}</td>
                 <td>${TotalQuantity}</td>
                 <td>₹ ${SubProductPrice}</td>
-                <td>₹ ${(productPrice).toFixed(2)}</td>
+                <td>₹ ${productPrice}</td>
               </tr>
               <tr>
                 <td colspan="3"><strong>Subtotal</strong></td>
@@ -123,7 +123,7 @@ export function invoiceTemplate(customerName,customerAddress,PaymentId,ProductNa
 
           <!-- Footer -->
           <div class="footer">
-            <p>Thank you for shopping with Next Gen Clothings!</p>
+            <p>Thank you for shopping with Next Gen Clothes!</p>
             <p>If you have any questions, contact us at support@nextgenclothings.com</p>
           </div>
         </div>

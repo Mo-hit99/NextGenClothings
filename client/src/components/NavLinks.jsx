@@ -58,8 +58,6 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
           import.meta.env.VITE_SERVER_LINK + `/api/user`
         );
         if (response && response.data) {
-          console.log("Fetched Users:", response.data);
-
           // const currentUser = response.data.find(
           //   (user) => user.email === UserEmail || user.email === userData.email
           // );
@@ -348,6 +346,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                                   Invoice
                                 </NavLink>
                               </div>
+                              <div>
+                                <NavLink
+                                  className="nav-link-text"
+                                  to={`/order/tracker/${userId}`}
+                                >
+                                  Your Order
+                                </NavLink>
+                              </div>
                               <div className="submenu-item">
                                 <button
                                   className="signOut"
@@ -429,6 +435,14 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                                     />
                                   </svg>
                                   Invoice
+                                </NavLink>
+                              </div>
+                              <div>
+                                <NavLink
+                                  className="nav-link-text"
+                                  to={`/order/tracker/${userId}`}
+                                >
+                                  Your Order
                                 </NavLink>
                               </div>
                               <button

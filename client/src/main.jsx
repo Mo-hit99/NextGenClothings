@@ -23,6 +23,8 @@ import UserInvoice from "./components/UserInvoice.jsx";
 import ViewOrder from "./components/ViewOrder.jsx";
 import WishList from "./components/WishList.jsx";
 import CustomerCare from "./components/CustomerCare.jsx";
+import OrderTracker from "./components/OrderTracker.jsx";
+import UserOrder from "./components/UserOrder.jsx";
 
 const GoogleAuthWrapper = () => {
   return (
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/UserInvoice/:id",
         element: <UserInvoice />,
+      },
+      {
+        path: "/order/tracker/:id",
+        element: <OrderTracker />,
       },
       {
         path: "/products/q",
@@ -112,6 +118,10 @@ const router = createBrowserRouter([
             path: "/Admin/view/order",
             element: <ViewOrder />,
           },
+          {
+            path : '/Admin/order/status',
+            element:<UserOrder />
+          }
         ],
       },
     ],
