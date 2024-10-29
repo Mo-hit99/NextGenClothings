@@ -5,6 +5,7 @@ import { timeAgo } from "../assets/Timeago";
 
 export default function UserInvoice() {
     const { id } = useParams();
+    const [ userEmail ,setUserEmail] = useState('')
     const [ user ,setUser] = useState('')
     const [userInvoice, setUserInvoice]=useState([]);
 
@@ -16,6 +17,7 @@ export default function UserInvoice() {
       try {
         const response = await axios.get(import.meta.env.VITE_SERVER_LINK +`/api/user/${id}`);
         if(response){
+          setUserEmail(response.data.email)
           setUser(response.data.name)
         }
       } catch (error) {
@@ -52,7 +54,7 @@ export default function UserInvoice() {
           </tr>
         </thead>
         <tbody>
-          {userInvoice && userInvoice.filter(invoiceUser => invoiceUser.CustomerName === user).map(getInvoice => (
+          {userInvoice && userInvoice.filter(invoiceUser => invoiceUser.CustomerEmail === userEmail).map(getInvoice => (
             <tr key={getInvoice._id}>
               <td>{getInvoice.paymentId}</td>
               <td>{getInvoice.totalQuantity}</td>
@@ -69,7 +71,7 @@ export default function UserInvoice() {
           ))}
         </tbody>
       </table>
-      {userInvoice.filter(invoiceUser => invoiceUser.CustomerName === user).length === 0 && (
+      {userInvoice.filter(invoiceUser => invoiceUser.CustomerEmail === userEmail).length === 0 && (
         <p className="user-invoice-text">No invoices found for this user.</p>
       )}
     </section>

@@ -18,6 +18,8 @@ export default function Addcart() {
   const [ProductColor, setProductColor] = useState("");
   const [ProductSize, setProductSize] = useState("");
   const [subQuantity, setSubQuantity] = useState("");
+  const [ProductImg,setProductImg]=useState('')
+  const [CustomerEmail,setCustomerEmail] = useState('');
   const [subProductPrice, SetSubProductPrice] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [invoiceUserEmail, setInvoiceUserEmail] = useState("");
@@ -85,6 +87,7 @@ export default function Addcart() {
         if (response) {
           setCustomerAddress(response.data);
           setCustomerName(response.data.name);
+          setCustomerEmail(response.data.email)
         }
       } catch (error) {
         console.error(error);
@@ -103,6 +106,8 @@ export default function Addcart() {
     setTotalQuantity(cart.cartTotalQuantity);
     setSubQuantity(cart.items.map((ele) => ele.quantity).join(", "));
     SetSubProductPrice(cart.items.map((ele) => ele.product.price).join(", "));
+    setProductImg(cart.items.map((ele)=> ele.product.filename[0]).join(", "));
+
   }, [cart]);
   // invoice rest api
   async function handlePayment() {
@@ -173,6 +178,8 @@ export default function Addcart() {
         totalQuantity,
         subQuantity,
         subProductPrice,
+        CustomerEmail,
+        ProductImg,
         email: invoiceUserEmail,
       });
     } catch (error) {

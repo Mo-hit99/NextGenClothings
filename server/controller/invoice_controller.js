@@ -45,8 +45,10 @@ export const createInvoiceRouter = async (req, res) => {
       ProductPrice,
       CustomerAddress,
       paymentId,
+      CustomerEmail,
       totalQuantity,
       subQuantity,
+      ProductImg,
       email
     } = req.body;
     console.log(email)
@@ -62,6 +64,8 @@ export const createInvoiceRouter = async (req, res) => {
       paymentId,
       totalQuantity,
       subQuantity,
+      CustomerEmail,
+      ProductImg,
       subProductPrice
     });
     if(!createInvoice){
@@ -224,7 +228,9 @@ export const updateInvoiceRouter = async (req, res) => {
       ProductSize,
       ProductPrice,
       CustomerAddress,
+      CustomerEmail,
       paymentId,
+      ProductImg,
       totalQuantity
     } = req.body;
     const updateInvoice = await invoiceModel.findOneAndUpdate(
@@ -238,6 +244,8 @@ export const updateInvoiceRouter = async (req, res) => {
       ProductPrice,
       CustomerAddress,
       paymentId,
+      CustomerEmail,
+      ProductImg,
       totalQuantity,
       { new: true }
     );

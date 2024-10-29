@@ -173,7 +173,7 @@ export default function Footer() {
                 />
               </g>
             </svg>
-            CustomerCare
+            Customer support
           </NavLink>
         </div>
       </div>

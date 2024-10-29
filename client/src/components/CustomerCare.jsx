@@ -158,7 +158,7 @@ function msgOpner(){
     //     </form>
     // </div>
     <section className="chat-section">
-      <h1 className="customer-care-title" >Customer Care</h1>
+      <h1 className="customer-care-title" >Customer support</h1>
       <button  className="start-chat-button" onClick={()=> msgOpner()}>Start Chat</button>
       {msgMode && 
       <div className="chat-container">
