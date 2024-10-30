@@ -4042,6 +4042,7 @@ h1.customer-care-title {
   }
   .chat-container{
     width: 300px;
+    overflow: visible;
     /* max-width: 300px; */
   }
 }
