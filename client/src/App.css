@@ -4040,6 +4040,10 @@ h1.customer-care-title {
   h1.customer-care-title {
     font-size: 28px; /* Adjust font size for smaller screens */
   }
+  .chat-container{
+    width: 100%;
+    max-width: 300px;
+  }
 }
 .new-message {
   -webkit-animation: pulse 1s infinite;
