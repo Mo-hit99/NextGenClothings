@@ -1,6 +1,6 @@
 import {useLocation } from "react-router-dom";
 import CommentSection from "./CommentSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCard } from "../redux/cartSlice";
 import axios from "axios";
@@ -9,32 +9,94 @@ export default function ProductDetails() {
   const location = useLocation();
   const data = location.state // Fallback to an empty object if state is not present
   const MoreDate = data.state;
+
   const [selectedColor, setSelectedColor] = useState('');
-  const [amount,setAmount]=useState('')
+  const [userId,setUserId]=useState('')
+  // const [amount,setAmount]=useState('')
+  const [invoiceUserEmail,setInvoiceUserEmail]=useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const [CustomerEmail,setCustomerEmail]=useState('')
+  const [CustomerName,setCustomerName]=useState('')
+  const [paymentId,setPaymentId]=useState('')
+  const [ProductImg,setProductImg]=useState(MoreDate.filename?.[0] || '')
   const [selectedImage, setSelectedImage] = useState(
     MoreDate.filename?.[0] || ''
   );
-  
-  const handleImageClick = (filename) => {
-    setSelectedImage(filename);
-  };
-  
-  async function handlePayment(payment) {
+  const [CustomerAddress, setCustomerAddress] = useState("");
+  const UserEmail = localStorage.getItem("email");
+  const user_info = localStorage.getItem("user-info");
+  const userData = JSON.parse(user_info);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Check if email is available
+        const email = UserEmail || (userData && userData.email);
+        if (!email) {
+          console.log("No email found to search for user.");
+          return; // Exit if email is not available
+        }
+        const response = await axios.get(
+          import.meta.env.VITE_SERVER_LINK + `/api/user`
+        );
+        if (response.data) {
+          // const currentUser = response.data.find(
+          //   (user) => user.email === UserEmail || user.email === userData.email
+          // ); // Find user by email
+          const currentUser = response.data.find(
+            (user) => user.email === email
+          );
+          if (currentUser) {
+            setUserId(currentUser._id); // Set user ID
+            setInvoiceUserEmail(currentUser.email);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (UserEmail || (userData && userData.email)) {
+      fetchUserData();
+    }
+  }, [UserEmail, userData]);
+
+  useEffect(() => {
+    const getUserById = async () => {
+      if (!userId) return; // Ensure userId is not null
+
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER_LINK}/api/user/${userId}`
+        );
+        if (response) {
+          setCustomerAddress(response.data.address);
+          setCustomerName(response.data.name);
+          setCustomerEmail(response.data.email)
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUserById();
+  }, [userId]);
+
+  // invoice rest api
+  async function handlePayment() {
     try {
-      setAmount(payment);
       const response = await axios.post(
         import.meta.env.VITE_SERVER_LINK + `/api/payment/order`,
-        { amount }
+        { amount: MoreDate.price }
       );
       if (response) {
-        handlePaymentVerify(response.data.data);
+        await handlePaymentVerify(response.data.data);
+        setPaymentId(response.data.data.id);
       }
     } catch (error) {
       console.log(error.message);
     }
   }
-  
+
   // handlePaymentVerify Function
   const handlePaymentVerify = async (data) => {
     const options = {
@@ -54,6 +116,8 @@ export default function ProductDetails() {
               razorpay_signature: response.razorpay_signature,
             }
           );
+          setPaymentId(response.razorpay_payment_id); // Update paymentId with verified payment ID
+          await createInvoice(response.razorpay_payment_id); // Pass paymentId to createInvoice
         } catch (error) {
           console.log(error.message);
         }
@@ -64,6 +128,32 @@ export default function ProductDetails() {
     };
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
+  };
+  async function createInvoice(paymentId) {
+    try {
+      await axios.post(import.meta.env.VITE_SERVER_LINK + `/payment/invoice`, {
+        CustomerName,
+        productName:MoreDate.title,
+        productDescription:MoreDate.description,
+        ProductBrand:MoreDate.brand,
+        ProductColor:selectedColor,
+        ProductSize:selectedSize,
+        ProductPrice:MoreDate.price,
+        CustomerAddress,
+        paymentId,
+        totalQuantity:0,
+        subQuantity:0,
+        subProductPrice:0,
+        CustomerEmail,
+        ProductImg,
+        email: invoiceUserEmail,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const handleImageClick = (filename) => {
+    setSelectedImage(filename);
   };
   // if (!data._id) {
   //   return <div>Product not found or no details available.</div>;
