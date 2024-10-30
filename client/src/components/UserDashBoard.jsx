@@ -22,7 +22,6 @@ export default function UserDashBoard() {
         const response = await axios.get(import.meta.env.VITE_SERVER_LINK +`/api/user/${id}`);
         if(response){
           setUser(response.data)
-          console.log(response.data)
         }
       } catch (error) {
         console.error(error);
@@ -39,7 +38,6 @@ export default function UserDashBoard() {
             phone
         });
             if(response){
-                console.log(response)
                 fetchUserData()
                 alert('successful update')
             }
