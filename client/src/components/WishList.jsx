@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 export default function WishList() {
   const wishlistItems = useSelector((state) => state.wishlist.wishListItems);
-  console.log(wishlistItems);
   return (
     <section className="wishlistCard-container">
          <h1>Wishlist</h1>
