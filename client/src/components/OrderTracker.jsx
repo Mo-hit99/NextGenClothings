@@ -6,6 +6,7 @@ export default function OrderTracker() {
   const { id } = useParams();
   const [ userEmail ,setUserEmail] = useState('')
   const [ user ,setUser] = useState('')
+  const [remainingDays,setRemainingDays] = useState({});
   const [userOrder, setUserOrder]=useState([]);
 
   useEffect(() => {   
@@ -28,11 +29,24 @@ async function getUserInvoice(){
       const response = await axios.get(import.meta.env.VITE_SERVER_LINK +'/payment/invoice')
       if(response){
         setUserOrder(response.data);
+        // Fetch remaining days for each invoice
+        response.data.forEach(invoice => fetchRemainingDays(invoice._id));
       }
   } catch (error) {
     console.log(error)
   }
 }
+// Fetch remaining delivery days for a given order
+const fetchRemainingDays = async (invoiceId) => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_SERVER_LINK + `/payment/invoices/${invoiceId}/remaining-days`);
+    if (response) {
+      setRemainingDays(prevDays => ({ ...prevDays, [invoiceId]: response.data.remainingDays }));
+    }
+  } catch (error) {
+    console.error('Error fetching remaining delivery days:', error);
+  }
+};
   return (
     <div className="order-tracker-container">
     <h2>Order Tracker For {user}</h2>
@@ -55,6 +69,7 @@ async function getUserInvoice(){
             <li key={index}>{`${update.status} - ${new Date(update.updatedAt).toLocaleString()}`}</li>
           ))}
         </ul>
+        <p>Remaining Delivery Days: {remainingDays[invoice._id] ?? 'Loading...'}</p>
         <p>Product: {invoice.productName}</p>
         <p>Brand: {invoice.ProductBrand}</p>
         <p>Color: {invoice.ProductColor}</p>
