@@ -4043,10 +4043,10 @@ h1.customer-care-title {
   .chat-container{
     width: 100%;
     overflow: visible;
-    max-width: 300px;
+    /* max-width: 300px; */
   }
   .chat-input input[type="text"] {
-   width: 50%;
+   max-width: 100%;
   }
 }
 .new-message {
