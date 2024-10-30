@@ -1948,7 +1948,7 @@ padding: .3rem;
     /* align-items: center; */
     position: absolute;
     top: 100%;
-    left: -50%;
+    /* left: -50%; */
     width: 100%;
     text-align: start;
     min-width: 190px;
@@ -1966,6 +1966,8 @@ padding: .3rem;
     z-index: 1;
     pointer-events: none;
     list-style: none;
+    /* border: 1px solid black; */
+    margin: 0 auto;
   }
   .navLink {
     display: -webkit-box;

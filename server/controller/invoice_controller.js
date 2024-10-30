@@ -154,6 +154,7 @@ export const UpdateOrderStatus = async (req, res) => {
   }
 };
 
+// generatePdf
 const generateAndSendInvoice = async (invoice, email) => {
 
     // Define PDF path
