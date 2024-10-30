@@ -264,6 +264,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                         <div className="submenu">
                           {isUserGoogleSignedIn ? (
                             <>
+                             <div className="submenu-item">
                               {/* <div className="submenu-item">
                               <a href="#" className="submenu-link">
                               <span className="dropdown-name">Name:</span>
@@ -374,7 +375,6 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                                   Your Order
                                 </NavLink>
                               </div>
-                              <div className="submenu-item">
                                 <button
                                   className="signOut"
                                   onClick={handleSignOut}
