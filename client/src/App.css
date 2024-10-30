@@ -4046,7 +4046,7 @@ h1.customer-care-title {
     max-width: 300px;
   }
   .chat-input input[type="text"] {
-   max-width: 100%;
+   max-width: 50%;
   }
 }
 .new-message {
