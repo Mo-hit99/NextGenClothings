@@ -242,11 +242,16 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                       <div className="item">
                         <span className="link">
                           {isUserGoogleSignedIn ? (
+                            <>
                             <img
                               className="profile-image"
                               src={userData.image}
                               alt={userData.name}
-                            />
+                              />
+                            <p>
+                              {truncateString(userData.email, userData.email.length - 7)}
+                            </p>
+                            </>
                           ) : (
                             <p>
                               {truncateString(UserEmail, UserEmail.length - 7)}
