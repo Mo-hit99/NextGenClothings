@@ -36,7 +36,7 @@ export default function WishList() {
             );
           })
         ) : (
-          <p className="cart-empty">Your wishlist is empty.</p>
+          <p className="wishlist-empty">Your wishlist is empty.</p>
         )}
       </div>
     </section>

@@ -4063,11 +4063,15 @@ h1.customer-care-title {
 /* wishlist card */
 /* Section styles */
 .wishlistCard-container {
-  padding: 20px;
+  padding:10px;
   max-width: 1200px; /* Limit the width of the wishlist section */
-  margin: auto; /* Center the section */
+  margin:0 auto; /* Center the section */
 }
-
+.wishlist-empty{
+  font-size: 19px;
+  text-align: center;
+  width: 100%;
+}
 /* Container for product cards */
 .product-card-container2 {
   display: -webkit-box;
@@ -4169,7 +4173,7 @@ h1.customer-care-title {
   align-items: center;
   padding: 1rem;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 /* Individual order card */
