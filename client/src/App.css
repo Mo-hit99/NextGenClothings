@@ -1943,7 +1943,7 @@ padding: .3rem;
     /* align-items: center; */
     position: absolute;
     top: 100%;
-    left: -50%;
+    right:0;
     width: 100%;
     text-align: start;
     min-width: 190px;
