@@ -102,6 +102,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
           {logo}
         </NavLink>
         <nav className={`nav-container ${isMenuOpen ? "open" : ""}`}>
+        <span className="close-navLink" onClick={()=> setIsMenuOpen(!isMenuOpen)}>&times;</span>
           <div className="nav-link01">
             <ul>
               {(isUserSignedIn || isUserGoogleSignedIn) &&
