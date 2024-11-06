@@ -1873,7 +1873,6 @@ padding: .3rem;
         -ms-flex-direction: column;
             flex-direction: column;
     background-color: rgb(255, 255, 255);
-    height: 50%;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -2344,10 +2343,10 @@ padding: .3rem;
   }
   .close-navLink{
     position: absolute;
-    top: -4px;
-    right: 3px;
+    top: -8px;
+    right: 7px;
     color: #f5356e;
-    font-size: 20px;
+    font-size: 30px;
   }
   .navbar-menu.active {
     display: -webkit-box;
