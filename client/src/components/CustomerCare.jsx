@@ -179,9 +179,7 @@ export default function CustomerCare() {
       {msgMode && (
         <div className="chat-container">
           <div className="messages">
-            {messages
-              .filter((sender) => sender.email === senderEmail)
-              .map((msg) => (
+            {messages.map((msg) => (
                 <div
                   key={msg._id}
                   className={`message ${
