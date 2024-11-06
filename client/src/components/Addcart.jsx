@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function Addcart() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState(""); 
   const [userId, setUserId] = useState(null);
   const [CustomerName, setCustomerName] = useState("");
   const [productName, setProductName] = useState("");
@@ -111,6 +112,10 @@ export default function Addcart() {
   }, [cart]);
   // invoice rest api
   async function handlePayment() {
+    if (!selectedAddress) {
+      setErrorMessage("Please select an address to proceed with the payment.")
+      return; // Prevent payment if address is not selected
+    }
     try {
       const response = await axios.post(
         import.meta.env.VITE_SERVER_LINK + `/api/payment/order`,
@@ -161,6 +166,7 @@ export default function Addcart() {
   const AddressHandleChange = (event) => {
     const address = event.target.value;
     setSelectedAddress(address);
+    setErrorMessage('');
     // console.log(address); // Log the selected address to the console
   };
   async function createInvoice(paymentId) {
@@ -318,11 +324,16 @@ export default function Addcart() {
               <p>₹ {cart.cartTotalAmount}</p>
             </div>
             <div className="checkout-btn">
-              <button onClick={handlePayment} className="checkoutcart-in_btn">
+              <button onClick={handlePayment} className="checkoutcart-in_btn" disabled={!selectedAddress}>
                 Pay ₹{cart.cartTotalAmount}
               </button>
             </div>
           </div>
+          {errorMessage && (
+          <p className="error-message" style={{ color: "red", marginTop: "10px" }}>
+            {errorMessage}
+          </p>
+        )}
         </>
       )}
     </div>
