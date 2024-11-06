@@ -2026,7 +2026,7 @@ padding: .3rem;
   display: -ms-flexbox;
   display: flex;
   z-index: 0;
-  margin: 5rem auto;
+  margin:.5rem auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -2327,11 +2327,25 @@ padding: .3rem;
     padding: 15px;
     max-width: calc(90% - 1rem);
   }
-
+  .show-password-label{
+    font-size: 12px;
+  }
   .sign-in_btn {
     font-size: 16px;
   }
-
+.forgot-password-btn-link{
+  font-size: 12px;
+}
+.sign-btn-link{
+  font-size: 12px;
+}
+.p{
+  margin: 0;
+  font-size: 13px;
+}
+.google{
+  margin: 0;
+}
   .hamburger-menu {
     display: -webkit-box;
     display: -ms-flexbox;
