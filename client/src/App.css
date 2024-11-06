@@ -3267,7 +3267,7 @@ h1 {
 
 .title-heading i {
   margin-left: 10px;
-  color: #ff6f61;
+  color: #0a84ff;
 }
 
 /* Cart Empty State */
@@ -3320,9 +3320,9 @@ h1 {
 
 .items-minus,
 .items-plus {
-  background-color: #ff6f61;
+  background-color: #fff;
   border: none;
-  color: #fff;
+  color: #000000;
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
@@ -3340,7 +3340,7 @@ h1 {
 
 .shopping-pricing {
   font-weight: bold;
-  color: #ff6f61;
+  color: #2a2a2a;
 }
 
 /* Remove Button */
@@ -3423,17 +3423,13 @@ h1 {
 }
 
 .checkoutcart-in_btn {
-  background-color: #ff6f61;
+  background-color: #026eda;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-}
-
-.checkoutcart-in_btn:hover {
-  background-color: #e55b4e;
 }
 
 /* Mobile Responsive Styles */
