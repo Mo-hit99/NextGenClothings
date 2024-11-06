@@ -25,6 +25,7 @@ import WishList from "./components/WishList.jsx";
 import CustomerCare from "./components/CustomerCare.jsx";
 import OrderTracker from "./components/OrderTracker.jsx";
 import UserOrder from "./components/UserOrder.jsx";
+import CustomerHandleMessages from "./components/CustomerHandleMessages.jsx";
 
 const GoogleAuthWrapper = () => {
   return (
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
           {
             path : '/Admin/order/status',
             element:<UserOrder />
+          },
+          {
+            path:'/Admin/customerMessageHandler',
+            element:<CustomerHandleMessages/>
           }
         ],
       },

@@ -66,6 +66,15 @@ export default function SignIn() {
   function showPasswordHandler() {
     setShowPassword(!showPassword);
   }
+
+  function loginEmail(e){
+    setEmail(e.target.value)
+    if(error) setError(null)
+  }
+  function loginPassword(e){
+    setPassword(e.target.value)
+    if(error) setError(null)
+  }
   return (
     <>
       {openModel && (
@@ -118,7 +127,7 @@ export default function SignIn() {
             autoComplete="username"
             className="input_field"
             id="email_field"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={loginEmail}
             value={email}
           />
         </div>
@@ -160,7 +169,7 @@ export default function SignIn() {
             className="input_field"
             id="password_field"
             autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={loginPassword}
             value={password}
           />
         </div>

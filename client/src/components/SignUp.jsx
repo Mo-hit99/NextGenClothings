@@ -46,6 +46,19 @@ export default function SignUp() {
   function showPasswordHandler() {
     setShowPassword(!showPassword);
   }
+
+  function signUpName(e){
+    setName(e.target.value)
+    if(error) setError(null)
+  }
+  function signUpEmail(e){
+    setEmail(e.target.value)
+    if(error) setError(null)
+  }
+  function signUpPassword(e){
+    setPassword(e.target.value)
+    if(error) setError(null)
+  }
   return (
     <>
       {openModel && (
@@ -92,7 +105,7 @@ export default function SignUp() {
             type="text"
             className="input_field"
             id="Name"
-            onChange={(e) => setName(e.target.value)}
+            onChange={signUpName}
             value={name}
           />
         </div>
@@ -130,7 +143,7 @@ export default function SignUp() {
             autoComplete="username"
             className="input_field"
             id="email_field"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={signUpEmail}
             value={email}
           />
         </div>
@@ -172,7 +185,7 @@ export default function SignUp() {
             className="input_field"
             id="password_field"
             autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={signUpPassword}
             value={password}
           />
         </div>

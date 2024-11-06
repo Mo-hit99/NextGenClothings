@@ -44,6 +44,7 @@ app.use((req, res, next) => {
   app.use(cors())
 
 app.use('/productData',express.static("public"));
+app.use('/api/messages',express.static("public"));
 
 app.use(Product_router)
 app.use(User_route)

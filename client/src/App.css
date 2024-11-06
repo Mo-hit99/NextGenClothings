@@ -652,6 +652,12 @@ h1 {
   color: #e70000;
   font-size: 13px;
 }
+.error-customer-care{
+  margin-top: 1rem;
+  color: #e70000;
+  text-align: center;
+  font-size: 13px;
+}
 /* notification */
 .success {
   position: fixed;
@@ -1487,7 +1493,7 @@ textarea::-webkit-scrollbar {
 .dashboard-analysis,
 .dashboard-View-Orders,
 .dashboard-add-products {
-  max-width: 240px;
+  width: 100%;
   padding: 0.5rem;
   border-radius: 20px;
   color: #115dfc;
@@ -3899,12 +3905,20 @@ h1 {
 
 /* Message styling */
 .message {
+  position: relative;
   display: inline-block;
   padding: 10px;
   border-radius: 20px;
-  max-width: 70%;
+  max-width: 100%;
 }
-
+.more-option-btn-sender-delete-msg{
+ position: absolute;
+ right: 3px;
+ top: 0;
+ background-color: #d1e7dd;
+ font-size: 13px;
+ border: none;
+}
 .sender-message {
   background-color: #d1e7dd;
   -ms-flex-item-align: end;
@@ -3919,7 +3933,36 @@ h1 {
       align-self: flex-start;
   border-top-left-radius: 0;
 }
+.sender-name{
+  font-size: 10px;
+  color: #555;
+}
+.msg-btn-container-wrapper {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 50;
+  right: 0;
+  top: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80px;
+}
+.msg-btn-container-wrapper .msg-btn {
+  border: none;
+  background-color: #fff;
+  padding: 0.3rem;
+  cursor: pointer;
+  -webkit-box-shadow: 4px 5px 2px -3px rgba(0, 0, 0, 0.1);
+          box-shadow: 4px 5px 2px -3px rgba(0, 0, 0, 0.1);
+}
 
+.msg-btn-container-wrapper .msg-btn:hover {
+  text-decoration: underline;
+}
 .message img {
   margin-top: 5px;
   border-radius: 8px;
@@ -4359,4 +4402,95 @@ h1.customer-care-title {
     width: 100%; /* Full width on small screens */
     border-radius: 12px 12px 0 0; /* Rounded corners on the top */
   }
+}
+
+/* admin dashboard customer message handler */
+.allMessages-btn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.message-deleteAll-btn {
+  background-color: #EEF2FF;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: #536DFE;
+  box-shadow: rgba(83, 109, 254, 0.2) 0 2px 4px, rgba(83, 109, 254, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #536DFE;
+  cursor: pointer;
+  padding: 1rem .5rem;
+  font-size: 14px;
+}
+
+ /* Modal styling */
+ .modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay effect */
+}
+
+.modal-content {
+  position: relative;
+  margin: 10% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.modal-header {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.modal-body {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-wrapper {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-secondary {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon-box {
+  font-size: 48px;
+  color: #dc3545;
+  margin-bottom: 10px;
 }

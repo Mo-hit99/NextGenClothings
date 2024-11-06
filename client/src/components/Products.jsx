@@ -62,7 +62,7 @@ export default function Products() {
     }
   }
 // extract the search query from the url
-const query = new URLSearchParams(location.search).get('search');
+const queryFromUrl = new URLSearchParams(location.search).get('search');
 useEffect(()=>{
   // Search products based on query
   async function searchProducts(query) {
@@ -70,21 +70,21 @@ useEffect(()=>{
     let response = await axios.get(
              `${import.meta.env.VITE_SERVER_LINK}/productData/?search=${encodeURIComponent(query)}`
            );
-           let result = await response.data;
+           const result = await response.data;
            if (result) {
              setData(result.queryData);
+             setTotalProductData(result.pagination.totalCount);
            }
-      setTotalProductData(result.pagination.totalCount);
     } catch (error) {
       console.log("Error during search:", error.message);
     }
   }
-  if(query){
-    searchProducts(query);
+  if(queryFromUrl){
+    searchProducts(queryFromUrl);
   }else{
     searchProducts('')
   }
-},[query,location.search]);
+},[queryFromUrl,location.search]);
 
   async function filterSubmit(e) {
     e.preventDefault();
@@ -125,7 +125,6 @@ useEffect(()=>{
         ? prev.filter(brand => brand !== value) 
         : [...prev, value]
     );
-    console.log(value)
   };  
 
   return (

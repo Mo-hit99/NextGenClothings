@@ -145,6 +145,19 @@ export default function CommentSection({ id }) {
   function commentOptionToggle(commentId) {
     SetCommentOptionModel(commentOptionModel === commentId ? null : commentId);
   }
+  function commentContent(e) {
+    setComment(e.target.value);
+    if (error) setError(null);
+  }
+  function RatingContent(e) {
+    setRating(e.target.value);
+    if (error) setError(null);
+  }
+
+  function editCommentContent(e) {
+    setUpDatedComment(e.target.value);
+    if (editError) setEditError(null);
+  }
   return (
     <div className="comment-card">
       <span className="title">Comments</span>
@@ -154,14 +167,14 @@ export default function CommentSection({ id }) {
           <input
             placeholder="Rating"
             value={rating}
-            onChange={(e) => setRating(e.target.value)}
+            onChange={RatingContent}
             className="comment-input-field"
             type="text"
           />
           <textarea
             placeholder="Reply"
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={commentContent}
           />
           <div>
             <div className="formatting">
@@ -264,7 +277,7 @@ export default function CommentSection({ id }) {
                             className="edit-comment-textarea"
                             placeholder="Edit"
                             value={upDatedComment || dataComment.comment || ""}
-                            onChange={(e) => setUpDatedComment(e.target.value)}
+                            onChange={editCommentContent}
                           />
                           <div className="edit-btn-wrapper">
                             <button

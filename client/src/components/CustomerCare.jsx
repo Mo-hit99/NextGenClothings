@@ -2,22 +2,25 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
 import { useCallback } from "react";
-import { timeAgo } from "../assets/Timeago";
+import { ShowByTime } from "../assets/ShowByTime";
 const socket = io(`${import.meta.env.VITE_SERVER_LINK}`); // Connect to the Socket.io server
 export default function CustomerCare() {
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState("");
   const [sender, setSender] = useState("");
   const [content, setContent] = useState("");
-  const [msgMode ,setMsgMode] = useState(false);
+  const [error, setError] = useState("");
+  const [senderEmail, setSenderEmail] = useState("");
+  const [msgOptionModel, SetMsgOptionModel] = useState(null);
+  const [msgMode, setMsgMode] = useState(false);
   const [image, setImage] = useState(null);
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
   const userData = JSON.parse(user_info);
-// msg opner
-function msgOpner(){
-  setMsgMode(!msgMode)
-}
+  // msg opner
+  function msgOpner() {
+    setMsgMode(!msgMode);
+  }
   useEffect(() => {
     if (Notification.permission === "default") {
       Notification.requestPermission().catch((error) =>
@@ -31,7 +34,7 @@ function msgOpner(){
     if (Notification.permission === "granted" && document.hidden) {
       const notification = new Notification("New Message", {
         body: `${message.sender}: ${message.content}`,
-        icon: './src/assets/svg/openart-image_CZzVmoz-_1729959679734_raw.jpg', // Replace with your icon path
+        icon: "./src/assets/svg/openart-image_CZzVmoz-_1729959679734_raw.jpg", // Replace with your icon path
       });
 
       // Optional: Add a click event for the notification
@@ -54,9 +57,6 @@ function msgOpner(){
           import.meta.env.VITE_SERVER_LINK + `/api/user`
         );
         if (response.data) {
-          // const currentUser = response.data.find(
-          //   (user) => user.email === UserEmail || user.email === userData.email
-          // ); // Find user by email
           const currentUser = response.data.find(
             (user) => user.email === email
           );
@@ -83,6 +83,7 @@ function msgOpner(){
         );
         if (response) {
           setSender(response.data.name);
+          setSenderEmail(response.data.email);
         }
       } catch (error) {
         console.error(error);
@@ -92,134 +93,170 @@ function msgOpner(){
     getUserById();
   }, [userId]);
   useEffect(() => {
-    const fetchMessages = async () => {
+    fetchMessages();
+  },[]);
+  const fetchMessages = async () => {
+    try {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_LINK}/api/messages`
       );
       setMessages(response.data);
-    };
-    fetchMessages();
+      socket.on("receiveMessage", (message) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+        triggerNotification(message); // Show notification for new message
+      });
 
-    socket.on("receiveMessage", (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-      triggerNotification(message); // Show notification for new message
-    });
-
-    return () => {
-      socket.off("receiveMessage");
-    };
-  }, [triggerNotification]);
-
+      return () => {
+        socket.off("receiveMessage");
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const formData = new FormData();
   if (sender) formData.append("sender", sender); // Adjust to include user info
+  if (senderEmail) formData.append("email", senderEmail);
   if (content) formData.append("content", content); // Append only if content exists
   if (image) formData.append("product-img", image); // Append only if image exists
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if the sender and content fields are properly set
-    if (!sender || !content) {
-      console.error("Sender or content is missing");
-      return;
-    }
-    const response = await axios.post(
-      `${import.meta.env.VITE_SERVER_LINK}/api/messages`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    try {
+      if (!sender || !content) {
+        setError("Please Login Or Fields Must Filled");
+        console.error("Please Login");
+        return;
       }
-    );
-    console.log(response);
-    socket.emit("sendMessage", response.data);
-    setContent("");
-    setImage(null);
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_LINK}/api/messages`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+      socket.emit("sendMessage", response.data);
+      setContent("");
+      setImage(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  function msgOptionToggle(msgId) {
+    SetMsgOptionModel(msgOptionModel === msgId ? null : msgId);
+  }
+  async function deleteMessage(messageId) {
+    try {
+      const id = messageId;
+      const response = await axios.delete(
+        import.meta.env.VITE_SERVER_LINK +
+          `/api/messages/delete/${id}`
+      );
+      if (response.status === 200) {
+        fetchMessages();
+        console.log("msg delete");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Clear the error when sender or content changes
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
+    if (error) setError(null);
   };
 
   return (
-    // <div>
-    //     <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
-    //         {messages.map((msg) => (
-    //             <div key={msg._id}>
-    //                 <strong>{msg.sender}</strong>: {msg.content}
-    //                 {msg.imageUrl && <img src={msg.imageUrl} alt="Uploaded" width="100" />}
-    //             </div>
-    //         ))}
-    //     </div>
-    //     <form onSubmit={handleSubmit} encType="multipart/form-data">
-    //         <input
-    //             type="text"
-    //             value={content}
-    //             onChange={(e) => setContent(e.target.value)}
-    //             placeholder="Type your message"
-    //         />
-    //         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-    //         <button type="submit">Send</button>
-    //     </form>
-    // </div>
     <section className="chat-section">
-      <h1 className="customer-care-title" >Customer support</h1>
-      <button  className="start-chat-button" onClick={()=> msgOpner()}>Start Chat</button>
-      {msgMode && 
-      <div className="chat-container">
-        <div className="messages">
-          {messages.map((msg) => (
-            <div
-            key={msg._id}
-            className={`message ${
-              msg.sender === sender ? "sender-message" : "receiver-message"
-              }`}
-            >
-              <strong>{msg.sender}</strong>: {msg.content}
-              {msg.imageUrl && <img src={msg.imageUrl} alt="Uploaded" />}
-              <p className="msg-timeStamp">{timeAgo(msg.timestamp)}</p>
-            </div>
-          ))}
-        </div>
-        <form
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-          className="chat-input"
+      <h1 className="customer-care-title">Customer support</h1>
+      <button className="start-chat-button" onClick={() => msgOpner()}>
+        Start Chat
+      </button>
+      {error && <p className="error-customer-care">{error}</p>}
+      {msgMode && (
+        <div className="chat-container">
+          <div className="messages">
+            {messages
+              .filter((sender) => sender.email === senderEmail)
+              .map((msg) => (
+                <div
+                  key={msg._id}
+                  className={`message ${
+                    msg.sender === sender
+                      ? "sender-message"
+                      : "receiver-message"
+                  }`}
+                >
+                  {msg.imageUrl && <img src={msg.imageUrl} alt="Uploaded" />}
+                  {msg.content}
+                  <p className="sender-name">{msg.sender}</p>
+                  <p className="msg-timeStamp">{ShowByTime(msg.timestamp)}</p>
+                  <button
+                    onClick={() => msgOptionToggle(msg._id)}
+                    className="more-option-btn-sender-delete-msg"
+                  >
+                    <i className="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  {msgOptionModel === msg._id && (
+                      <div className="msg-btn-container-wrapper">
+                        <button
+                          className="msg-comment-delete msg-btn"
+                          onClick={() => deleteMessage(msg._id)}
+                        >
+                          delete
+                        </button>
+                      </div>
+                    )}
+                </div>
+              ))}
+          </div>
+          <form
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+            className="chat-input"
           >
-          <input
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Type your Query"
+            <input
+              type="text"
+              value={content}
+              onChange={handleContentChange}
+              placeholder="Type your Query"
             />
-          <label htmlFor="file-input" className="upload-label">
-            <svg
-              className="w-6 h-6 text-gray-800 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              fill="none"
-              viewBox="0 0 24 24"
+            <label htmlFor="file-input" className="upload-label">
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                fill="none"
+                viewBox="0 0 24 24"
               >
-              <path
-                stroke="currentColor"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 18V8a1 1 0 0 1 1-1h1.5l1.707-1.707A1 1 0 0 1 8.914 5h6.172a1 1 0 0 1 .707.293L17.5 7H19a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"
+                <path
+                  stroke="currentColor"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 18V8a1 1 0 0 1 1-1h1.5l1.707-1.707A1 1 0 0 1 8.914 5h6.172a1 1 0 0 1 .707.293L17.5 7H19a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"
                 />
-              <path
-                stroke="currentColor"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-            </svg>
-          </label>
-          <input
-            id="file-input"
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
+                <path
+                  stroke="currentColor"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+            </label>
+            <input
+              id="file-input"
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
             />
-          <button type="submit">Send</button>
-        </form>
-      </div>
-      }
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      )}
     </section>
   );
 }
