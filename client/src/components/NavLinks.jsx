@@ -88,7 +88,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
   };
 
   return (
-    <>
+    <section className="sticky-navbar">
       <header className="container">
         <div className="new-nav-wrapper">
           {/* Hamburger Icon */}
@@ -548,11 +548,11 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
           </li>
         </ul>
       </header>
-      <section className="searchBar-container">
+      <header className="searchBar-container">
         <nav className="nav-search-bar">
           <Search />
         </nav>
-      </section>
-    </>
+      </header>
+    </section>
   );
 }
