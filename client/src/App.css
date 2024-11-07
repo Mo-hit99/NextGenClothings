@@ -231,7 +231,7 @@
 }
 
 /* When checkbox is checked, expand the content */
-.read-more-toggle:checked + .description-content2 {
+.read-more-toggle:checked ~ .description-content2 {
   max-height: 500px; /* Expand to show full content */
 }
 
@@ -246,6 +246,16 @@
 
 .read-more-toggle {
   display: none; /* Hide the checkbox */
+}
+
+/* Default content for "Read More" */
+.read-more-btn::before {
+  content: "Read More";
+}
+
+/* Change to "Read Less" when checkbox is checked */
+.read-more-toggle:checked + .read-more-btn::before {
+  content: "Read Less";
 }
 /* Color and Size Wrapper */
 .color-wrapper2,
