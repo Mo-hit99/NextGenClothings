@@ -1883,7 +1883,6 @@ padding: .3rem;
 @media screen and (max-width: 768px) {
 .nav-link01{
   margin-top: 2rem;
-  border: 1px solid black;
 }
   .new-nav-wrapper {
     width: 10%;
