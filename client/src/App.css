@@ -237,7 +237,7 @@
 
 /* Style the "Read More" button */
 .read-more-btn {
-  display: block;
+  display: inline-block;
   cursor: pointer;
   color: #026eda;
   font-weight: bold;
