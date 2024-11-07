@@ -9,6 +9,7 @@ import { useCategory } from "../../context/context";
 import { addToWishList } from "../redux/wishlistslice";
 import Message from "./Message";
 import { useLocation, useNavigate } from "react-router-dom";
+import ShimmerSkeleton from "./ShimmerSkeleton";
 
 
 const LIMIT = 5;
@@ -18,6 +19,7 @@ export default function Products() {
   const { categoryItem } = useCategory();
   const location = useLocation();
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState([]);
   const [brand, setBrand] = useState([]);
   const [loadingOff,setLoadingOff]=useState(true)
@@ -49,6 +51,7 @@ export default function Products() {
   ? data.filter(ele => ele.category === categoryItem) 
   : data.filter(product => (category.length === 0) || category.includes(product.category) && (brand.length === 0 || brand.includes(product.brand)));
   async function fetchProductData() {
+    setLoading(true)
     try {
       const response = await axios.get(`${import.meta.env.VITE_SERVER_LINK}/productData`, {
         params: {
@@ -67,6 +70,8 @@ export default function Products() {
       }
     } catch (error) {
       console.log({ error: error.message });
+    } finally{
+      setLoading(false)
     }
   }
 // extract the search query from the url
@@ -141,19 +146,22 @@ useEffect(()=>{
         {/* <div className="category-selection">
           <button onClick={() => handleCategory("shoes")}>Shoes</button>
         </div> */}
-      <div className="main-container-form2">
+        {loading ? (
+       <ShimmerSkeleton/>
+        ) : (
+          <div className="main-container-form2">
         <InfiniteScroll
           style={{ textAlign: "center" }}
           dataLength={data.length}
           next={fetchProductData}
           hasMore={data.length < totalProductData}
           loader={loadingOff && data != 0 && <ProductLoading />}
-        >
+          >
           <div className="productCard-container2">
             {filteredData && filteredData.length > 0 ?  (
               filteredData?.map((product) => (
                 <ProductCard
-                  key={product._id}
+                key={product._id}
                   state={product}
                   links={`/ProductDetails/${product._id}`}
                   image={product.filename[0]}
@@ -164,7 +172,7 @@ useEffect(()=>{
                   count={product.count}
                   likehandler={() => likehandler(product)} // Pass product object to handler
                   like={(like === product._id)} // Check if in wishlist
-                >
+                  >
                   <button
                     onClick={() =>
                       dispatch(
@@ -177,7 +185,7 @@ useEffect(()=>{
                     }
                     title="Sign In"
                     className="addcart-in_btn2"
-                  >
+                    >
                     <span>Add cart</span>
                     <i className="fa-solid fa-cart-shopping"></i>
                   </button>
@@ -204,7 +212,7 @@ useEffect(()=>{
                 id="shoes"
                 value={"shoes"}
                 onChange={handleCategoryChange}
-              />
+                />
               <label className="checkbox-label" htmlFor="shoes">
                 Shoes
               </label>
@@ -216,7 +224,7 @@ useEffect(()=>{
                 id="T-Shirts"
                 value={"t-shirts"}
                 onChange={handleCategoryChange}
-              />
+                />
               <label className="checkbox-label2" htmlFor="T-Shirts">
                 T-Shirts
               </label>
@@ -230,7 +238,7 @@ useEffect(()=>{
                 id="brand"
                 value={"nike"}
                 onChange={handleBrandChange}
-              />
+                />
               <label className="checkbox-label2" htmlFor="brand">
                 Adidas
               </label>
@@ -242,7 +250,7 @@ useEffect(()=>{
                 id="Levis"
                 value={"Levis"}
                 onChange={handleBrandChange}
-              />
+                />
               <label className="checkbox-label2" htmlFor="Levis">
                 Levis
               </label>
@@ -251,6 +259,7 @@ useEffect(()=>{
           </form>
         </div>
       </div>
+  )}
     </section>
   );
 }
