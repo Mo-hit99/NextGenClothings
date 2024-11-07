@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
         const token = localStorage.getItem("token");
         const userData = localStorage.getItem('user-info')
        const user_info = JSON.parse(userData);
-    if (!token && !user_info.token) {
+    if (!token && !user_info?.token) {
         // Redirect to login page
         state.redirectToLogin = true;
       } else {

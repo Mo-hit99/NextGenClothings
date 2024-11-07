@@ -92,7 +92,7 @@ export default function ProductDetails() {
   async function handlePayment() {
     const token = localStorage.getItem("token");
 
-    if (!token && !userData.token ) {
+    if (!token && !userData?.token ) {
         // Redirect to login page
         navigate("/signIn");
     } else {
