@@ -203,7 +203,7 @@
 }
 
 /* When checkbox is checked, expand the content */
-.read-more-toggle:checked + .description-content2 {
+.read-more-toggle:checked ~ .description-content2 {
   max-height: 500px; /* Expand to show full content */
 }
 
@@ -216,15 +216,17 @@
   margin-top: 10px;
 }
 
+/* Change label content when checkbox is checked */
+.read-more-toggle:checked + .read-more-btn::after {
+  content: " Read Less";
+}
+
+.read-more-btn::after {
+  content: " Read More";
+}
+
 .read-more-toggle {
   display: none; /* Hide the checkbox */
-}
-/* Product Content Section */
-.product-content2 {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 20px;
 }
 
 .product-detail-title2 {
