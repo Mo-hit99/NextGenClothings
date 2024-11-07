@@ -5,19 +5,29 @@ export const cartSlice = createSlice({
     items: [],
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
+    redirectToLogin:false,
   },
   reducers: {
     addToCard(state, action) {
       const { productId, quantity, product , selectedColor,
         selectedSize } = action.payload;
-      const indexProductId = state.items.findIndex(
-        (item) => item.productId === productId
-      );
-      if (indexProductId >= 0) {
-        state.items[indexProductId].quantity += quantity;
+
+        const token = localStorage.getItem("token");
+
+    if (!token) {
+        // Redirect to login page
+        state.redirectToLogin = true;
       } else {
-        state.items.push({ productId, quantity, product,selectedColor,
-          selectedSize });
+        // Proceed with adding to cart
+        state.redirectToLogin = false;
+        const indexProductId = state.items.findIndex(
+          (item) => item.productId === productId
+        );
+        if (indexProductId >= 0) {
+          state.items[indexProductId].quantity += quantity;
+        } else {
+          state.items.push({ productId, quantity, product,selectedColor,
+            selectedSize });
       }
       state.cartTotalQuantity = state.items.reduce(
         (prev, curr) => prev + curr.quantity,
@@ -27,6 +37,7 @@ export const cartSlice = createSlice({
         (prev, curr) => prev + curr.product.price * curr.quantity,
         0
       );
+    }
     },
     removeToCart(state, action) {
       const  productId  = action.payload;
@@ -85,6 +96,7 @@ export const cartSlice = createSlice({
       );
     },
     clearCart: (state) => {
+      state.redirectToLogin =false;
       state.items = [];
       state.cartTotalQuantity = 0;
       state.cartTotalAmount = 0;

@@ -1,14 +1,14 @@
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCard } from "../redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCard, clearCart } from "../redux/cartSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import ProductLoading from "./ProductLoading";
 import { useCategory } from "../../context/context";
 import { addToWishList } from "../redux/wishlistslice";
 import Message from "./Message";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const LIMIT = 5;
@@ -24,7 +24,15 @@ export default function Products() {
   const [activePage, setActivePage] = useState(1);
   const [totalProductData, setTotalProductData] = useState(0);
   const [like,setLinke]= useState(false);
+  const redirectToLogin = useSelector((state)=> state.cart.redirectToLogin);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+  useEffect(()=>{
+    if(redirectToLogin){  
+      navigate('/signIn')
+      dispatch(clearCart());
+    }
+  },[redirectToLogin,navigate,dispatch])
   useEffect(() => {
     fetchProductData();
   }, []);

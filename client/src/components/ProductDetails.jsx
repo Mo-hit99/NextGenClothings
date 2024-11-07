@@ -1,8 +1,8 @@
-import {useLocation } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 import CommentSection from "./CommentSection";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCard } from "../redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCard, clearCart } from "../redux/cartSlice";
 import axios from "axios";
 export default function ProductDetails() {
   const dispatch = useDispatch();
@@ -26,7 +26,14 @@ export default function ProductDetails() {
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
   const userData = JSON.parse(user_info);
-
+  const redirectToLogin = useSelector((state)=> state.cart.redirectToLogin);
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(redirectToLogin){  
+      navigate('/signIn')
+      dispatch(clearCart());
+    }
+  },[redirectToLogin,navigate,dispatch])
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -83,17 +90,24 @@ export default function ProductDetails() {
 
   // invoice rest api
   async function handlePayment() {
-    try {
-      const response = await axios.post(
-        import.meta.env.VITE_SERVER_LINK + `/api/payment/order`,
-        { amount: MoreDate.price }
-      );
-      if (response) {
-        await handlePaymentVerify(response.data.data);
-        setPaymentId(response.data.data.id);
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        // Redirect to login page
+        navigate("/signIn");
+    } else {
+      try {
+        const response = await axios.post(
+          import.meta.env.VITE_SERVER_LINK + `/api/payment/order`,
+          { amount: MoreDate.price }
+        );
+        if (response) {
+          await handlePaymentVerify(response.data.data);
+          setPaymentId(response.data.data.id);
+        }
+      } catch (error) {
+        console.log(error.message);
       }
-    } catch (error) {
-      console.log(error.message);
     }
   }
 
