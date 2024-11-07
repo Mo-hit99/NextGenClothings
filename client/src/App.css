@@ -196,37 +196,12 @@
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.description-content2 {
-  max-height: 100px; /* Limit initial height */
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-}
-
-/* When checkbox is checked, expand the content */
-.read-more-toggle:checked ~ .description-content2 {
-  max-height: 500px; /* Expand to show full content */
-}
-
-/* Style the "Read More" button */
-.read-more-btn {
-  display: block;
-  cursor: pointer;
-  color: #026eda;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-/* Change label content when checkbox is checked */
-.read-more-toggle:checked + .read-more-btn::after {
-  content: " Read Less";
-}
-
-.read-more-btn::after {
-  content: " Read More";
-}
-
-.read-more-toggle {
-  display: none; /* Hide the checkbox */
+/* Product Content Section */
+.product-content2 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 20px;
 }
 
 .product-detail-title2 {
@@ -247,6 +222,31 @@
   margin-bottom: 10px;
 }
 
+.description-content2 {
+  font-size: 1rem;
+  color: #666;
+  max-height: 100px; /* Limit initial height */
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* When checkbox is checked, expand the content */
+.read-more-toggle:checked + .description-content2 {
+  max-height: 500px; /* Expand to show full content */
+}
+
+/* Style the "Read More" button */
+.read-more-btn {
+  display: block;
+  cursor: pointer;
+  color: #026eda;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.read-more-toggle {
+  display: none; /* Hide the checkbox */
+}
 /* Color and Size Wrapper */
 .color-wrapper2,
 .size-wrapper2 {
@@ -347,10 +347,6 @@
   margin-bottom: 10px;
 }
 
-.description-content2 {
-  font-size: 1rem;
-  color: #666;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
