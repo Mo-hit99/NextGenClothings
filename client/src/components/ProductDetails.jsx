@@ -29,6 +29,7 @@ export default function ProductDetails() {
   const userData = JSON.parse(user_info);
   const redirectToLogin = useSelector((state)=> state.cart.redirectToLogin);
   const navigate = useNavigate()
+  
   const toggleReadMore = () => {
     setIsExpanded((prevExpanded) => !prevExpanded);
   };

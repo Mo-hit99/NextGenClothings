@@ -1881,10 +1881,10 @@ padding: .3rem;
 }
 /* Mobile Menu */
 @media screen and (max-width: 768px) {
-  .nav-link-product {
-    margin-top: 1.5rem;
-    font-size: 18px;
-  }
+.nav-link01{
+  margin-top: 2rem;
+  border: 1px solid black;
+}
   .new-nav-wrapper {
     width: 10%;
     -webkit-box-pack: justify;
