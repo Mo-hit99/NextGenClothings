@@ -1543,14 +1543,6 @@ textarea::-webkit-scrollbar {
 }
 
 /* navigation link */
-.sticky-navbar{
-  position: sticky; /* Sticky positioning */
-  top: 0; /* Stick to the top of the viewport */
-  background-color: #fff;
-  color: #fff;
-  padding: 1rem;
-  z-index: 1000; /* Ensures it stays above other elements */
-}
 .container {
   padding: 0 .5rem;
   -webkit-box-align: center;
@@ -1559,6 +1551,14 @@ textarea::-webkit-scrollbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.searchBar-container{
+  position: sticky; /* Sticky positioning */
+  top: 0; /* Stick to the top of the viewport */
+  background-color: #fff;
+  color: #fff;
+  padding: 1rem;
+  z-index: 1000; /* Ensures it stays above other elements */
 }
 .searchBar-container .nav-search-bar{
 padding: .3rem;
