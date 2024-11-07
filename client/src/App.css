@@ -225,37 +225,15 @@
 .description-content2 {
   font-size: 1rem;
   color: #666;
-  max-height: 100px; /* Limit initial height */
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
 }
-
-/* When checkbox is checked, expand the content */
-.read-more-toggle:checked ~ .description-content2 {
-  max-height: 500px; /* Expand to show full content */
-}
-
-/* Style the "Read More" button */
 .read-more-btn {
-  display: inline-block;
-  cursor: pointer;
   color: #026eda;
   font-weight: bold;
-  margin-top: 10px;
-}
-
-.read-more-toggle {
-  display: none; /* Hide the checkbox */
-}
-
-/* Default content for "Read More" */
-.read-more-btn::before {
-  content: "Read More";
-}
-
-/* Change to "Read Less" when checkbox is checked */
-.read-more-toggle:checked + .read-more-btn::before {
-  content: "Read Less";
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin-top: 5px;
 }
 /* Color and Size Wrapper */
 .color-wrapper2,

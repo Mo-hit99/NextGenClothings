@@ -23,11 +23,15 @@ export default function ProductDetails() {
     MoreDate.filename?.[0] || ''
   );
   const [CustomerAddress, setCustomerAddress] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
   const userData = JSON.parse(user_info);
   const redirectToLogin = useSelector((state)=> state.cart.redirectToLogin);
   const navigate = useNavigate()
+  const toggleReadMore = () => {
+    setIsExpanded((prevExpanded) => !prevExpanded);
+  };
   useEffect(()=>{
     if(redirectToLogin){  
       navigate('/signIn')
@@ -267,9 +271,11 @@ export default function ProductDetails() {
             </div>
             <div className="description-forProduct2">
               <h3 className="description-title-content2">Description</h3>
-              <input type="checkbox" id="read-more-toggle" className="read-more-toggle" />
-              <p className="description-content2">{MoreDate.description}</p>
-              <label htmlFor="read-more-toggle" className="read-more-btn"></label>
+
+              <p className="description-content2"> {isExpanded ? MoreDate.description : `${MoreDate.description.slice(0, 100)}...`}</p>
+              <button onClick={toggleReadMore} className="read-more-btn">
+                {isExpanded ? "Read Less" : "Read More"}
+              </button>
             </div>
             <CommentSection id={MoreDate._id} />
           </div>
