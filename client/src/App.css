@@ -2790,11 +2790,11 @@ padding: .3rem;
 .addcart-in_btn:hover {
   opacity: 0.8;
 }
-.bg-color {
-  width: 15px;
-  height: 15px;
+/* .bg-color {
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-}
+} */
 .addcart-in_btn span {
   padding: 0 0.8rem 0 0;
 }
@@ -2920,7 +2920,12 @@ padding: .3rem;
   .product-search-btn {
     font-size: 15px;
   }
-}
+  /* .bg-color{
+    width: 10px;
+    height: 10px;
+  }
+  */
+} 
 /* sepreate product style section */
 .product-details-container {
   width: 100%;

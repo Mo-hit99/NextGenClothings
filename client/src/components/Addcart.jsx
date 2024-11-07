@@ -239,8 +239,8 @@ export default function Addcart() {
                       className="bg-color"
                       style={{
                         backgroundColor: element.selectedColor,
-                        width: "30px",
-                        height: "30px",
+                        width: "20px",
+                        height: "20px",
                         borderRadius: "50%",
                       }}
                     ></div>
