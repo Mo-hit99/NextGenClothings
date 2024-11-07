@@ -267,7 +267,11 @@ export default function ProductDetails() {
             </div>
             <div className="description-forProduct2">
               <h3 className="description-title-content2">Description</h3>
+              <input type="checkbox" id="read-more-toggle" className="read-more-toggle" />
               <p className="description-content2">{MoreDate.description}</p>
+              <label htmlFor="read-more-toggle" className="read-more-btn">
+              Read More
+            </label>
             </div>
             <CommentSection id={MoreDate._id} />
           </div>

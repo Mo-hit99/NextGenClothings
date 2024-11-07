@@ -196,6 +196,29 @@
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.description-content2 {
+  max-height: 100px; /* Limit initial height */
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* When checkbox is checked, expand the content */
+.read-more-toggle:checked + .description-content2 {
+  max-height: 500px; /* Expand to show full content */
+}
+
+/* Style the "Read More" button */
+.read-more-btn {
+  display: block;
+  cursor: pointer;
+  color: #026eda;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.read-more-toggle {
+  display: none; /* Hide the checkbox */
+}
 /* Product Content Section */
 .product-content2 {
   -webkit-box-flex: 1;
@@ -258,6 +281,7 @@
   font-weight: 700;
   color: #e63946;
 }
+
 
 /* Buy Now and Add to Cart Button */
 .buy-now-btn2 {
