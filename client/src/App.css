@@ -4595,3 +4595,40 @@ h1.customer-care-title {
     background-position: 200% 0;
   }
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skeleton-main-container-form {
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .skeleton-product-card {
+    width: 45%;
+    height: 250px;
+  }
+
+  .skeleton-filter-container {
+    width: 100%;
+    padding: 0 1rem;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton-main-container-form {
+    gap: 0.5rem;
+    padding: 0.5rem;
+    flex-direction: column;
+  }
+
+  .skeleton-product-card {
+    width: 100%;
+    height: 200px;
+  }
+
+  .skeleton-filter-container {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+}
