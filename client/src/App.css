@@ -4600,7 +4600,7 @@ h1.customer-care-title {
 @media (max-width: 768px) {
   .skeleton-main-container-form {
     gap: 1rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .skeleton-product-card {
@@ -4619,7 +4619,7 @@ h1.customer-care-title {
   .skeleton-main-container-form {
     gap: 0.5rem;
     padding: 0.5rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .skeleton-product-card {
