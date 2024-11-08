@@ -48,7 +48,7 @@ export default function UserInvoice() {
             <th>Brand</th>
             <th>Color</th>
             <th>Size</th>
-            <th>Price</th>
+            <th>Total Price</th>
             <th>Address</th>
             <th>Date</th>
           </tr>

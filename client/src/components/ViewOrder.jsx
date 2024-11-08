@@ -57,7 +57,7 @@ export default function ViewOrder() {
               <td>{getInvoice.totalQuantity}</td>
               <td>{getInvoice.CustomerName}</td>
               <td>{getInvoice.productName}</td>
-              <td>{getInvoice.productDescription}</td>
+              {/* <td>{getInvoice.productDescription}</td> */}
               <td>{getInvoice.ProductBrand}</td>
               <td>{getInvoice.ProductColor}</td>
               <td>{getInvoice.ProductSize}</td>

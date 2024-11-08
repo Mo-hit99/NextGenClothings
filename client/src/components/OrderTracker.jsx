@@ -8,7 +8,7 @@ export default function OrderTracker() {
   const [ user ,setUser] = useState('')
   const [remainingDays,setRemainingDays] = useState({});
   const [userOrder, setUserOrder]=useState([]);
-
+  console.log(userOrder)
   useEffect(() => {   
       fetchUserData();
       getUserInvoice()
@@ -60,7 +60,10 @@ const fetchRemainingDays = async (invoiceId) => {
 
     {userOrder && userOrder.filter(invoiceUser => invoiceUser.CustomerEmail === userEmail).map((invoice) => (
       <div key={invoice._id} className="order-card">
-        <img src={invoice.ProductImg} alt={invoice.productName} />
+        {/* Display multiple product images if available */}
+        {invoice.ProductImg.split(', ').map((imgUrl, index) => (
+            <img className="order-tracker-images" key={index} src={imgUrl} alt={invoice.productName} />
+          ))}
         <div className="order-card-content">
         <h3>Order for {invoice.CustomerName}</h3>
         <p>Status: {invoice.status}</p>
@@ -75,7 +78,8 @@ const fetchRemainingDays = async (invoiceId) => {
         <p>Color: {invoice.ProductColor}</p>
         <p>Size: {invoice.ProductSize}</p>
         <p>Price: ${invoice.ProductPrice}</p>
-        <p>Quantity: {invoice.totalQuantity}</p>
+        <p>subQuantity : {invoice.subQuantity}</p>
+        <p>Total Quantity: {invoice.totalQuantity}</p>
         <p>Address: {invoice.CustomerAddress}</p>
         <p>Date: {new Date(invoice.date).toLocaleString()}</p>
       </div>

@@ -38,9 +38,13 @@ export default function UserOrder() {
     <h2>Manage Orders</h2>
     {userInvoice.map((invoice) => (
       <div key={invoice._id} className="order-card">
-         <img src={invoice.ProductImg} alt={invoice.productName} />
+        {invoice.ProductImg.split(',').map((img,index)=>(
+          <img className="order-tracker-images" key={index} src={img} alt={invoice.productName} />
+        ))}
          <div className="order-card-content">
         <h3>Order ID: {invoice._id}</h3>
+        <p>User Name: {invoice.CustomerName}</p>
+        <p>User Email: {invoice.CustomerEmail}</p>
         <p>Current Status: {invoice.status}</p>
         <select onChange={(e) => setSelectedStatus(e.target.value)}>
           <option value="">Select Status</option>
