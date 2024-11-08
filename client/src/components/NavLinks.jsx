@@ -106,7 +106,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
           <div className="nav-link01">
             <ul>
               {(isUserSignedIn || isUserGoogleSignedIn) &&
-              UserEmail === import.meta.env.AdminEmail ? (
+              UserEmail === import.meta.env.VITE_AdminEmail ? (
                 <>
                   <li>
                     <NavLink className="nav-link-text" to="/Admin">
