@@ -30,18 +30,19 @@ async function getUserInvoice(){
       if(response){
         setUserOrder(response.data);
         // Fetch remaining days for each invoice
-        response.data.forEach(invoice => fetchRemainingDays(invoice._id));
+        response.data.forEach(invoice => fetchRemainingDays(invoice));
       }
   } catch (error) {
     console.log(error)
   }
 }
 // Fetch remaining delivery days for a given order
-const fetchRemainingDays = async (invoiceId) => {
+const fetchRemainingDays = async (invoice) => {
   try {
-    const response = await axios.get(import.meta.env.VITE_SERVER_LINK + `/payment/invoices/${invoiceId}/remaining-days`);
+    
+    const response = await axios.get(import.meta.env.VITE_SERVER_LINK + `/payment/invoices/${invoice._id}/remaining-days`);
     if (response) {
-      setRemainingDays(prevDays => ({ ...prevDays, [invoiceId]: response.data.remainingDays }));
+      setRemainingDays(prevDays => ({ ...prevDays, [invoice._id]: response.data.remainingDays }));
     }
   } catch (error) {
     console.error('Error fetching remaining delivery days:', error);
