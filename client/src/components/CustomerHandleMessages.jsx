@@ -29,7 +29,7 @@ export default function CustomerHandleMessages() {
           className="message-deleteAll-btn"
           onClick={() => setModel(true)}
           >
-          Delete All Messages
+          Delete All Chats Messages From Your Side?
         </button>
         </div>
       </div>

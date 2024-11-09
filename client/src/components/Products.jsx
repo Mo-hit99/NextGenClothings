@@ -83,10 +83,9 @@ useEffect(()=>{
     let response = await axios.get(
              `${import.meta.env.VITE_SERVER_LINK}/productData/?search=${encodeURIComponent(query)}`
            );
-           const result = await response.data;
-           if (result) {
-             setData(result.queryData);
-             setTotalProductData(result.pagination.totalCount);
+           if (response) {
+             setData(response.data.queryData);
+             setTotalProductData(response.data.pagination.totalCount);
            }
     } catch (error) {
       console.log("Error during search:", error.message);

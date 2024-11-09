@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function AdminMenu({dashboard,addproduct,vieworder,UserOrderStatus,CustomerMessageHandler}) {
+export default function AdminMenu({dashboard,addproduct,vieworder,UserOrderStatus,CustomerMessageHandler,AllUserDataByMonth}) {
   return (
     <aside>
         <div className="adminMenu">
@@ -15,6 +15,8 @@ export default function AdminMenu({dashboard,addproduct,vieworder,UserOrderStatu
                 <li><NavLink to='/Admin/order/status' className='dash-link-text'><i className="fa-solid fa-cart-flatbed"></i>{UserOrderStatus}</NavLink></li>
                 <h2 className="dashboard-View-Orders">Customer Messages</h2>
                 <li><NavLink to='/Admin/customerMessageHandler' className='dash-link-text'>{CustomerMessageHandler}</NavLink></li>
+                <h2 className="dashboard-View-Orders">All User Data By Month</h2>
+                <li><NavLink to='/Admin/All/User/Data' className='dash-link-text'>{AllUserDataByMonth}</NavLink></li>
             </ul>
         </div>
     </aside>
