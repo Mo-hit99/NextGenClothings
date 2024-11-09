@@ -65,7 +65,7 @@ export default function Products() {
       if (!response) {
         console.log("failed to fetch");
       }
-      if (response.ok) {
+      if (response) {
         console.log("fetch data successfully");
       }
     } catch (error) {

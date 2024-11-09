@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import ShimmerSkeleton from './ShimmerSkeleton';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -55,7 +56,7 @@ const UserLineChart = ({ userData }) => {
     },
   };
 
-  if (chartData === null) return <p>Loading user data...</p>; // Wait until chartData is set
+  if (chartData === null) return (<ShimmerSkeleton/>); // Wait until chartData is set
 
   return <Line data={chartData} options={options} />;
 };
