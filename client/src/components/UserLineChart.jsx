@@ -1,9 +1,32 @@
-import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-import ShimmerSkeleton from './ShimmerSkeleton';
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarController,
+  LineController,
+} from "chart.js";
+import ShimmerSkeleton from "./ShimmerSkeleton";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarController,  // Register BarController for bar charts
+  LineController  // Register LineController for line charts
+);
 
 const UserLineChart = ({ userData }) => {
   const [chartData, setChartData] = useState(null);
@@ -21,22 +44,22 @@ const UserLineChart = ({ userData }) => {
         labels,
         datasets: [
           {
-            label: 'User Count (Bar)',
+            label: "User Count (Bar)",
             data: countData,
             fill: false,
-            borderColor: 'rgba(75,192,192,1)',
-            backgroundColor: 'rgba(75,192,192,0.2)', // Bar color
+            borderColor: "rgba(75,192,192,1)",
+            backgroundColor: "rgba(75,192,192,0.2)", // Bar color
             borderWidth: 1,
-            type: 'bar', // Specifies this dataset as a bar chart
+            type: "bar", // Specifies this dataset as a bar chart
           },
           {
-            label: 'Average (Line)',
+            label: "Average (Line)",
             data: averageData,
             fill: false,
-            borderColor: 'rgba(153,102,255,1)',
-            backgroundColor: 'rgba(153,102,255,0.2)', // Line color
+            borderColor: "rgba(153,102,255,1)",
+            backgroundColor: "rgba(153,102,255,0.2)", // Line color
             tension: 0.1,
-            type: 'line', // Specifies this dataset as a line chart
+            type: "line", // Specifies this dataset as a line chart
           },
         ],
       });
@@ -47,16 +70,16 @@ const UserLineChart = ({ userData }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: 'User Data Over Time',
+        text: "User Data Over Time",
       },
     },
   };
 
-  if (chartData === null) return (<ShimmerSkeleton/>); // Wait until chartData is set
+  if (chartData === null) return <ShimmerSkeleton />; // Wait until chartData is set
 
   return <Line data={chartData} options={options} />;
 };
