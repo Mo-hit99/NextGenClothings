@@ -8,7 +8,6 @@ export default function OrderTracker() {
   const [ user ,setUser] = useState('')
   const [remainingDays,setRemainingDays] = useState({});
   const [userOrder, setUserOrder]=useState([]);
-  console.log(userOrder)
   useEffect(() => {   
       fetchUserData();
       getUserInvoice()
@@ -62,9 +61,11 @@ const fetchRemainingDays = async (invoice) => {
     {userOrder && userOrder.filter(invoiceUser => invoiceUser.CustomerEmail === userEmail).map((invoice) => (
       <div key={invoice._id} className="order-card">
         {/* Display multiple product images if available */}
+        <div className="img-order-tracker">
         {invoice.ProductImg.split(', ').map((imgUrl, index) => (
-            <img className="order-tracker-images" key={index} src={imgUrl} alt={invoice.productName} />
-          ))}
+          <img className="order-tracker-images" key={index} src={imgUrl} alt={invoice.productName} />
+        ))}
+        </div>
         <div className="order-card-content">
         <h3>Order for {invoice.CustomerName}</h3>
         <p>Status: {invoice.status}</p>

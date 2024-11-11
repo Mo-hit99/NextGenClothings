@@ -4304,8 +4304,6 @@ h1.customer-care-title {
 
 /* Card image */
 .order-card .order-tracker-images {
-  display: flex;
-  flex-wrap: wrap;
   width: 100%; /* Fixed width for the image */
   max-width: 100px;
   height: 100%; /* Maintain aspect ratio */
@@ -4313,7 +4311,16 @@ h1.customer-care-title {
   object-fit: contain;
   border-radius: 12px 0 0 12px;
 }
-
+.admin-img-order-tracker{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.order-card .img-order-tracker{
+  display: flex;
+  flex-direction: column;
+height: 100%;
+}
 /* Card content area */
 .order-card-content {
   padding: 1rem;

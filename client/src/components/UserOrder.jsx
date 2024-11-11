@@ -12,7 +12,6 @@ export default function UserOrder() {
           const response = await axios.get(import.meta.env.VITE_SERVER_LINK +'/payment/invoice')
           if(response){
               setUserInvoice(response.data);
-              console.log(response.data)
           }
       } catch (error) {
           console.log(error)
@@ -38,9 +37,11 @@ export default function UserOrder() {
     <h2>Manage Orders</h2>
     {userInvoice.map((invoice) => (
       <div key={invoice._id} className="order-card">
+        <div className='admin-img-order-tracker'>
         {invoice.ProductImg.split(',').map((img,index)=>(
           <img className="order-tracker-images" key={index} src={img} alt={invoice.productName} />
         ))}
+        </div>
          <div className="order-card-content">
         <h3>Order ID: {invoice._id}</h3>
         <p>User Name: {invoice.CustomerName}</p>
