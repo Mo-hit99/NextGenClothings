@@ -2021,7 +2021,7 @@ padding: .3rem;
     min-height: 265px;
     overflow: hidden;
     z-index: 40;
-    background-color: #fff;
+    background-color: #f5f5f5;
     margin: auto;
   }
   .dropdown-wrapper-for-category {
