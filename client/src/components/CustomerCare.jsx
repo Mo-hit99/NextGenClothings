@@ -122,7 +122,7 @@ export default function CustomerCare() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if the sender and content fields are properly set
-    if(!token){
+    if(!token && !userData?.token){
       setError('Please Login!!')
     }else{
       try {

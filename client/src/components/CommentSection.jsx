@@ -75,7 +75,7 @@ export default function CommentSection({ id }) {
 
   async function commenthandler(e) {
     e.preventDefault();
-    if (!token) {
+    if (!token && !userData?.token) {
       setError("Please Login !!");
     } else {
       try {
