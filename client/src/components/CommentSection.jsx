@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { timeAgo } from "../assets/Timeago";
+import { formatNumber } from "../assets/FormatedNumber";
 
 export default function CommentSection({ id }) {
   const [comment, setComment] = useState("");
@@ -15,6 +16,7 @@ export default function CommentSection({ id }) {
   const [commentOptionModel, SetCommentOptionModel] = useState(null);
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
+  const token = localStorage.getItem("token");
   const userData = JSON.parse(user_info);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -73,24 +75,28 @@ export default function CommentSection({ id }) {
 
   async function commenthandler(e) {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        import.meta.env.VITE_SERVER_LINK + `/productData/${id}/review`,
-        {
-          name,
-          comment,
-          rating,
+    if (!token) {
+      setError("Please Login !!");
+    } else {
+      try {
+        const response = await axios.post(
+          import.meta.env.VITE_SERVER_LINK + `/productData/${id}/review`,
+          {
+            name,
+            comment,
+            rating,
+          }
+        );
+        if (response) {
+          setComment("");
+          setRating("");
+          setError("");
+          getCommentSection();
         }
-      );
-      if (response) {
-        setComment("");
-        setRating("");
-        setError("");
-        getCommentSection();
+      } catch (error) {
+        console.log(error);
+        setError(error.response.data.message);
       }
-    } catch (error) {
-      console.log(error);
-      setError(error.response.data.message);
     }
   }
 
@@ -160,17 +166,42 @@ export default function CommentSection({ id }) {
   }
   return (
     <div className="comment-card">
-      <span className="title">Comments</span>
+      {commentData &&
+        commentData
+          ?.filter((product) => product._id === id)
+          ?.map((productItem) =>
+            productItem.numReviews === 0 ? (
+              <span key={productItem._id} className="title">
+                Reviews
+              </span>
+            ) : (
+              <span key={productItem._id} className="title">
+                Reviews
+                <span className="reviews-title-wrapper">
+                  <i id="rating-start2" className="fa-solid fa-star"></i>
+                  {productItem.rating}
+                </span>
+                <span className="reviews-title">
+                  ({formatNumber(productItem.numReviews)})
+                </span>
+              </span>
+            )
+          )}
       <div className="text-box">
         <form onSubmit={commenthandler} className="box-container">
           {error && <p className="error">{error}</p>}
-          <input
-            placeholder="Rating"
-            value={rating}
-            onChange={RatingContent}
-            className="comment-input-field"
-            type="text"
-          />
+          <select className="custom-select" onChange={RatingContent}>
+            <option value="">Select Rating</option>
+            <option value={1}>1</option>
+            <option value={1.5}>1.5</option>
+            <option value={2}>2</option>
+            <option value={2.5}>2.5</option>
+            <option value={3}>3</option>
+            <option value={3.5}>3.5</option>
+            <option value={4}>4</option>
+            <option value={4.5}>4.5</option>
+            <option value={5}>5</option>
+          </select>
           <textarea
             placeholder="Reply"
             value={comment}
@@ -241,7 +272,16 @@ export default function CommentSection({ id }) {
                         </svg>
                       </div>
                       <div className="user-info">
-                        <span>{dataComment.name}</span>
+                        <div className="user-info-wrapper">
+                          <span className="user-name">{dataComment.name}</span>
+                          <span className="user-rating">
+                            <i
+                              id="rating-start3"
+                              className="fa-solid fa-star"
+                            ></i>{" "}
+                            {dataComment.rating}
+                          </span>
+                        </div>
                         <p>{timeAgo(dataComment.createdAt)}</p>
                       </div>
                     </div>

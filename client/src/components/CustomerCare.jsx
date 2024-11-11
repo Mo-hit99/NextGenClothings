@@ -16,6 +16,7 @@ export default function CustomerCare() {
   const [image, setImage] = useState(null);
   const UserEmail = localStorage.getItem("email");
   const user_info = localStorage.getItem("user-info");
+  const token = localStorage.getItem('token')
   const userData = JSON.parse(user_info);
   // msg opner
   function msgOpner() {
@@ -121,27 +122,29 @@ export default function CustomerCare() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if the sender and content fields are properly set
-    try {
-      if (!sender || !content) {
-        setError("Please Login Or Fields Must Filled");
-        console.error("Please Login");
-        return;
-      }
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_LINK}/api/messages`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+    if(!token){
+      setError('Please Login!!')
+    }else{
+      try {
+        if (!sender || !content) {
+          setError("Type Something....");
+          return;
         }
-      );
-      console.log(response);
-      socket.emit("sendMessage", response.data);
-      setContent("");
-      setImage(null);
-    } catch (error) {
-      console.log(error);
+        const response = await axios.post(
+          `${import.meta.env.VITE_SERVER_LINK}/api/messages`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        socket.emit("sendMessage", response.data);
+        setContent("");
+        setImage(null);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   function msgOptionToggle(msgId) {

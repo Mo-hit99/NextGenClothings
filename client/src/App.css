@@ -737,11 +737,56 @@ h1 {
           flex-direction: column;
 }
 /* comment section */
+/* Container for the select element */
+.custom-select {
+  appearance: none;
+  padding:.5rem .7rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #f3f2f2e4;
+  ; /* Black background */
+  color:#777777; /* White text color */
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: .5rem;
+  width: 100%; /* Full width or adjust as needed */
+  font-size: 13px;
+}
+
+/* Style for the options */
+.custom-select option {
+  background-color: #f3f2f2e4;
+  color:#777777; /* White text color */
+  font-size: 13px;
+}
+
+/* Add a down arrow */
+.custom-select::after {
+  content: '▼';
+  color: #111;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 15px;
+  pointer-events: none;
+}
+
 .comment-card {
   width: 100%;
   background-color: white;
 }
+.reviews-title-wrapper{
+ padding-left: .5rem;
+}
+.reviews-title{
+padding-left: .2rem;
+}
 
+.reviews-title-wrapper #rating-start2{
+ color: gold;
+ padding-right: .2rem;
+}
 .title {
   width: 100%;
   height: 50px;
@@ -3143,6 +3188,15 @@ h1 {
   font-size: 16px; /* Font size for paragraph text */
   color: #5f6064; /* Medium gray text color */
   margin: 5px 0; /* Margin for spacing between paragraphs */
+}
+.user-name{
+  padding-right: .3rem;
+}
+.user-rating{
+ color: #fff;
+}
+#rating-start3{
+  color: gold;
 }
 .user-text {
   color: #000000;
