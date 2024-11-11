@@ -179,7 +179,7 @@ export default function CommentSection({ id }) {
                 Reviews
                 <span className="reviews-title-wrapper">
                   <i id="rating-start2" className="fa-solid fa-star"></i>
-                  {productItem.rating}
+                  {Number(productItem.rating.toFixed(1))}
                 </span>
                 <span className="reviews-title">
                   ({formatNumber(productItem.numReviews)})
@@ -190,7 +190,7 @@ export default function CommentSection({ id }) {
       <div className="text-box">
         <form onSubmit={commenthandler} className="box-container">
           {error && <p className="error">{error}</p>}
-          <select className="custom-select" onChange={RatingContent}>
+          <select className="custom-select" value={rating} onChange={RatingContent}>
             <option value="">Select Rating</option>
             <option value={1}>1</option>
             <option value={1.5}>1.5</option>
