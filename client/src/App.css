@@ -2016,12 +2016,12 @@ padding: .3rem;
     top: 26px;
     right: -220px;
     width: 100%;
-    min-width: 330px;
+    min-width: 300px;
     height: 100%;
     min-height: 265px;
     overflow: hidden;
     z-index: 40;
-    background-color: #f5f5f5;
+    background-color: #fff;
     margin: auto;
   }
   .dropdown-wrapper-for-category {
