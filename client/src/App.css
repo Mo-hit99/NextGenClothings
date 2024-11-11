@@ -1580,8 +1580,12 @@ textarea::-webkit-scrollbar {
   .adminMenu {
     width: 100%;
   }
+  .carousel-wrapper .carousel-content{
+    top: 25%;
+  }
   .carousel-content .carousel-heading{
-    font-size: 1.1rem;
+    color:slategrey;
+    font-size: 1rem;
   }
   .carousel-content .carousel-btn{
     font-size: 16px;
