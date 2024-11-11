@@ -541,13 +541,10 @@ h1 {
   border-radius: 50%;
 }
 /* product dropdown */
-.paste-button {
+.product-hover-button {
   position: relative;
   display: block;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-transition: all 400ms ease-in-out;
-  -o-transition: all 400ms ease-in-out;
-  transition: all 400ms ease-in-out;
 }
 
 .btn-dropdown {
@@ -576,13 +573,12 @@ h1 {
   display: grid;
   width: 700px;
   margin: auto;
-
   grid-template-columns: repeat(
     auto-fill,
     minmax(200px, 1fr)
   ); /* Responsive columns */
 }
-.paste-button:hover .dropdown-content {
+.product-hover-button:hover .dropdown-content {
   display: block;
 }
 .nav-link-category {

@@ -114,7 +114,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
                     </NavLink>
                   </li>
                   <li>
-                    <div className="paste-button">
+                    <div className="product-hover-button">
                       <button className="btn-dropdown">
                         <p className="nav-link-product">Products</p>
                       </button>
@@ -174,7 +174,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
               ) : (
                 <>
                   <li>
-                    <div className="paste-button">
+                    <div className="product-hover-button">
                       <button className="btn-dropdown">
                         <p className="nav-link-product">Products</p>
                       </button>
