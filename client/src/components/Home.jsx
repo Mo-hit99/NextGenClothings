@@ -3,15 +3,23 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import img from '../assets/henry-co-cp-VMJ-mdKs-unsplash.jpg'
 import img2 from '../assets/jason-leung-DmD8HVOjy4c-unsplash.jpg'
 import img3 from '../assets/tuananh-blue-_sNZ8XOm52w-unsplash.jpg'
-import { NavLink} from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import { trendingData } from '../data/trendingProductData.js';
 import FeatureCard from './FeatureCard';
+import { useCategory } from '../../context/context.jsx';
 
 
 
 export default function Home() {
+  const navigate = useNavigate();
+  const { setCategoryItem } =  useCategory();
 
+
+  const handleCategory = (category) => {
+    setCategoryItem(category);
+    navigate('/products/q');
+  };
 
   const [trendingProducts,setTrendingProducts]=useState(trendingData)
   return (
@@ -25,17 +33,26 @@ export default function Home() {
         showThumbs={false}
         interval={3000}
         >
-        <div>
+        <div className='carousel-wrapper'>
           <img src={img} />
-          <p>Legend 1</p>
+          <div className="carousel-content">
+          <p className='carousel-heading'>Get Ready to Save: 30% Discount on Nike Products Just for You!</p>
+          <button className="carousel-btn" onClick={() => handleCategory("T-shirts")}>Shop Now</button>
+          </div>
         </div>
-        <div>
+        <div className='carousel-wrapper'>
           <img src={img2} />
-          <p>Legend 2</p>
+          <div className="carousel-content"> 
+          <p className='carousel-heading'>Get Ready to Save: 10% Discount on T-Shirts Products Just for You!</p>
+          <button className="carousel-btn" onClick={() => handleCategory("T-shirts")}>Shop Now</button>
+          </div>
         </div>
-        <div>
+        <div className='carousel-wrapper'>
           <img src={img3} />
-          <p>Legend 3</p>
+          <div className="carousel-content">
+          <p className='carousel-heading'>Get Ready to Save: 70% Discount on Polo Shirts Products Just for You!</p>
+          <button className="carousel-btn" onClick={() => handleCategory("T-shirts")}>Shop Now </button>
+          </div>
         </div>
       </Carousel>
   <h1 className='title-arrivals'>NEW ARRIVALS</h1>
