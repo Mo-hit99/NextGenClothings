@@ -7,17 +7,20 @@ export const trendingData = [
       image:trendingImg1,
       brand:"Sweat shirt & Hoodies",
       description:"explore Now",
+      category:'hoodies'
     },
     {
       id:2,
       image:trendingImg2,
       brand:"OverSize T-Shirts Collection",
       description:"explore Now",
+      category:'T-Shirts'
     },
     {
       id:3,
       image:trendingImg3,
       brand:"Brand New Collection Of Shoes",
       description:"explore Now",
+      category:'shoes'
     }
   ]

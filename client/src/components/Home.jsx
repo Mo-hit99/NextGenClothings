@@ -67,6 +67,7 @@ export default function Home() {
       <FeatureCard key={trending.id} links={'/products/q'} image={trending.image}
       brand={trending.brand}
       description={trending.description}
+      category={trending.category}
       >
     </FeatureCard>
   </>

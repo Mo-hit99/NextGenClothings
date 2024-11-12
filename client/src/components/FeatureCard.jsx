@@ -2,7 +2,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCategory } from "../../context/context";
 
-    export default function FeatureCard({state,brand,description,formattedPrice,links,image}) {
+    export default function FeatureCard({state,brand,description,formattedPrice,links,image,category}) {
    const navigate = useNavigate();
   const { setCategoryItem } =  useCategory();
 
@@ -13,7 +13,7 @@ import { useCategory } from "../../context/context";
   };
   return (
     <section className='product-card2'>
-      <button className="feature-category-btn" onClick={() => handleCategory("T-shirts")}>
+      <button className="feature-category-btn" onClick={() => handleCategory(category)}>
      <NavLink state={{state}} className="product-card-img2" to={links}>
       <img className="product-card__image2" src={image} />
       </NavLink>
