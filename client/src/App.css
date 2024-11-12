@@ -1940,6 +1940,12 @@ padding: .3rem;
   list-style: none;
 }
 /* Mobile Menu */
+@media screen and (max-width:766px) {
+  .nav-container{
+    display: none;
+  }
+  
+}
 @media screen and (max-width: 768px) {
 .nav-link01{
   margin-top: 2rem;
