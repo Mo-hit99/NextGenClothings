@@ -1587,6 +1587,9 @@ textarea::-webkit-scrollbar {
     color:#acaeb4;
     font-size: 1rem;
   }
+  .bg-black-wrapper{
+    background-color: rgba(0, 0, 0,0.3);
+  }
   .carousel-content .carousel-btn{
     font-size: 16px;
     margin-top: 10px;
@@ -2510,7 +2513,6 @@ padding: .3rem;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
   background-color: rgba(0, 0, 0,0.5);
 }
 .carousel-content{
