@@ -63,14 +63,14 @@ export default function Home() {
     <div className="Trending">
 
     {trendingProducts?.map((trending)=>(
-      <>
+      <div key={trending.id}>
       <FeatureCard key={trending.id} links={'/products/q'} image={trending.image}
       brand={trending.brand}
       description={trending.description}
       category={trending.category}
       >
     </FeatureCard>
-  </>
+  </div>
 ))}
 </div>
   </section>
