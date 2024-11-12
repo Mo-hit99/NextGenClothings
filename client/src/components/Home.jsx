@@ -35,13 +35,15 @@ export default function Home() {
         >
         <div className='carousel-wrapper'>
           <img src={img} />
+          <div className="bg-black-wrapper"></div>
           <div className="carousel-content">
           <p className='carousel-heading'>Get Ready to Save: 30% Discount on Nike Products Just for You!</p>
-          <button className="carousel-btn" onClick={() => handleCategory("T-shirts")}>Shop Now</button>
+          <button className="carousel-btn" onClick={() => handleCategory("nike")}>Shop Now</button>
           </div>
         </div>
         <div className='carousel-wrapper'>
           <img src={img2} />
+          <div className="bg-black-wrapper"></div>
           <div className="carousel-content"> 
           <p className='carousel-heading'>Get Ready to Save: 10% Discount on T-Shirts Products Just for You!</p>
           <button className="carousel-btn" onClick={() => handleCategory("T-shirts")}>Shop Now</button>
@@ -49,9 +51,10 @@ export default function Home() {
         </div>
         <div className='carousel-wrapper'>
           <img src={img3} />
+          <div className="bg-black-wrapper"></div>
           <div className="carousel-content">
           <p className='carousel-heading'>Get Ready to Save: 70% Discount on Polo Shirts Products Just for You!</p>
-          <button className="carousel-btn" onClick={() => handleCategory("T-shirts")}>Shop Now </button>
+          <button className="carousel-btn" onClick={() => handleCategory("polo")}>Shop Now </button>
           </div>
         </div>
       </Carousel>
