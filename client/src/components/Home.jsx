@@ -46,7 +46,7 @@ export default function Home() {
           <div className="bg-black-wrapper"></div>
           <div className="carousel-content"> 
           <p className='carousel-heading'>Get Ready to Save: 10% Discount on T-Shirts Products Just for You!</p>
-          <button className="carousel-btn" onClick={() => handleCategory("shirt")}>Shop Now</button>
+          <button className="carousel-btn" onClick={() => handleCategory("T-Shirts")}>Shop Now</button>
           </div>
         </div>
         <div className='carousel-wrapper'>
@@ -54,7 +54,7 @@ export default function Home() {
           <div className="bg-black-wrapper"></div>
           <div className="carousel-content">
           <p className='carousel-heading'>Get Ready to Save: 70% Discount on Polo Shirts Products Just for You!</p>
-          <button className="carousel-btn" onClick={() => handleCategory("t-shirt")}>Shop Now </button>
+          <button className="carousel-btn" onClick={() => handleCategory("T-Shirts")}>Shop Now </button>
           </div>
         </div>
       </Carousel>
