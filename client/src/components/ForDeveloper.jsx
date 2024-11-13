@@ -30,10 +30,10 @@ export default function ForDeveloper() {
             <p className='api-para'>All HTTP methods are supported. You can use https for your requests.</p>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
                 <li><b className='request res-get'>GET</b> <a className='response-link' href={`${url}/productData`}>/productData</a></li>
-                <li><b className='request res-post'>POST</b> <a className='response-link' href="/posts">Coming Soon...</a></li>
-                <li><b className='request res-put'>PUT</b> <a className='response-link' href="/posts/1">Coming Soon...</a></li>
-                <li><b className='request res-patch'>PATCH</b> <a className='response-link' href="/posts/1">Coming Soon...</a></li>
-                <li><b className='request res-delete'>DELETE</b> <a className='response-link' href="/posts/1">Coming Soon...</a></li>
+                <li><b className='request res-post'>POST</b> <a className='response-link' href={`${url}/posts`}>Coming Soon...</a></li>
+                <li><b className='request res-put'>PUT</b> <a className='response-link' href={`${url}/posts/1`}>Coming Soon...</a></li>
+                <li><b className='request res-patch'>PATCH</b> <a className='response-link' href={`${url}/posts/1`}>Coming Soon...</a></li>
+                <li><b className='request res-delete'>DELETE</b> <a className='response-link' href={`${url}/posts/1`}>Coming Soon...</a></li>
             </ul>
             <p className='api-para'><strong className='para-strong'>Note:</strong> see guide for usage examples.</p>
             </div>
