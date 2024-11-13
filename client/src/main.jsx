@@ -27,6 +27,7 @@ import OrderTracker from "./components/OrderTracker.jsx";
 import UserOrder from "./components/UserOrder.jsx";
 import CustomerHandleMessages from "./components/CustomerHandleMessages.jsx";
 import Admin_All_UserData from "./components/Admin_All_UserData.jsx";
+import ForDeveloper from "./components/ForDeveloper.jsx";
 
 const GoogleAuthWrapper = () => {
   return (
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "/customerCare",
         element: <CustomerCare />,
+      },
+      {
+        path :"/forDevelopers",
+        element : <ForDeveloper/>
       },
       {
         path: "/wishlist",

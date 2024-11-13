@@ -4805,3 +4805,92 @@ height: 100%;
     padding: 0 0.5rem;
   }
 }
+
+/* for Developer Apis */
+.api-container{
+  padding: 20px;
+   font-family: 'Arial, sans-serif'
+}
+.api-para{
+  color: #606470;
+}
+.para-strong{
+  color: #2772db;
+}
+.restApi-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.json-data-pre{
+   background: #cccccc48; 
+   padding: 10px; 
+   border-radius :17px;
+   overflow-x: scroll;
+   margin-top: 1rem;
+}
+.forDevelopers{
+    width: 100%;
+    text-align: center;
+}
+.forDevelopers svg{
+  margin-bottom: -.3rem;
+  margin-right: .5rem;
+}
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+ul li .request {
+  font-weight: bold;
+}
+
+.response-link{
+  text-decoration: none;
+  color:#606470;
+}
+.response-link:hover{
+  text-decoration:underline;
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+}
+.request{
+  border-radius: 1rem;
+  display: inline-block;
+  padding: .2rem .8rem;
+  margin: .2rem 0;
+}
+.res-get{
+  background-color:#66d37e;
+  color: #fff;
+}
+.res-post{
+  background-color:#f96d00;
+  color: #fff;
+}
+.res-put{
+  background-color:#3fc5f0;
+  color: #fff;
+}
+.res-patch{
+  background-color:#3fc5f0;
+  color: #fff;
+}
+.res-delete{
+  background-color:#e70000;
+  color: #fff;
+}
+.api-title{
+  color: #c9356c;
+}
