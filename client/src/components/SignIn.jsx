@@ -18,7 +18,7 @@ export default function SignIn() {
   async function submitForm(e) {
     e.preventDefault();
     try {
-      const response = axios.post(`${import.meta.env.VITE_SERVER_LINK}/login`, {
+      const response = axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/login`, {
         email,
         password,
       });

@@ -42,7 +42,7 @@ export default function Addcart() {
           return; // Exit if email is not available
         }
         const response = await axios.get(
-          import.meta.env.VITE_SERVER_LINK + `/api/user`
+          import.meta.env.VITE_SERVER_USER_LINK + `/api/user`
         );
         if (response.data) {
           // const currentUser = response.data.find(
@@ -83,7 +83,7 @@ export default function Addcart() {
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_LINK}/api/user/${userId}`
+          `${import.meta.env.VITE_SERVER_USER_LINK}/api/user/${userId}`
         );
         if (response) {
           setCustomerAddress(response.data);

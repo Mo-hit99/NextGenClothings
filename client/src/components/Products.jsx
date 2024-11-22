@@ -64,7 +64,7 @@ export default function Products() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_LINK}/productData`,
+        `${import.meta.env.VITE_SERVER_PRODUCT_LINK}/productData`,
         {
           params: {
             page: activePage,
@@ -113,7 +113,7 @@ export default function Products() {
     try {
       const response = await axios.get(
         `${
-          import.meta.env.VITE_SERVER_LINK
+          import.meta.env.VITE_SERVER_PRODUCT_LINK
         }/productData?category=${category}&brand=${brand}`
       );
       let result = await response.data;

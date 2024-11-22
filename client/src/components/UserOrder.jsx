@@ -9,7 +9,7 @@ export default function UserOrder() {
     },[])
     async function getUserInvoice(){
       try {
-          const response = await axios.get(import.meta.env.VITE_SERVER_LINK +'/payment/invoice')
+          const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK +'/payment/invoice')
           if(response){
               setUserInvoice(response.data);
           }
@@ -21,7 +21,7 @@ export default function UserOrder() {
 
     const updateOrderStatus = async (invoiceId) => {
         try {
-          await axios.put(import.meta.env.VITE_SERVER_LINK + `/payment/order/${invoiceId}/status`, { status: selectedStatus });
+          await axios.put(import.meta.env.VITE_SERVER_INVOICE_LINK + `/payment/order/${invoiceId}/status`, { status: selectedStatus });
           setUserInvoice((prevInvoices) =>
             prevInvoices.map((invoice) =>
               invoice._id === invoiceId ? { ...invoice, status: selectedStatus } : invoice

@@ -22,7 +22,7 @@ export default function UserDashBoard() {
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        import.meta.env.VITE_SERVER_LINK + `/api/user/${id}`
+        import.meta.env.VITE_SERVER_USER_LINK + `/api/user/${id}`
       );
       if (response) {
         setUser(response.data);
@@ -41,7 +41,7 @@ export default function UserDashBoard() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        import.meta.env.VITE_SERVER_LINK + `/api/user/${id}`,
+        import.meta.env.VITE_SERVER_USER_LINK + `/api/user/${id}`,
         {
           name,
           address,
@@ -69,7 +69,7 @@ export default function UserDashBoard() {
   async function deleteUser(id) {
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_SERVER_LINK}/api/user/${id}`
+        `${import.meta.env.VITE_SERVER_USER_LINK}/api/user/${id}`
       );
 
       if (response) {

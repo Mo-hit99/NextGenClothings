@@ -12,7 +12,7 @@ export default function VerificationOtp() {
   async function submitForm(e) {
     e.preventDefault();
     await axios
-      .post(`${import.meta.env.VITE_SERVER_LINK}/verification-Otp`, {
+      .post(`${import.meta.env.VITE_SERVER_USER_LINK}/verification-Otp`, {
         code
       })
       .then(() => {

@@ -15,7 +15,7 @@ export default function UserInvoice() {
     }, [])
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(import.meta.env.VITE_SERVER_LINK +`/api/user/${id}`);
+        const response = await axios.get(import.meta.env.VITE_SERVER_USER_LINK +`/api/user/${id}`);
         if(response){
           setUserEmail(response.data.email)
           setUser(response.data.name)
@@ -26,7 +26,7 @@ export default function UserInvoice() {
     };
   async function getUserInvoice(){
     try {
-        const response = await axios.get(import.meta.env.VITE_SERVER_LINK +'/payment/invoice')
+        const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK +'/payment/invoice')
         if(response){
             setUserInvoice(response.data);
         }

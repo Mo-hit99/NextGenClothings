@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export default function ForDeveloper() {
-    const url = import.meta.env.VITE_SERVER_LINK
+    const url = import.meta.env.VITE_SERVER_PRODUCT_LINK
     const [productData, setProductData] = useState([]);
     const [isExpanded, setIsExpanded] = useState(false);
     useEffect(() => {
@@ -18,7 +18,6 @@ export default function ForDeveloper() {
         }
         getProductData()
     }, []);
-    console.log(productData)
     const toggleReadMore = () => {
         setIsExpanded((prevExpanded) => !prevExpanded);
       };

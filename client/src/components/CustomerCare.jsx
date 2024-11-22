@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import { useCallback } from "react";
 import { ShowByTime } from "../assets/ShowByTime";
-const socket = io(`${import.meta.env.VITE_SERVER_LINK}`); // Connect to the Socket.io server
+const socket = io(`${import.meta.env.VITE_SERVER_CUSTOMERCARE_LINK}`); // Connect to the Socket.io server
 export default function CustomerCare() {
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState("");
@@ -55,7 +55,7 @@ export default function CustomerCare() {
           return; // Exit if email is not available
         }
         const response = await axios.get(
-          import.meta.env.VITE_SERVER_LINK + `/api/user`
+          import.meta.env.VITE_SERVER_USER_LINK + `/api/user`
         );
         if (response.data) {
           const currentUser = response.data.find(
@@ -80,7 +80,7 @@ export default function CustomerCare() {
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_LINK}/api/user/${userId}`
+          `${import.meta.env.VITE_SERVER_USER_LINK}/api/user/${userId}`
         );
         if (response) {
           setSender(response.data.name);
@@ -99,7 +99,7 @@ export default function CustomerCare() {
   const fetchMessages = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_LINK}/api/messages`
+        `${import.meta.env.VITE_SERVER_CUSTOMERCARE_LINK}/api/messages`
       );
       setMessages(response.data);
       socket.on("receiveMessage", (message) => {
@@ -131,7 +131,7 @@ export default function CustomerCare() {
           return;
         }
         const response = await axios.post(
-          `${import.meta.env.VITE_SERVER_LINK}/api/messages`,
+          `${import.meta.env.VITE_SERVER_CUSTOMERCARE_LINK}/api/messages`,
           formData,
           {
             headers: {
@@ -154,7 +154,7 @@ export default function CustomerCare() {
     try {
       const id = messageId;
       const response = await axios.delete(
-        import.meta.env.VITE_SERVER_LINK +
+        import.meta.env.VITE_SERVER_CUSTOMERCARE_LINK +
           `/api/messages/delete/${id}`
       );
       if (response.status === 200) {

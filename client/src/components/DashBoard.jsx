@@ -49,7 +49,7 @@ export default function DashBoard() {
   
   async function fetchProductData(){
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_LINK}/productData`)
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_PRODUCT_LINK}/productData`)
       const productData = response.data.queryData
       setProductData(productData);
       if(!response){
@@ -67,7 +67,7 @@ export default function DashBoard() {
 }
 async function deleteProduct(id){
   try {
-    const response = await axios.delete(`${import.meta.env.VITE_SERVER_LINK}/productData/${id}`)
+    const response = await axios.delete(`${import.meta.env.VITE_SERVER_PRODUCT_LINK}/productData/${id}`)
 
     if(response){
       fetchProductData()
@@ -80,7 +80,7 @@ async function deleteProduct(id){
 
 async function getByIdData(id){
   try {
-    const productDataId =await axios.get(import.meta.env.VITE_SERVER_LINK + `/productData/${id}`);
+    const productDataId =await axios.get(import.meta.env.VITE_SERVER_PRODUCT_LINK + `/productData/${id}`);
     const productDataById = productDataId.data;
     setBrand(productDataById.brand)
     setTitle(productDataById.title)
@@ -102,7 +102,7 @@ async function updateProduct(id) {
 }
 async function updateSubmitProduct(id) {
   try {
-    const updateProduct =await axios.put(import.meta.env.VITE_SERVER_LINK + `/productData/${id}`,formData,{
+    const updateProduct =await axios.put(import.meta.env.VITE_SERVER_PRODUCT_LINK + `/productData/${id}`,formData,{
       headers: {
         "Content-Type": "multipart/form-data"
       },

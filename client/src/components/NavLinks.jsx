@@ -55,7 +55,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
           return; // Exit if email is not available
         }
         const response = await axios.get(
-          import.meta.env.VITE_SERVER_LINK + `/api/user`
+          import.meta.env.VITE_SERVER_USER_LINK + `/api/user`
         );
         if (response && response.data) {
           // const currentUser = response.data.find(

@@ -10,7 +10,7 @@ export default function Admin_All_UserData() {
     }, []);
   const fetchUserGrowthData = async () => {
     try {
-      const response = await axios.get(import.meta.env.VITE_SERVER_LINK + `/api/user/monthlyUserData`);
+      const response = await axios.get(import.meta.env.VITE_SERVER_USER_LINK + `/monthlyUserData`);
       if (response && response.data) {
         setUserGrowthData(response.data); // Set the monthly user count data
       } else {

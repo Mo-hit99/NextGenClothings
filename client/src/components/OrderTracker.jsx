@@ -14,7 +14,7 @@ export default function OrderTracker() {
   }, [])
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(import.meta.env.VITE_SERVER_LINK +`/api/user/${id}`);
+      const response = await axios.get(import.meta.env.VITE_SERVER_USER_LINK +`/api/user/${id}`);
       if(response){
         setUserEmail(response.data.email)
         setUser(response.data.name)
@@ -25,7 +25,7 @@ export default function OrderTracker() {
   };
 async function getUserInvoice(){
   try {
-      const response = await axios.get(import.meta.env.VITE_SERVER_LINK +'/payment/invoice')
+      const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK +'/payment/invoice')
       if(response){
         setUserOrder(response.data);
         // Fetch remaining days for each invoice
@@ -39,7 +39,7 @@ async function getUserInvoice(){
 const fetchRemainingDays = async (invoice) => {
   try {
     
-    const response = await axios.get(import.meta.env.VITE_SERVER_LINK + `/payment/invoices/${invoice._id}/remaining-days`);
+    const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK + `/payment/invoices/${invoice._id}/remaining-days`);
     if (response) {
       setRemainingDays(prevDays => ({ ...prevDays, [invoice._id]: response.data.remainingDays }));
     }

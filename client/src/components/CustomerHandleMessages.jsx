@@ -7,7 +7,7 @@ export default function CustomerHandleMessages() {
   const [deleteMessage , setDeleteMessage] = useState(false);
   async function deleteAllMessagesFromAdmin() {
     try {
-      const response = await axios.delete(import.meta.env.VITE_SERVER_LINK+"/api/messages/deleteAll");
+      const response = await axios.delete(import.meta.env.VITE_SERVER_CUSTOMERCARE_LINK+"/api/messages/deleteAll");
       if(response){
         setModel(false);
         setDeleteMessage(true)
