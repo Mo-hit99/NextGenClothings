@@ -49,7 +49,7 @@ export default function ProductDetails() {
           return; // Exit if email is not available
         }
         const response = await axios.get(
-          import.meta.env.VITE_SERVER_USER_LINK + `/api/user`
+          import.meta.env.VITE_SERVER_USER_LINK + `/users/api/user`
         );
         if (response.data) {
           // const currentUser = response.data.find(
@@ -78,7 +78,7 @@ export default function ProductDetails() {
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_USER_LINK}/api/user/${userId}`
+          `${import.meta.env.VITE_SERVER_USER_LINK}/users/api/user/${userId}`
         );
         if (response) {
           setCustomerAddress(response.data.address);
@@ -103,7 +103,7 @@ export default function ProductDetails() {
     } else {
       try {
         const response = await axios.post(
-          import.meta.env.VITE_SERVER_RAZORPAY_LINK + `/api/payment/order`,
+          import.meta.env.VITE_SERVER_RAZORPAY_LINK + `/payments/api/payment/order`,
           { amount: MoreDate.price }
         );
         if (response) {
@@ -128,7 +128,7 @@ export default function ProductDetails() {
       handler: async (response) => {
         try {
           await axios.post(
-            import.meta.env.VITE_SERVER_RAZORPAY_LINK + `/api/payment/verify`,
+            import.meta.env.VITE_SERVER_RAZORPAY_LINK + `/payments/api/payment/verify`,
             {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
@@ -150,7 +150,7 @@ export default function ProductDetails() {
   };
   async function createInvoice(paymentId) {
     try {
-      await axios.post(import.meta.env.VITE_SERVER_INVOICE_LINK + `/payment/invoice`, {
+      await axios.post(import.meta.env.VITE_SERVER_INVOICE_LINK + `/invoices/payment/invoice`, {
         CustomerName,
         productName:MoreDate.title,
         productDescription:MoreDate.description,

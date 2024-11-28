@@ -42,7 +42,7 @@ export default function Addproduct() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_LINK}/productData`,
+        `${import.meta.env.VITE_SERVER_LINK}/products/productData`,
         formData,
         {
           headers: {

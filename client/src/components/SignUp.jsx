@@ -17,7 +17,7 @@ export default function SignUp() {
   async function submitForm(e) {
     e.preventDefault();
     await axios
-      .post(`${import.meta.env.VITE_SERVER_USER_LINK}/signup`, {
+      .post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/signup`, {
         name,
         email,
         password,

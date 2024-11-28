@@ -11,7 +11,7 @@ export default function RestPassword() {
     
     async function submitForm(e) {
       e.preventDefault();
-     axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/reset-password/${token}`, {
+     axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/reset-password/${token}`, {
         password,
       }).then(res=>{
           if(res.data.Status==='Success'){

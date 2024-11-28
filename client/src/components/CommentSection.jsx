@@ -28,7 +28,7 @@ export default function CommentSection({ id }) {
           return; // Exit if email is not available
         }
         const response = await axios.get(
-          import.meta.env.VITE_SERVER_USER_LINK + `/api/user`
+          import.meta.env.VITE_SERVER_USER_LINK + `/users/api/user`
         );
         if (response.data) {
           // const currentUser = response.data.find(
@@ -56,7 +56,7 @@ export default function CommentSection({ id }) {
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_USER_LINK}/api/user/${userId}`
+          `${import.meta.env.VITE_SERVER_USER_LINK}/users/api/user/${userId}`
         );
         if (response) {
           setName(response.data.name);
@@ -80,7 +80,7 @@ export default function CommentSection({ id }) {
     } else {
       try {
         const response = await axios.post(
-          import.meta.env.VITE_SERVER_PRODUCT_LINK + `/productData/${id}/review`,
+          import.meta.env.VITE_SERVER_PRODUCT_LINK + `/products/productData/${id}/review`,
           {
             name,
             comment,
@@ -103,7 +103,7 @@ export default function CommentSection({ id }) {
   async function getCommentSection() {
     try {
       const response = await axios.get(
-        import.meta.env.VITE_SERVER_PRODUCT_LINK + "/productData"
+        import.meta.env.VITE_SERVER_PRODUCT_LINK + "/products/productData"
       );
       const result = response.data.queryData;
       setCommentData(result);
@@ -118,7 +118,7 @@ export default function CommentSection({ id }) {
       const reviewId = reviewsId;
       const response = await axios.delete(
         import.meta.env.VITE_SERVER_PRODUCT_LINK +
-          `/productData/${productId}/review/${reviewId}`
+          `/products/productData/${productId}/review/${reviewId}`
       );
       if (response.status === 200) {
         getCommentSection();
@@ -137,7 +137,7 @@ export default function CommentSection({ id }) {
       const reviewId = reviewsId;
       const response = await axios.patch(
         import.meta.env.VITE_SERVER_PRODUCT_LINK +
-          `/productData/${productId}/review/${reviewId}`,
+          `/products/productData/${productId}/review/${reviewId}`,
         { upDatedComment }
       );
       if (response.status === 200) {

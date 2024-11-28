@@ -10,7 +10,7 @@ export default function ViewOrder() {
   },[])
   async function getUserInvoice(){
     try {
-        const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK +'/payment/invoice')
+        const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK +'/invoices/payment/invoice')
         if(response){
             setUserInvoice(response.data);
             console.log(response.data)
@@ -22,7 +22,7 @@ export default function ViewOrder() {
 
   async function deleteProduct(id){
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_SERVER_INVOICE_LINK}/payment/invoice/${id}`)
+      const response = await axios.delete(`${import.meta.env.VITE_SERVER_INVOICE_LINK}/invoices/payment/invoice/${id}`)
   
       if(response){
         getUserInvoice()

@@ -9,7 +9,7 @@ export default function ForgotPassword() {
 
   async function submitForm(e) {
    e.preventDefault();
-    await axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/forgot-password`, {
+    await axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/forgot-password`, {
       email,
       }).then(res=>{
         if(res.data.Status==='Success'){

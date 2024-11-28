@@ -8,7 +8,7 @@ export default function ForDeveloper() {
         // Fetch product data from server
         async function getProductData() {
             try {
-                fetch( url + '/productData')
+                fetch( url + '/products/productData')
                     .then(response => response.json())
                     .then(data => setProductData(data))
                     .catch(error => console.error('Error fetching data:', error));
