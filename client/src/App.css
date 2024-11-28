@@ -2147,6 +2147,7 @@ padding: .3rem;
       display: -ms-flexbox;
       display: flex;
       position: fixed;
+      top: 0;
       transition: transform 400ms cubic-bezier(0.86, 0, 0.07, 1);
       transform: translateX(-70px);
       width: 100%;
