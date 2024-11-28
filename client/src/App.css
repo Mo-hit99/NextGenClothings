@@ -1672,6 +1672,10 @@ padding: .3rem;
   position: relative;
   color: #25262a;
 }
+.nav-link-login{
+  color: #000000;
+}
+
 .nav-link-text2 {
   display: block;
   font-size: 50px;

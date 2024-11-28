@@ -515,7 +515,7 @@ export default function NavLinks({ admin, logo, products, signIn, Addcart }) {
               ) : (
                 <>
                   <li>
-                    <NavLink className="nav-link-text" to="/signIn">
+                    <NavLink className="nav-link-login" to="/signIn">
                       {signIn}
                     </NavLink>
                   </li>
