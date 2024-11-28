@@ -1,15 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { timeAgo } from "../assets/Timeago";
+import ShimmerSkeleton from "./ShimmerSkeleton";
 
 export default function ViewOrder() {
 
   const [userInvoice, setUserInvoice]=useState([]);
+  const [loading ,setLoading]=useState(true);
   useEffect(()=>{
     getUserInvoice()
   },[])
   async function getUserInvoice(){
     try {
+      setLoading(true)
         const response = await axios.get(import.meta.env.VITE_SERVER_INVOICE_LINK +'/invoices/payment/invoice')
         if(response){
             setUserInvoice(response.data);
@@ -17,6 +20,8 @@ export default function ViewOrder() {
         }
     } catch (error) {
         console.log(error)
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -34,7 +39,8 @@ export default function ViewOrder() {
   }
   return (
     <section className="section-invoice-container">
-      <table className="invoice-table">
+      {loading ? (<ShimmerSkeleton cards={4}/>):userInvoice.length > 0 ? (
+        <table className="invoice-table">
         <thead>
           <tr>
             <th>Payment ID</th>
@@ -70,9 +76,10 @@ export default function ViewOrder() {
           
         </tbody>
       </table>
-      {userInvoice.length === 0 && (
-        <p className="user-invoice-text">No invoices found for this user.</p>
-      )}
+        ):(
+          <p className="user-invoice-text">No invoices found for this user.</p>
+        )
+    }
     </section>
   );
 }

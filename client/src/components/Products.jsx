@@ -157,7 +157,7 @@ export default function Products() {
           <button onClick={() => handleCategory("shoes")}>Shoes</button>
         </div> */}
       {loading ? (
-        <ShimmerSkeleton />
+        <ShimmerSkeleton cards={8} />
       ) : (
         <div className="main-container-form2">
           <InfiniteScroll

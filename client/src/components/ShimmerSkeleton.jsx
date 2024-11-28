@@ -1,8 +1,8 @@
-export default function ShimmerSkeleton() {
+export default function ShimmerSkeleton({cards}) {
   return (
     <div className="skeleton-main-container-form">
       <div className="skeleton-productCard-container">
-        {Array.from({ length: 8 }).map((_, idx) => (
+        {Array.from({ length: cards }).map((_, idx) => (
           <div key={idx} className="skeleton-product-card shimmer"></div>
         ))}
       </div>
