@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Message from "./Message";
 import Loader from "./Loader";
-import RestPassword from "./RestPassword";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -214,7 +213,6 @@ if(error) setError(null)
           </span>
         </NavLink>
       </form>
-      <RestPassword/>
     </>
   );
 }
