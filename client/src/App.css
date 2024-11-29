@@ -4972,3 +4972,15 @@ pre {
 .admin-info{
   color: #dc3545;
 }
+
+/*addcart address   */
+.warning-text {
+  color: #ff0000; /* Red color to indicate a warning */
+  font-weight: bold; /* Makes the text bold */
+  background-color: #ffe6e6; /* Light red background for visibility */
+  padding: 10px; /* Adds space around the text */
+  text-align: center;
+  border: 1px solid #ffcccc; /* Adds a light red border */
+  margin: 1rem 0;
+  border-radius: 5px; /* Rounds the corners of the border */
+}

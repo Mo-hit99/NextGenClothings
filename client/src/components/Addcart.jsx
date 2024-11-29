@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function Addcart() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [errorMessage, setErrorMessage] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState("");
   const [userId, setUserId] = useState(null);
   const [CustomerName, setCustomerName] = useState("");
   const [productName, setProductName] = useState("");
@@ -19,8 +19,8 @@ export default function Addcart() {
   const [ProductColor, setProductColor] = useState("");
   const [ProductSize, setProductSize] = useState("");
   const [subQuantity, setSubQuantity] = useState("");
-  const [ProductImg,setProductImg]=useState('')
-  const [CustomerEmail,setCustomerEmail] = useState('');
+  const [ProductImg, setProductImg] = useState("");
+  const [CustomerEmail, setCustomerEmail] = useState("");
   const [subProductPrice, SetSubProductPrice] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [invoiceUserEmail, setInvoiceUserEmail] = useState("");
@@ -88,7 +88,7 @@ export default function Addcart() {
         if (response) {
           setCustomerAddress(response.data);
           setCustomerName(response.data.name);
-          setCustomerEmail(response.data.email)
+          setCustomerEmail(response.data.email);
         }
       } catch (error) {
         console.error(error);
@@ -107,18 +107,18 @@ export default function Addcart() {
     setTotalQuantity(cart.cartTotalQuantity);
     setSubQuantity(cart.items.map((ele) => ele.quantity).join(", "));
     SetSubProductPrice(cart.items.map((ele) => ele.product.price).join(", "));
-    setProductImg(cart.items.map((ele)=> ele.product.filename[0]).join(", "));
-
+    setProductImg(cart.items.map((ele) => ele.product.filename[0]).join(", "));
   }, [cart]);
   // invoice rest api
   async function handlePayment() {
     if (!selectedAddress) {
-      setErrorMessage("Please select an address to proceed with the payment.")
+      setErrorMessage("Please select an address to proceed with the payment.");
       return; // Prevent payment if address is not selected
     }
     try {
       const response = await axios.post(
-        import.meta.env.VITE_SERVER_RAZORPAY_LINK + `/payments/api/payment/order`,
+        import.meta.env.VITE_SERVER_RAZORPAY_LINK +
+          `/payments/api/payment/order`,
         { amount: ProductPrice }
       );
       if (response) {
@@ -142,7 +142,8 @@ export default function Addcart() {
       handler: async (response) => {
         try {
           await axios.post(
-            import.meta.env.VITE_SERVER_RAZORPAY_LINK + `/payments/api/payment/verify`,
+            import.meta.env.VITE_SERVER_RAZORPAY_LINK +
+              `/payments/api/payment/verify`,
             {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
@@ -166,28 +167,31 @@ export default function Addcart() {
   const AddressHandleChange = (event) => {
     const address = event.target.value;
     setSelectedAddress(address);
-    setErrorMessage('');
+    setErrorMessage("");
     // console.log(address); // Log the selected address to the console
   };
   async function createInvoice(paymentId) {
     try {
-      await axios.post(import.meta.env.VITE_SERVER_INVOICE_LINK + `/invoices/payment/invoice`, {
-        CustomerName,
-        productName,
-        productDescription,
-        ProductBrand,
-        ProductColor,
-        ProductSize,
-        ProductPrice,
-        CustomerAddress: selectedAddress,
-        paymentId,
-        totalQuantity,
-        subQuantity,
-        subProductPrice,
-        CustomerEmail,
-        ProductImg,
-        email: invoiceUserEmail,
-      });
+      await axios.post(
+        import.meta.env.VITE_SERVER_INVOICE_LINK + `/invoices/payment/invoice`,
+        {
+          CustomerName,
+          productName,
+          productDescription,
+          ProductBrand,
+          ProductColor,
+          ProductSize,
+          ProductPrice,
+          CustomerAddress: selectedAddress,
+          paymentId,
+          totalQuantity,
+          subQuantity,
+          subProductPrice,
+          CustomerEmail,
+          ProductImg,
+          email: invoiceUserEmail,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -283,37 +287,52 @@ export default function Addcart() {
       </section>
       {cart.cartTotalQuantity > 0 && (
         <>
-          <div className="radio-group">
-            <div className="radio-wrapper">
-              <h4 className="select-address-heading">Select an Address</h4>
-              <div className="radio-item">
-                <input
-                  type="radio"
-                  id="address"
-                  name="address"
-                  value={CustomerAddress.address}
-                  checked={selectedAddress === CustomerAddress.address}
-                  onChange={AddressHandleChange}
-                />
-                <label className="address" htmlFor="address">
-                  {CustomerAddress.address}
-                </label>
-              </div>
-              <div className="radio-item">
-                <input
-                  type="radio"
-                  id="officeAddress"
-                  name="address"
-                  value={CustomerAddress.officeAddress}
-                  checked={selectedAddress === CustomerAddress.officeAddress}
-                  onChange={AddressHandleChange}
-                />
-                <label className="address" htmlFor="officeAddress">
-                  {CustomerAddress.officeAddress}
-                </label>
+          {CustomerAddress.address || CustomerAddress.officeAddress ? (
+            <div className="radio-group">
+              <div className="radio-wrapper">
+                <h4 className="select-address-heading">Select an Address</h4>
+                {CustomerAddress.address ? (
+                  <div className="radio-item">
+                    <>
+                      <input
+                        type="radio"
+                        id="address"
+                        name="address"
+                        value={CustomerAddress.address}
+                        checked={selectedAddress === CustomerAddress.address}
+                        onChange={AddressHandleChange}
+                      />
+                      <label className="address" htmlFor="address">
+                        {CustomerAddress.address}
+                      </label>
+                    </>
+                  </div>
+                ) : (
+                  <div className="radio-item">
+                    <input
+                      type="radio"
+                      id="officeAddress"
+                      name="address"
+                      value={CustomerAddress.officeAddress}
+                      checked={
+                        selectedAddress === CustomerAddress.officeAddress
+                      }
+                      onChange={AddressHandleChange}
+                    />
+                    <label className="address" htmlFor="officeAddress">
+                      {CustomerAddress.officeAddress}
+                    </label>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
+          ) : (
+            <p className="warning-text">
+              Please update your address. For specific instructions, please go
+              to the User Profile. Otherwise, you won't be able to pay the order
+              price.
+            </p>
+          )}
           <div className="Total-amount">
             <div className="total-container">
               <h3 className="total-quantity">Total Quantity:</h3>
@@ -324,16 +343,23 @@ export default function Addcart() {
               <p>₹ {cart.cartTotalAmount}</p>
             </div>
             <div className="checkout-btn">
-              <button onClick={handlePayment} className="checkoutcart-in_btn" disabled={!selectedAddress}>
+              <button
+                onClick={handlePayment}
+                className="checkoutcart-in_btn"
+                disabled={!selectedAddress}
+              >
                 Pay ₹{cart.cartTotalAmount}
               </button>
             </div>
           </div>
           {errorMessage && (
-          <p className="error-message" style={{ color: "red", marginTop: "10px" }}>
-            {errorMessage}
-          </p>
-        )}
+            <p
+              className="error-message"
+              style={{ color: "red", marginTop: "10px" }}
+            >
+              {errorMessage}
+            </p>
+          )}
         </>
       )}
     </div>
