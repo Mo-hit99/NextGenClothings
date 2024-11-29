@@ -8,8 +8,10 @@ import { googleAuth } from "../assets/api";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginData,setLoginData]= useState({
+    email : '',
+    password : ''
+  })
   const [error, setError] = useState("");
   const [openModel, setOpenModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,13 +21,17 @@ export default function SignIn() {
     e.preventDefault();
     try {
       const response = axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/login`, {
-        email,
-        password,
+        // email,
+        // password,
+       email: loginData.email,
+        password:loginData.password
       });
       const token = (await response).data.token;
       setOpenModel(true);
-      setEmail("");
-      setPassword("");
+      setLoginData({
+        email: '',
+        password:''
+      })
       setError('')
       setTimeout(() => {
         setOpenModel(false);
@@ -38,9 +44,9 @@ export default function SignIn() {
         navigate("/");
       }, 5000);
       localStorage.setItem("token", token);
-      localStorage.setItem("email", email);
+      localStorage.setItem("email", loginData.email);
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response?.data?.error);
     }
   }
   async function responseGoogle(authResult) {
@@ -67,14 +73,16 @@ export default function SignIn() {
     setShowPassword(!showPassword);
   }
 
-  function loginEmail(e){
-    setEmail(e.target.value)
-    if(error) setError(null)
-  }
-  function loginPassword(e){
-    setPassword(e.target.value)
-    if(error) setError(null)
-  }
+
+  function loginDataHandler(e){
+    const {name , value} = e.target;
+    setLoginData({
+      ...loginData,
+      [name]:value
+    })
+   if(error) setError(null)
+}
+
   return (
     <>
       {openModel && (
@@ -127,8 +135,8 @@ export default function SignIn() {
             autoComplete="username"
             className="input_field"
             id="email_field"
-            onChange={loginEmail}
-            value={email}
+            onChange={loginDataHandler}
+            value={loginData.email}
           />
         </div>
         <div className="input_container">
@@ -169,8 +177,8 @@ export default function SignIn() {
             className="input_field"
             id="password_field"
             autoComplete="current-password"
-            onChange={loginPassword}
-            value={password}
+            onChange={loginDataHandler}
+            value={loginData.password}
           />
         </div>
         {error && <p className="error">{error}</p>}

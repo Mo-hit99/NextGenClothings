@@ -3,12 +3,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Message from "./Message";
 import Loader from "./Loader";
+import RestPassword from "./RestPassword";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [signUpData,setSignUpData]=useState({
+    name:'',
+    email:'',
+    password : ''
+  })
   const [error, setError] = useState("");
   const [openModel, setOpenModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,15 +21,17 @@ export default function SignUp() {
     e.preventDefault();
     await axios
       .post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/signup`, {
-        name,
-        email,
-        password,
+        name:signUpData.name,
+        email:signUpData.email,
+        password:signUpData.password
       })
       .then(() => {
         setOpenModel(true);
-        setName("");
-        setEmail("");
-        setPassword("");
+        setSignUpData({
+          name:'',
+          email:'',
+          password : ''
+        })
         setError('');
         setTimeout(() => {
           setOpenModel(false);
@@ -40,25 +45,22 @@ export default function SignUp() {
         }, 5000);
       })
       .catch((error) => {
-        setError(error.response.data.error);
+        setError(error.response?.data?.error);
       });
   }
   function showPasswordHandler() {
     setShowPassword(!showPassword);
   }
 
-  function signUpName(e){
-    setName(e.target.value)
-    if(error) setError(null)
-  }
-  function signUpEmail(e){
-    setEmail(e.target.value)
-    if(error) setError(null)
-  }
-  function signUpPassword(e){
-    setPassword(e.target.value)
-    if(error) setError(null)
-  }
+  function signUpDataHandler(e){
+    const {name,value} = e.target;
+    
+    setSignUpData({
+      ...signUpData,
+      [name]:value
+    })
+if(error) setError(null)
+}
   return (
     <>
       {openModel && (
@@ -105,8 +107,8 @@ export default function SignUp() {
             type="text"
             className="input_field"
             id="Name"
-            onChange={signUpName}
-            value={name}
+            onChange={signUpDataHandler}
+            value={signUpData.name}
           />
         </div>
         <div className="input_container">
@@ -143,8 +145,8 @@ export default function SignUp() {
             autoComplete="username"
             className="input_field"
             id="email_field"
-            onChange={signUpEmail}
-            value={email}
+            onChange={signUpDataHandler}
+            value={signUpData.email}
           />
         </div>
         <div className="input_container">
@@ -185,8 +187,8 @@ export default function SignUp() {
             className="input_field"
             id="password_field"
             autoComplete="current-password"
-            onChange={signUpPassword}
-            value={password}
+            onChange={signUpDataHandler}
+            value={signUpData.password}
           />
         </div>
         {error && <p className="error">{error}</p>}
@@ -212,6 +214,7 @@ export default function SignUp() {
           </span>
         </NavLink>
       </form>
+      <RestPassword/>
     </>
   );
 }

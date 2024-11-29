@@ -4986,3 +4986,15 @@ pre {
   margin: 1rem 0;
   border-radius: 5px; /* Rounds the corners of the border */
 }
+/* rest password */
+.error3{
+  text-align: center;
+  color: #ff0000;
+  font-size: 13px;
+  word-break: break-all;
+  padding:0 .1rem;
+}
+.reset-error-wrapper{
+  width: 100%;
+  margin: 0 auto;
+}
