@@ -1584,7 +1584,7 @@ textarea::-webkit-scrollbar {
     top: 25%;
   }
   .carousel-content .carousel-heading{
-    color:#acaeb4;
+    color:#f9f9f9;
     font-size: 1rem;
   }
   .carousel-content .bg-black-wrapper{
@@ -2541,7 +2541,7 @@ padding: .3rem;
 .carousel-heading{
   font-size:2rem;
   font-weight: 700;
-  color: #acaeb4;
+  color:#f9f9f9;
 }
 .carousel-btn{
   border: 2px solid #acaeb4;
@@ -4905,4 +4905,70 @@ pre {
 }
 .api-title{
   color: #c9356c;
+}
+/* backend sever model */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-in-out;
+}
+
+/* Animation for modal */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #ff0000;
+}
+
+/* Admin credentials styling */
+.admin-credentials .admin-para {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.admin-credentials .admin-strong {
+  color: #007bff;
+}
+.admin-info{
+  color: #dc3545;
 }
