@@ -1,14 +1,56 @@
+import axios from "axios";
 import { useState } from "react";
-import { useForm, ValidationError } from "@formspree/react";
 import { NavLink } from "react-router-dom";
+import Message from "./Message";
 export default function Footer() {
   const [date, setDate] = useState(new Date());
-  const [state, handleSubmit] = useForm(import.meta.env.VITE_FORMSPREE_KEY);
-  if (state.succeeded) {
-    alert("successfully submit");
+  const [error,setError] = useState('')
+  const [openModel,setOpenModel] = useState(false)
+  const [userQueryData,setUserQueryData] = useState({
+    email:'',
+    query:''
+  })
+
+ async function handleSubmit(e){
+   e.preventDefault();
+   try {
+    const response = await axios.post(import.meta.env.VITE_SERVER_USER_LINK + '/users/client/query',{
+      email:userQueryData.email,
+      query:userQueryData.query
+    })
+
+    if(response){
+      setOpenModel(true);
+      setUserQueryData({
+        email:'',
+        query:''
+      })
+      setTimeout(() => {
+        setOpenModel(false);
+      }, 2000);
+    }
+   } catch (error) {
+    console.log(error)
+    setError(error?.response?.data?.message);
+   }
+  }
+
+  function handleInput(e){
+    const {name , value} = e.target;
+    setUserQueryData({
+      ...userQueryData,
+       [name]:value
+    })
+    setError(null)
   }
   return (
     <footer className="sticky-footer">
+      {openModel && (
+        <Message
+          title={"Successfully!"}
+          subtitle={"Our Team Contact You Soon.."}
+        />
+      )}
       <div className="footer">
         <div className="footer-container">
           {/* <div className="col-1">
@@ -68,31 +110,23 @@ export default function Footer() {
               <input
                 type="email"
                 id="email"
+                value={userQueryData.email}
                 placeholder="Enter your email"
+                onChange={handleInput}
                 name="email"
-                required
-              />
-              <ValidationError
-                prefix="Email"
-                field="email"
-                errors={state.errors}
               />
               <textarea
                 type="text"
+                value={userQueryData.query}
                 placeholder="Enter the Query"
                 id="message"
-                name="message"
-                required
+                onChange={handleInput}
+                name="query"
               />
-              <ValidationError
-                prefix="Message"
-                field="message"
-                errors={state.errors}
-              />
+              {error && <p className="error3">{error}</p>}
               <button
                 type="submit"
                 className="submission-btn"
-                disabled={state.submitting}
               >
                 <i className="fa-solid fa-paper-plane"></i> Submit
               </button>
