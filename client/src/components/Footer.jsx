@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Message from "./Message";
+import SpinLoader from "./SpinLoader";
 export default function Footer() {
   const [date, setDate] = useState(new Date());
   const [error,setError] = useState('')
+  const [loading,setLoading] = useState(false)
   const [openModel,setOpenModel] = useState(false)
   const [userQueryData,setUserQueryData] = useState({
     email:'',
@@ -13,6 +15,7 @@ export default function Footer() {
 
  async function handleSubmit(e){
    e.preventDefault();
+   setLoading(true);
    try {
     const response = await axios.post(import.meta.env.VITE_SERVER_USER_LINK + '/users/client/query',{
       email:userQueryData.email,
@@ -32,6 +35,8 @@ export default function Footer() {
    } catch (error) {
     console.log(error)
     setError(error?.response?.data?.message);
+   }finally{
+      setLoading(false);
    }
   }
 
@@ -128,7 +133,7 @@ export default function Footer() {
                 type="submit"
                 className="submission-btn"
               >
-                <i className="fa-solid fa-paper-plane"></i> Submit
+               {loading ? <SpinLoader/> : <><i className="fa-solid fa-paper-plane"></i> Submit</>}
               </button>
             </form>
           </div>
