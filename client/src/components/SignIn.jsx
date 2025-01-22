@@ -5,9 +5,11 @@ import Message from "./Message";
 import { useGoogleLogin } from "@react-oauth/google";
 import Loader from "./Loader";
 import { googleAuth } from "../assets/api";
+import SpinLoader from "./SpinLoader";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [loginData,setLoginData]= useState({
     email : '',
     password : ''
@@ -19,6 +21,7 @@ export default function SignIn() {
 
   async function submitForm(e) {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/login`, {
         // email,
@@ -47,6 +50,8 @@ export default function SignIn() {
       localStorage.setItem("email", loginData.email);
     } catch (error) {
       setError(error.response?.data?.error);
+    }finally{
+      setLoading(false);
     }
   }
   async function responseGoogle(authResult) {
@@ -80,15 +85,15 @@ export default function SignIn() {
       ...loginData,
       [name]:value
     })
-   if(error) setError(null)
-}
-
+    if(error) setError(null)
+    }
+  
   return (
     <>
       {openModel && (
         <Message
-          title={"Successfully SignIn!"}
-          subtitle={"We Redirect To The Home Page"}
+        title={"Successfully SignIn!"}
+        subtitle={"We Redirect To The Home Page"}
         />
       )}
       {isLoading && <Loader />}
@@ -204,12 +209,12 @@ export default function SignIn() {
           </NavLink>
         </div>
         <button title="Sign In" type="submit" className="sign-in_btn">
-          <span>Login In</span>
-        </button>
+        {loading  ? <SpinLoader/> :'Login In'}
+       </button>
 
         {/* {error && <div className="error">{error}</div>} */}
         <NavLink className="sign-btn-link" to={"/signUp"}>
-          <span className="create-account-span">Don't have account?</span>
+          <span className="create-account-span">Don&apos;t have account?</span>
           SignUp
         </NavLink>
         <p className="p line">Or With</p>

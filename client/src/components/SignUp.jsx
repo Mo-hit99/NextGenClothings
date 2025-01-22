@@ -3,9 +3,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Message from "./Message";
 import Loader from "./Loader";
+import SpinLoader from "./SpinLoader";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading,setLoading]= useState(false);
   const [signUpData,setSignUpData]=useState({
     name:'',
     email:'',
@@ -18,6 +20,7 @@ export default function SignUp() {
 
   async function submitForm(e) {
     e.preventDefault();
+    setLoading(true);
     await axios
       .post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/signup`, {
         name:signUpData.name,
@@ -45,6 +48,8 @@ export default function SignUp() {
       })
       .catch((error) => {
         setError(error.response?.data?.error);
+      }).finally(()=>{    
+        setLoading(false);
       });
   }
   function showPasswordHandler() {
@@ -205,7 +210,7 @@ if(error) setError(null)
           </label>
         </div>
         <button title="Sign In" type="submit" className="sign-in_btn">
-          <span>Sign Up</span>
+          {loading? <SpinLoader/> :'Sign Up'}
         </button>
         <NavLink className="sign-btn-link" to={"/signIn"}>
           <span className="create-account-span02">

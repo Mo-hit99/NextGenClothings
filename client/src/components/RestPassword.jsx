@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SpinLoader from "./SpinLoader";
 
 export default function RestPassword() {
   const [password, SetPassword] = useState("");
@@ -11,11 +12,13 @@ export default function RestPassword() {
    message3:"", 
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { token } = useParams();
 
   async function submitForm(e) {
     e.preventDefault();
+    setLoading(true);
     axios
       .post(
         `${
@@ -37,6 +40,8 @@ export default function RestPassword() {
           message2:error?.response?.data?.message2,
           message3:error?.response?.data?.message
         })
+      }).finally(() => {
+        setLoading(false);
       });
   }
   function showPasswordHandler() {
@@ -119,7 +124,7 @@ export default function RestPassword() {
       </div>
       }
         <button title="Sign In" type="submit" className="sign-in_btn">
-          <span>REST</span>
+          {loading ? <SpinLoader/> :'Rest Password'}
         </button>
       </form>
     </>

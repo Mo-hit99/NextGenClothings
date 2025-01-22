@@ -1,14 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SpinLoader from "./SpinLoader";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   async function submitForm(e) {
    e.preventDefault();
+    setLoading(true);
     await axios.post(`${import.meta.env.VITE_SERVER_USER_LINK}/users/forgot-password`, {
       email,
       }).then(res=>{
@@ -19,7 +22,10 @@ export default function ForgotPassword() {
         }
       }).catch(error=>{
     setError(error.response.data.error)}
-  )
+).finally(()=>{
+    setLoading(false);
+});
+
   }
   return (
     <>
@@ -70,7 +76,7 @@ export default function ForgotPassword() {
         </div>
           {error && <p className="error">{error}</p> }
         <button title="Sign In" type="submit" className="sign-in_btn">
-          <span>Send</span>
+          {loading? <SpinLoader/> :'Send'}
         </button>
       </form>
     </>
